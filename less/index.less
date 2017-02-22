@@ -145,11 +145,6 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 /* Start of Media Queries for devices (mobile first- min-width styles only apply if screen size is equal to or greater) -------------------------------------------------------------------------- */
 
 
-/* big landscape tablets, laptops, and desktops */
-@media (min-width:1025px) {  
-	
-}
-
 
 /* tablet, landscape iPad, lo-res laptops ands desktops */
 @media (min-width:801px)  {  
@@ -301,7 +296,9 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 		#title-description { display: none; }
 	}
 
-	.navbar-fixed .page-content.login-page #login-container #password-container #password-label:before {  background-position: 0px -4896px; }
+	.navbar-fixed .page-content.login-page { background-image: url(../img/login-bg-mob.jpg);
+		#login-container #password-container #password-label:before {  background-position: 0px -4896px; }
+	}
 
 }
 
@@ -330,7 +327,6 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	#search-container { background-image: url(../img/search-container-bg.jpg); }
 	#best-deals-container { background-image: url(../img/best-deals-container-bg.jpg); }
 	#discover-container { background-image: url(../img/discover-container-bg.jpg);}
-	#travel-tips-container { background-image: url(../img/travel-tips-container-bg.jpg); margin-bottom: 0px; }
 
 	.header { color: white; font: 36px "budget";  }
 	.discription { color: white; font-size: 18px; .mixroboto(400);  position: relative;  margin-top: 10px;
@@ -366,6 +362,17 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 		
 	.home-page {
 		#search-container, #best-deals-container, #discover-container , #travel-tips-container { min-height: 300px; }
+	}
+}
+
+
+@media (max-width:480px) { 
+	.home-page {
+		
+		#search-container { background-image: url(../img/search-container-bg-mob.jpg); }
+		#best-deals-container { background-image: url(../img/best-deals-container-bg-mob.jpg); }
+		#discover-container { background-image: url(../img/discover-container-bg-mob.jpg);}
+
 	}
 }
 
@@ -518,33 +525,20 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	}
 
 
+	
+
 }
 
 
 /* === Autocomplete === */
-.autocomplete-page .autocomplete-found {
-  display: block;
-}
-.autocomplete-page .autocomplete-not-found {
-  display: none;
-}
-.autocomplete-page .autocomplete-values {
-  display: block;
-}
-.autocomplete-page .list-block ul:empty {
-  display: none;
-}
+
 .autocomplete-page .navbar .autocomplete-preloader {
   margin-right: 16px;
 }
-.autocomplete-preloader:not(.autocomplete-preloader-visible) {
-  -webkit-animation: none;
-  animation: none;
-  visibility: hidden;
-}
+
+
 .autocomplete-dropdown {
-// background for transparent bg on dropdown results 2------------------------------------------------------------------------------------------------------
-  // background:rgba(255,255,255, 0.9); 
+
   box-sizing: border-box;
   position: absolute;
   z-index: 500;
@@ -577,14 +571,8 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
   display: block;
 }
 
-.autocomplete-dropdown .list-block { 
+.autocomplete-dropdown .list-block {  margin: 0; }
 
-  margin: 0;
- 
-}
-.autocomplete-dropdown .list-block ul { 
-	li {  }
-}
 .autocomplete-dropdown .list-block ul:before {
   display: none;
 }
@@ -620,14 +608,32 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	}
 }
 
-select { background-color: red;
-	option { background-color: red; }
+
+
+// Calender styling 
+
+.picker-calendar-week-day:nth-child(2) , .picker-calendar-week-day:nth-child(3) , .picker-calendar-week-day:nth-child(4) { display: none; }
+
+.picker-calendar-day.picker-calendar-day-selected span { background: @orange; }
+
+.picker-calendar-day , .picker-calendar-week-days .picker-calendar-week-day { width: calc(100% / 4); }
+
+
+// hide tue-thur (only show fri-mon)
+.picker-calendar-row { 
+	.picker-calendar-day:nth-child(2) , .picker-calendar-day:nth-child(3)  , .picker-calendar-day:nth-child(4)  { display: none; }
+
 }
+
+
+
 
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
 
 @media (min-width:600px)  {  
 	
+	// .navbar-fixed .page-content.search-bg-page { padding-top: 56px; }
+
 	.search-bg-page { 
 	
 		.adults-container { width: 100%;  display: block;}
@@ -672,6 +678,31 @@ select { background-color: red;
 	}
 
 }
+
+
+@media (max-width: 440px) { 
+
+	.search-bg-page { 
+		#my-form {
+			.adults-container  { width: 48%; margin-right: 2%; }
+			.children-container { margin-right: 0%; width: 48%; margin-left: 2%; }
+			.infants-container  { width: 100%; margin-right: 0%; margin-top: 14px; }
+		}
+
+	}
+
+
+}
+
+
+@media (max-width: 380px) { 
+	.navbar-fixed .page-content.search-bg-page { padding-top: 56px; }
+}
+
+
+
+
+
 
 
 
@@ -829,11 +860,9 @@ select { background-color: red;
 				&::before { position: absolute; content: ''; left: 10px; width: 27px; height:24px; top: 50%; margin-top: -12px; background-repeat: no-repeat; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto;    background-position: 0 -3341px; }
 			}
 		}
+		.deal-wrappr:nth-child(even) { margin-left: 0%;  }
+		.deal-wrappr:nth-child(odd) { margin-left: 1%;  }
 	}
-
-	#deals-container .deal-wrappr:nth-child(even) { margin-left: 0%;  }
-
-	#deals-container .deal-wrappr:nth-child(odd) { margin-left: 1%;  }
 	
 	.swiper-container-horizontal>.swiper-pagination-bullets { bottom: 10px; }
 
@@ -846,6 +875,16 @@ select { background-color: red;
 
 	.page-content.best-deals-page { 
 		.best-result-label { width: 49.5%; }
+	}
+
+}
+
+@media(max-width: 600px) { 
+
+	.page-content.best-deals-page {
+		#deals-container {
+			.deal-wrappr:nth-child(odd) { margin-left: 0%;  }
+		}
 	}
 
 }
@@ -1133,6 +1172,12 @@ select { background-color: red;
 }
 
 
+@media (max-width: 480px) { 
+	.page-content.settings-page {
+		#settings-container .link-container .settings-links { font-size: 16px; }
+	}
+} 
+
 
 
 
@@ -1168,6 +1213,25 @@ select { background-color: red;
 
 .page-content.about { background-color: @dark-purple;
 	
+	.st0{ fill:#755641;}
+    .st1{ fill:#AA8147;}
+    .st2{ fill:#253949;}
+    .st3{ fill:#755641;}
+    .st4{ fill:#AA8247;}
+    .st5{ fill:#7F5638;}
+    .st6{ fill:#5E2C02;}
+    .st7{ fill:#34495E;}
+    .st8{ fill:#D3B285;}
+    .st9{ fill:#7E5537;}
+    .st10{ fill:#7E5536;}
+    .st11{ fill:#F7F7F7;}
+    .st12{ fill:#333333;}
+    .st13{ fill:#EC1A24;}
+    .st14{ fill:#C8001A;}
+    .st15{ fill:#CC191F;}
+    .st16{ fill:#01247D;}
+    .st17{ fill:#FFFFFF;}
+    .st18{ fill:#CF142B;}
 
 	#designed-built { display: block;   font: 21px "budget"; color: white;  
 		#build-location { display: block; font: "budget" 18px; }
@@ -1176,10 +1240,19 @@ select { background-color: red;
 	#copyright { position: absolute; bottom: 10px; color: @purple-grey; font-size: 18px; .mixroboto(500); text-align: center; width: 100%; }
 
 	#about-app-london { width: 300px; height: 300px; } 
+
+	
+
 }
 
 
-
+@media (max-width: 480px) { 
+	.page-content.about {
+		#designed-built { font-size: 18px; }
+		#about-app-london { width: 200px; height: 200px; } 
+		#copyright { font-size: 14px; }
+	}
+} 
 
 
 

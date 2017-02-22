@@ -32,8 +32,10 @@ setTimeout(function() {
 
 
 
-
+// Global variable to store JSONP data from dealchecker 
 var localData;
+
+
 
 // Function to store JSONP in global variable --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -94,9 +96,9 @@ $$(document).on('pageInit', '.page[data-page="login"]', function(e) {
 
 	// Account validation ---------------------------------------------------------
 
-	$$('input#email-login').on('blur',  function() { 
+	$('input#email-login').on('blur',  function() { 
 
-		var emailInput = $$('input#email-login').val();
+		var emailInput = $('input#email-login').val();
 
 		var my_script = document.createElement('script');
 		my_script.setAttribute('src','https://www.dealchecker.co.uk/user/user-exists/' + emailInput + '-jsonp.html?callback=userLoginCallback');
@@ -134,8 +136,8 @@ $('#login-button-container').on('click', function() {
 /* home-page --------------------------------------------------------------------------------------------------------- */ 
 $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
-	$$(".content-block p").removeClass("active");
-	$$('.content-block p').eq(0).addClass('active-nav');
+	$(".content-block p").removeClass("active");
+	$('.content-block p').eq(0).addClass('active-nav');
 
 
 
@@ -165,13 +167,13 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 	// Make search page left panel navigation have active highlight in panel menu - remove it from home 
-	$$(".content-block p").removeClass("active");
-	$$('.content-block p').eq(1).addClass('active-nav');
+	$(".content-block p").removeClass("active");
+	$('.content-block p').eq(1).addClass('active-nav');
 
 
 
-	$$('.bottom-skip-bar').on('click', function(){ 
-		$$(this).parent().parent().hide();
+	$('.bottom-skip-bar').on('click', function(){ 
+		$(this).parent().parent().hide();
 	});
 
 
@@ -341,29 +343,32 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 	// Script for calender --------------------------------------------------------------------------------------------------------------------------
 
 	var today = new Date();
+	
 	var calendarDefault = myApp.calendar({
+	    
 	    input: '#calendar-default',
 	    dateFormat: 'dd/mm/yyyy',
 	    closeOnSelect: true,
+	    
+
+
 	    rangePicker: true,
+	   	
+	  
+
 	    events: {
-	  		from: today
+	  		from: today,
 		},
 
-		 disabled: [new Date(2017, 2, 20), new Date(2017, 02, 23)],
+		disabled: {
+			to: today
+		},
 
 
-		rangesClasses: [
-	    //Add "day-october' class for all october dates
-	    {
-	        // string CSS class name for this range in "cssClass" property
-	        cssClass: 'day-october', //string CSS class          
-	    },
-	],
+
 	});       
 
-
-
+	
 
 
 	// Remove user departure search input if invalid 
@@ -426,6 +431,10 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
 
+
+
+
+
 // Script for search form submit ( has to be outside of search page js, as its a global variable thats used on the search deal landing page ) ----------------------------------------------------------------------------------------------------------------------
 
 
@@ -453,6 +462,15 @@ searchPageContainer.find('.save-storage-data').on('click', function (e) {
 
    
 });
+
+
+
+
+
+
+
+
+
 
 
 
@@ -703,6 +721,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 	
 
+	console.log(localData);
 
 
 	// Make best deals page have active highlight in panel menu - remove it from home 
@@ -729,11 +748,15 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 
 
+
 	// loop through each object in returned data array 
     for( var i=0;  i < localData.length;  i++) {
   	
 
+
        	$('.best-deals-page #deals-container').append(
+
+
 
 		    '<div class="deal-wrappr">' + 
 		      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '),  url(https://static2.dealchecker.co.uk/10.9-2/images/ImageLibraries/Shared/no-image450x250.jpg); ">'  +  
@@ -787,7 +810,7 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 		            '<span class="price-inner">' + localData[i].price + '</span>' + " " + 
 		              "pp" +  
 		          '</span>' + 
-		          '<a href="">' + 
+		          '<a href="#" onclick="window.open(\' '  + localData[i].deepLink  + ' \' ,   \'_system\'  ); "> ' +
 		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
 		          '</a>' + 
 		        '</div>' + 
@@ -808,18 +831,18 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 
    // add star rating class depending on deals rating 
-    $$('.star-rating').each(function(i,e) {
+    $('.star-rating').each(function(i,e) {
         var rating = $$(this).text();
         if( rating == 1 ) {
-           $$(elem).addClass('rating-1').html('');
+           $(elem).addClass('rating-1').html('');
         } else if (rating == 2) {
-           $$(e).addClass('rating-2').html('');
+           $(e).addClass('rating-2').html('');
         } else if(rating == 3) {
-            $$(e).addClass('rating-3').html('');
+            $(e).addClass('rating-3').html('');
         } else if( rating == 4) {
-           $$(e).addClass('rating-4').html('');
+           $(e).addClass('rating-4').html('');
         } else if( rating == 5) {
-            $$(e).addClass('rating-5').html('');
+            $(e).addClass('rating-5').html('');
         }
     });
 
@@ -843,6 +866,19 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // // Start of about page -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 $$(document).on('pageInit', '.page[data-page="about"]', function(e) {
@@ -857,6 +893,20 @@ $$(document).on('pageInit', '.page[data-page="about"]', function(e) {
 	
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

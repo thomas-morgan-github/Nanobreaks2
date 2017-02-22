@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
     <widget id="com.nanobreak.app"
-        versionCode="5.7" 
-        version="5.7" 
+        versionCode="6.0" 
+        version="6.0" 
         xmlns="http://www.w3.org/ns/widgets"
         xmlns:gap="http://phonegap.com/ns/1.0">
     
@@ -30,7 +30,8 @@
 
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-console" source="npm" spec="~1.0.2" />
-    <plugin name="cordova-plugin-contacts" source="npm" spec="~2.0.1" />
+<!--     <plugin name="cordova-plugin-contacts" source="npm" spec="~2.0.1" />
+ -->   
     <plugin name="cordova-plugin-device" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-device-motion" source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-device-orientation" source="npm" spec="~1.0.2" />
@@ -47,12 +48,7 @@
     
 
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
-
-
     <plugin name="cordova-plugin-inappbrowser" source="npm" spec="~1.3.0" />
-
-
-
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
     
 
@@ -63,28 +59,28 @@
     <allow-intent href="mailto:*"/>
     <allow-intent href="geo:*"/>
     <allow-intent href="*" />
-    
+  <!--   
     <allow-intent href="https://www.dealchecker.co.uk/*" />
     <allow-intent href="https://www.facebook.com/dealchecker/*" />
 
     <allow-intent href="https://twitter.com/dealchecker/*" />
     <allow-intent href="https://www.facebook.com/dealchecker/*" />
-
+ -->
 
 
     <allow-navigation href="http://*/*" />
     <allow-navigation href="https://*/*" />
     <allow-navigation href="data:*" />
-    <allow-navigation href="http://www.dealchecker.co.uk/*" />
+  <!--   <allow-navigation href="http://www.dealchecker.co.uk/*" /> -->
 
 
-     
+ <!--     
     <access origin="https://www.dealchecker.co.uk" />
     <access origin="https://www.facebook.com/dealchecker/"/>
     <access origin="https://twitter.com/dealchecker/" />
     <access origin="https://www.youtube.com/user/dealchecker/" />
     <access origin="https://www.instagram.com/dealchecker/" />
-    <access origin="https://www.dealchecker.co.uk/holidays/nano-deals-jsonp.html" />
+    <access origin="https://www.dealchecker.co.uk/holidays/nano-deals-jsonp.html" /> -->
 
      
     <!-- Enable requests to content: URLs -->
@@ -169,29 +165,29 @@
         <allow-intent href="mailto:*"/>
         <allow-intent href="geo:*"/>
         <allow-intent href="*" />
-        
+       <!--  
         <allow-intent href="https://www.dealchecker.co.uk/*" />
         <allow-intent href="https://www.facebook.com/dealchecker/*" />
 
         <allow-intent href="https://twitter.com/dealchecker/*" />
         <allow-intent href="https://www.facebook.com/dealchecker/*" />
-
+ -->
 
 
         <allow-navigation href="http://*/*" />
         <allow-navigation href="https://*/*" />
         <allow-navigation href="data:*" />
-        <allow-navigation href="http://www.dealchecker.co.uk/*" />
+     <!--    <allow-navigation href="http://www.dealchecker.co.uk/*" />
+ -->
 
-
-         
+     <!--     
         <access origin="https://www.dealchecker.co.uk" />
         <access origin="https://www.facebook.com/dealchecker/"/>
         <access origin="https://twitter.com/dealchecker/" />
         <access origin="https://www.youtube.com/user/dealchecker/" />
         <access origin="https://www.instagram.com/dealchecker/" />
         <access origin="https://www.dealchecker.co.uk/holidays/nano-deals-jsonp.html" />
-
+ -->
 
     </platform>
 
