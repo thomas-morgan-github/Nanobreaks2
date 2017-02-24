@@ -598,11 +598,6 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 		        '</div>' + 
 
 		        '<div class="result-price-and-button-container">' + 
-		         '<span class="result-price">' +  "fr" + " " +
-		            '<span class="pnd">' + "£"  + '</span>' + 
-		            '<span class="price-inner">' + localData[i].price + '</span>' + " " + 
-		              "pp" +  
-		          '</span>' + 
 		          '<a href="">' + 
 		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
 		          '</a>' + 
