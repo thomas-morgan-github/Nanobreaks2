@@ -191,13 +191,14 @@ myApp.onPageReinit('home', function (page) {
 
 
 
-
-
-
  /* Search-page --------------------------------------------------------------------------------------------------------- */ 
 
 
 $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
+
+
+
+
 
 	$(".content-block p").each(function () {
         $(this).removeClass("active-nav");
@@ -207,7 +208,7 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 	$('.content-block p').eq(1).addClass('active-nav');
 
 
-	$('.bottom-skip-bar').on('click', function(){ 
+	$('.skip-nano-guide').on('click', function(){ 
 		$(this).parent().parent().hide();
 	});
 
@@ -1357,6 +1358,8 @@ $$(document).on('pageInit', '.page[data-page="settings"]', function(e) {
         $(this).removeClass("active-nav");
     });
 	
+
+	$('.content-block p').eq(4).addClass('active-nav');
 
 
 });
