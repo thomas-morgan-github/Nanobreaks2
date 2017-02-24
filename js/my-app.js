@@ -60,7 +60,7 @@ $('.menu-icon-nav').on('click', function() {
 
 
 
-
+// function to check if users email is valid on login page 
 function userLoginCallback(data) { 
 
 	if ( data == '123578') { 
@@ -131,6 +131,12 @@ $('#login-button-container').on('click', function() {
 /* home-page --------------------------------------------------------------------------------------------------------- */ 
 $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
+		$(".content-block p").each(function () {
+        	$(this).removeClass("active-nav");
+    	});
+	
+
+		$('.content-block p').eq(0).addClass('active-nav');
 				
 	    // Sort by Price - return best deals 
 	    localData.sort(function(a, b) {
@@ -141,12 +147,13 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 		});
 
 
+	    // store best price deal object in database in variable
 	    var todaysBestDeal = localData[0];
   	
 	    console.log(todaysBestDeal);
 
 	    myApp.addNotification({
-	        title: 'Todays best handpicked deal!',
+	        title: 'Todays best deal!',
 	        subtitle: todaysBestDeal.destination + " " + "£" + todaysBestDeal.price + "pp " + todaysBestDeal.rating,
 	        message: 'Hello, how are you? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut posuere erat. Pellentesque id elementum urna, a aliquam ante. Donec vitae volutpat orci. Aliquam sed molestie risus, quis tincidunt dui.',
 	        media: '<img width="44" height="44" style="border-radius:100%" src="http://lorempixel.com/output/people-q-c-100-100-9.jpg">'
@@ -162,8 +169,19 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
 
 
+// Script that runs on every other time the home page is loaded 
+myApp.onPageReinit('home', function (page) {
+   
+
+	$(".content-block p").each(function () {
+	    $(this).removeClass("active-nav");
+	});
 
 
+	$('.content-block p').eq(0).addClass('active-nav');
+
+
+});
 
 
 	
@@ -181,8 +199,12 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
 $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
-	// Make search page left panel navigation have active highlight in panel menu - remove it from home 
+	$(".content-block p").each(function () {
+        $(this).removeClass("active-nav");
+    });
+	
 
+	$('.content-block p').eq(1).addClass('active-nav');
 
 
 	$('.bottom-skip-bar').on('click', function(){ 
@@ -431,7 +453,6 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 	});
 
 
-console.log(localData);
 
 
 
@@ -478,6 +499,20 @@ searchPageContainer.find('.save-storage-data').on('click', function (e) {
 
 
 
+// Script that runs on every other time the searchpage is loaded 
+myApp.onPageReinit('search', function (page) {
+   
+
+	$(".content-block p").each(function () {
+	    $(this).removeClass("active-nav");
+	});
+
+
+	$('.content-block p').eq(1).addClass('active-nav');
+
+
+});
+
 
 
 
@@ -496,6 +531,9 @@ searchPageContainer.find('.save-storage-data').on('click', function (e) {
 $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 
+	$(".content-block p").each(function () {
+        $(this).removeClass("active-nav");
+    });
 	
 
 
@@ -646,8 +684,6 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 		
 		else if( (  localData[i].departure + " " + localData[i].depAir == departure  ) && (date == "") && (destination == "") ){ 	
 			console.log('departure only other fields are empty');
-
-			console.log(localData[i]);
 	     	appendInputedDataToDeal();
 
 	    }
@@ -720,6 +756,260 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 
 
+
+// Script that runs on every other time the searchpage is loaded 
+myApp.onPageReinit('deal-landing', function (page) {
+   
+
+	console.log('page reloaded');
+
+	$(".content-block p").each(function () {
+	    $(this).removeClass("active-nav");
+	});
+
+
+	// Hide previous searched deals 
+	$(".deal-landing-page #deals-container .deal-wrappr").each(function () {
+	    $(this).hide();
+	});
+
+
+
+
+	// Code to create unique departure and departure airport codes -----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	// Create empty array that will hold all departure airports and departure airport codes 
+	var departureWithAirportCode = [];
+
+	// loop through local data and add all depature airport and departure airport codes to empty array 
+	for ( var i = 0 ; i < localData.length; i ++ ) { 
+		departureWithAirportCode.push(localData[i].departure + " " + localData[i].depAir );
+	}
+
+	// Create empty array to hold only unique departure airport and departure airport code values 
+	var uniqueDepartureNames = [];
+
+
+	for(var i in departureWithAirportCode){
+	    if(uniqueDepartureNames.indexOf(departureWithAirportCode[i]) === -1){
+	        uniqueDepartureNames.push(departureWithAirportCode[i]);
+	    }
+	}
+
+
+
+	// Code to create unique destination values  ------------------------------------------------------------------------------------------------------------------
+
+	// Create empty array that will hold all destination airports 
+	var destinationOnly = [];
+
+	// loop through local data and add all destination airport to empty array 
+	for ( var i = 0 ; i < localData.length; i ++ ) { 
+		destinationOnly.push(localData[i].destination);
+	}
+
+
+	// Create empty array to hold only unique destination values
+	var uniqueDestinationNames = [];
+
+	for(var i in destinationOnly)  {
+
+	    if( uniqueDestinationNames.indexOf(destinationOnly[i]) === -1){
+	        uniqueDestinationNames.push(destinationOnly[i]);
+	    }
+
+	}
+
+
+
+
+
+
+	function appendInputedDataToDeal() { 
+		
+			$('.deal-landing-page #deals-container').append(
+
+
+			    '<div class="deal-wrappr">' + 
+			      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '), url(https://static2.dealchecker.co.uk/10.9-2/images/ImageLibraries/Shared/no-image450x250.jpg);">' +  
+			         
+			         '<div class="result-price-container">' + 
+			            '<span class="result-price">' + "fr" + " " + 
+			              '<span class="pnd">' + "£" + '</span>' + 
+			              '<span class="price-inner">'  + localData[i].price + '</span>' + " " 
+			               + 'pp' + 
+			            '</span>' + 
+			          '</div>' + 
+
+			          '<div class="deal-logo">' + 
+			            '<img src="https://static2.dealchecker.co.uk/10.7-6' + localData[i].clientImage + '" alt="' + '" />' + 
+			          '</div>' + 
+
+			          '<div class="inner-deal-summary-container">' + 
+			            '<span class="accomodation">' +  localData[i].accommodation + '</span>'  + 
+			            '<span class="destination">' +  localData[i].destination  + '</span>' + 
+			            '<span class="star-rating-container">' +  
+			              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
+		            '</span>' +
+		          '</div>' +
+
+		      '</div>' + 
+
+		      '<div class="result-bottom">' + 
+		        '<div class="result-flight">' + 
+		          
+		          '<div class="result-outbound">' +
+		            '<span class="result-dep-airport">' +  localData[i].depAir   + '</span>' +
+		            '<div class="result-dep-dates-container">' + 
+		              '<span class="dep-date">' +  localData[i].departureDate  + '</span>' +
+		            '</div>' +
+		          '</div>' +
+		          
+		          '<div class="result-return">' + 
+		            '<span class="result-return-airport">' + localData[i].destAir + '</span>' + 
+		            '<div class="result-return-dates-container">' + 
+		              '<span class="return-date">' + localData[i].returnDate + '</span>' + 
+		            '</div>' +
+		          '</div>' +
+
+		        '</div>' + 
+
+		        '<div class="result-price-and-button-container">' + 
+		          '<a href="">' + 
+		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
+		          '</a>' + 
+		        '</div>' + 
+		      
+		      '</div>' +
+
+		    '</div>'
+
+		);
+
+
+			
+	}
+
+
+
+//  For loop containing conditions to display deals depending on user input   ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	// loop through each object in returned data array 
+	for( var i=0;  i < localData.length;  i++)  {
+		
+		// Departure and destination and date search ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------					    
+
+		if ( ( localData[i].departure + " " + localData[i].depAir == departure ) && ( localData[i].destination == destination ) && ( localData[i].departureDate == date ) ) {  
+			console.log("departure and destination and date, full housee ");
+
+			appendInputedDataToDeal();     
+		}
+
+		// Departure and destination only search ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------					    
+
+		else if ( (  localData[i].departure + " " + localData[i].depAir == departure ) && (  localData[i].destination == destination ) && (date == "") ) {
+	    	console.log("departure and destination no date");
+	 		appendInputedDataToDeal();
+		}
+
+		// Departure airport and date search ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------					    
+		
+		else if ( (localData[i].departureDate == date) && ( localData[i].departure + " " + localData[i].depAir == departure ) && (destination == "") ) { 
+			console.log("date and departure, destination empty");
+	 		appendInputedDataToDeal();
+		}
+
+		// Departure only search ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------					    
+		
+		else if( (  localData[i].departure + " " + localData[i].depAir == departure  ) && (date == "") && (destination == "") ){ 	
+			console.log('departure only other fields are empty');
+
+		
+	     	appendInputedDataToDeal();
+
+	    }
+
+		// Destination only search ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------					    
+
+		else if( (localData[i].destination == destination ) && (date == "") && (departure == "") ) { 
+			console.log('destination only, other fields are empty');
+			appendInputedDataToDeal();
+		}
+
+		// Date only search 
+		else if( (localData[i].departureDate.substring(0,10) == date ) && (destination == "") && (departure == "") ) { 
+			console.log('destination only, other fields are empty');
+			appendInputedDataToDeal();
+		}
+		// End of if else statement 
+
+
+
+
+
+
+		// code to manipulate deals ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	 	// add star rating class depending on deals rating 
+	    $('.star-rating').each(function(i,e) {
+	        var rating = $(this).text();
+	        if( rating == 1 ) {
+	           $(elem).addClass('rating-1').html('');
+	        } else if (rating == 2) {
+	           $(e).addClass('rating-2').html('');
+	        } else if(rating == 3) {
+	           $(e).addClass('rating-3').html('');
+	        } else if( rating == 4) {
+	           $(e).addClass('rating-4').html('');
+	        } else if( rating == 5) {
+	           $(e).addClass('rating-5').html('');
+	        }
+	    });
+
+
+
+
+		if (destination == "") { 
+			$("#search-destination").html("");
+		}
+		else {  
+		 	$("#search-destination").html("in" + " " + destination);
+		}
+
+		var DealCounter = $('.deal-wrappr').length;
+
+		$("#deal-count").html(DealCounter);
+	}
+	// end of for loop 
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Best deals page --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -728,6 +1018,14 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 	
 
 	console.log(localData);
+
+	$(".content-block p").each(function () {
+        $(this).removeClass("active-nav");
+    });
+	
+
+	$('.content-block p').eq(2).addClass('active-nav');
+
 
 
 	$('.bottom-skip-bar').on('click', function(){ 
@@ -811,9 +1109,7 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 		    '</div>'
 
-			);
-
-
+		);
 
     }	
 
@@ -840,7 +1136,6 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 
 
-
     // add class to remove margin from top deal 
     $('.deal-wrappr').eq(0).addClass('best');
    
@@ -858,39 +1153,20 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Start of about page -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-$$(document).on('pageInit', '.page[data-page="about"]', function(e) {
+// Script that runs on every other time the best-deals is loaded 
+myApp.onPageReinit('best-deals', function (page) {
+   
 
 	$(".content-block p").each(function () {
-        $(this).removeClass("active-nav");
-    });
-	
+	    $(this).removeClass("active-nav");
+	    console.log('remove');
+	});
 
 
+	$('.content-block p').eq(2).addClass('active-nav');
 
-
-
-	
 
 });
-
-
-
-
 
 
 
@@ -912,6 +1188,14 @@ $$(document).on('pageInit', '.page[data-page="about"]', function(e) {
 // Start of discover page -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 $$(document).on('pageInit', '.page[data-page="discover"]', function(e) {
+
+
+
+	$(".content-block p").each(function () {
+	    $(this).removeClass("active-nav");
+	});
+
+	$('.content-block p').eq(3).addClass('active-nav');
 
 
 
@@ -996,6 +1280,99 @@ $$(document).on('pageInit', '.page[data-page="discover"]', function(e) {
 
 
 
+// Script that runs on every other time the discover page is init\loaded 
+myApp.onPageReinit('discover', function (page) {
+   
+
+	$(".content-block p").each(function () {
+	    $(this).removeClass("active-nav");
+	});
+
+
+	$('.content-block p').eq(3).addClass('active-nav');
+
+
+});
 
 
 
+
+
+
+
+
+
+
+
+// Start of about page -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+$$(document).on('pageInit', '.page[data-page="about"]', function(e) {
+
+	$(".content-block p").each(function () {
+        $(this).removeClass("active-nav");
+    });
+	
+
+});
+
+
+
+
+// Script that runs every time after the about page is init\loaded 
+myApp.onPageReinit('about', function (page) {
+   
+
+	$(".content-block p").each(function () {
+	    $(this).removeClass("active-nav");
+	});
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Start of settings page -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+$$(document).on('pageInit', '.page[data-page="settings"]', function(e) {
+
+	$(".content-block p").each(function () {
+        $(this).removeClass("active-nav");
+    });
+	
+
+
+});
+
+
+
+
+// Script that runs every time after the about page is init\loaded 
+myApp.onPageReinit('settings', function (page) {
+   
+
+	$(".content-block p").each(function () {
+	    $(this).removeClass("active-nav");
+	});
+
+
+	$('.content-block p').eq(4).addClass('active-nav');
+
+
+});
