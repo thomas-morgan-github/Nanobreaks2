@@ -499,7 +499,7 @@ searchPageContainer.find('.save-storage-data').on('click', function (e) {
 
 
 
-// Script that runs on every other time the searchpage is loaded 
+// Script that runs on every other time the searchpage is page is init\loaded 
 myApp.onPageReinit('search', function (page) {
    
 
@@ -509,6 +509,8 @@ myApp.onPageReinit('search', function (page) {
 
 
 	$('.content-block p').eq(1).addClass('active-nav');
+
+	
 
 
 });
@@ -757,7 +759,10 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 
 
-// Script that runs on every other time the searchpage is loaded 
+
+
+
+// Script that runs on every other time the deallanding page is init\loaded  
 myApp.onPageReinit('deal-landing', function (page) {
    
 
@@ -827,35 +832,35 @@ myApp.onPageReinit('deal-landing', function (page) {
 
 	function appendInputedDataToDeal() { 
 		
-			$('.deal-landing-page #deals-container').append(
+		$('.deal-landing-page #deals-container').append(
 
 
-			    '<div class="deal-wrappr">' + 
-			      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '), url(https://static2.dealchecker.co.uk/10.9-2/images/ImageLibraries/Shared/no-image450x250.jpg);">' +  
-			         
-			         '<div class="result-price-container">' + 
-			            '<span class="result-price">' + "fr" + " " + 
-			              '<span class="pnd">' + "£" + '</span>' + 
-			              '<span class="price-inner">'  + localData[i].price + '</span>' + " " 
-			               + 'pp' + 
-			            '</span>' + 
-			          '</div>' + 
+		    '<div class="deal-wrappr">' + 
+		      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '), url(https://static2.dealchecker.co.uk/10.9-2/images/ImageLibraries/Shared/no-image450x250.jpg);">' +  
+		         
+		         '<div class="result-price-container">' + 
+		            '<span class="result-price">' + "fr" + " " + 
+		              '<span class="pnd">' + "£" + '</span>' + 
+		              '<span class="price-inner">'  + localData[i].price + '</span>' + " " 
+		               + 'pp' + 
+		            '</span>' + 
+		          '</div>' + 
 
-			          '<div class="deal-logo">' + 
-			            '<img src="https://static2.dealchecker.co.uk/10.7-6' + localData[i].clientImage + '" alt="' + '" />' + 
-			          '</div>' + 
+		          '<div class="deal-logo">' + 
+		            '<img src="https://static2.dealchecker.co.uk/10.7-6' + localData[i].clientImage + '" alt="' + '" />' + 
+		          '</div>' + 
 
-			          '<div class="inner-deal-summary-container">' + 
-			            '<span class="accomodation">' +  localData[i].accommodation + '</span>'  + 
-			            '<span class="destination">' +  localData[i].destination  + '</span>' + 
-			            '<span class="star-rating-container">' +  
-			              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
-		            '</span>' +
-		          '</div>' +
+		          '<div class="inner-deal-summary-container">' + 
+		            '<span class="accomodation">' +  localData[i].accommodation + '</span>'  + 
+		            '<span class="destination">' +  localData[i].destination  + '</span>' + 
+		            '<span class="star-rating-container">' +  
+		              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
+	            '</span>' +
+	          '</div>' +
 
-		      '</div>' + 
+	        '</div>' + 
 
-		      '<div class="result-bottom">' + 
+		    '<div class="result-bottom">' + 
 		        '<div class="result-flight">' + 
 		          
 		          '<div class="result-outbound">' +
@@ -885,9 +890,7 @@ myApp.onPageReinit('deal-landing', function (page) {
 		    '</div>'
 
 		);
-
-
-			
+	
 	}
 
 
@@ -923,8 +926,6 @@ myApp.onPageReinit('deal-landing', function (page) {
 		
 		else if( (  localData[i].departure + " " + localData[i].depAir == departure  ) && (date == "") && (destination == "") ){ 	
 			console.log('departure only other fields are empty');
-
-		
 	     	appendInputedDataToDeal();
 
 	    }
@@ -1153,7 +1154,7 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 
 
-// Script that runs on every other time the best-deals is loaded 
+// Script that runs on every other time the best-deals page is init\loaded 
 myApp.onPageReinit('best-deals', function (page) {
    
 
@@ -1363,7 +1364,7 @@ $$(document).on('pageInit', '.page[data-page="settings"]', function(e) {
 
 
 
-// Script that runs every time after the about page is init\loaded 
+// Script that runs every time after the settings page is init\loaded 
 myApp.onPageReinit('settings', function (page) {
    
 
