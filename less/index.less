@@ -612,16 +612,17 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 // Calender styling 
 
-.picker-calendar-week-day:nth-child(2) , .picker-calendar-week-day:nth-child(3) , .picker-calendar-week-day:nth-child(4) { display: none; }
+// hide dates except friday and saturday 
+.picker-calendar-week-day:nth-child(1), .picker-calendar-week-day:nth-child(2) , .picker-calendar-week-day:nth-child(3) , .picker-calendar-week-day:nth-child(4) , .picker-calendar-week-day:nth-child(7) { display: none; }
 
 .picker-calendar-day.picker-calendar-day-selected span { background: @orange; }
 
-.picker-calendar-day , .picker-calendar-week-days .picker-calendar-week-day { width: calc(100% / 4); }
+.picker-calendar-day , .picker-calendar-week-days .picker-calendar-week-day { width: calc(100% / 2); }
 
 
-// hide tue-thur (only show fri-mon)
+// (only show fri & sat)
 .picker-calendar-row { 
-	.picker-calendar-day:nth-child(2) , .picker-calendar-day:nth-child(3)  , .picker-calendar-day:nth-child(4)  { display: none; }
+	.picker-calendar-day:nth-child(1), .picker-calendar-day:nth-child(2) , .picker-calendar-day:nth-child(3)  , .picker-calendar-day:nth-child(4) , .picker-calendar-day:nth-child(7)  { display: none; }
 
 }
 
@@ -792,10 +793,6 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 				}
 			}
 			.result-price-and-button-container { float: none; margin-top: 10px; text-align: center;
-				.result-price { font-size: 11px; font-weight: 300; margin-right: 10px; display: block; float: none; color: @yellow; position: relative; top: -10px; display: inline-block;
-					.pnd { font-size: 22px; color: @yellow;  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(0, 0, 0, 0.15); font-weight: 300;  }
-					.price-inner { font-size: 22px; font-weight: 700; color: @yellow;   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px rgba(0, 0, 0, 0.15); }
-				}
 				a { display: inline-block;
 					.view-deal-button {   display: block;  padding-top: 9px;  padding-bottom: 9px;  float: left;  background: #ffd43e;  background: linear-gradient(to bottom, #ffd43e 0, #f6bf00 100%);   color: black;   text-shadow: 0 1px 0 #ffd237;     font-size: 14px; color: black;   font-weight: bold;   font-style: normal;   position: relative;   padding: 6px 13px;   padding-right: 26px;   border-radius: 3px; padding-top: 8px;
 						&::after { position: absolute; content: ''; right: 14px; width: 7px; height: 9px; top: 50%; margin-top: -5px; background-repeat: no-repeat; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto; background-position: 0px -695px; }
@@ -994,7 +991,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 .anne-frank { background-image: url('../img/anne-frank.jpg'); }
 .rijksmuseum { background-image: url('../img/rijksmuseu.jpg'); }
 .amsterdam-centraal { background-image: url('../img/amsterdam-train-station.jpg'); }
-.hieneken { background-image: url('../img/heineken-experience.jpg'); }
+.heineken { background-image: url('../img/heineken-experience.jpg'); }
 .artis { background-image: url('../img/natura-artis-magistra.jpg'); }
 .zuiderbad { background-image: url('../img/zuiderbad.jpg'); }
 .nemo { background-image: url('../img/NEMO.jpg'); }
@@ -1023,12 +1020,12 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 .high-line { background-image: url('../img/High-Line.jpg'); }
 .top-of-the-rock { background-image: url('../img/top-of-the-rock.jpg'); }
 .metropolitan { background-image: url('../img/metropolitan-museum-of-art.jpg'); }
-.trade-centre { background-image: url('../img/september-11-memorial.jpg'); }
+.trade-center { background-image: url('../img/september-11-memorial.jpg'); }
 .empire-state { background-image: url('../img/empire-state.jpg'); }
-.natural-history { ackground-image: url('../img/natural-history.jpg'); }
+.natural-history { background-image: url('../img/natural-history.jpg'); }
 .time-square { background-image: url('../img/times-square.jpg'); }
 .liberty { background-image: url('../img/liberty.jpg'); }
-.chinatown { background-image: url('img/china-town.jpg'); }
+.chinatown { background-image: url('../img/china-town.jpg'); }
 
 
 
@@ -1048,8 +1045,6 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	.big-ben { background-image: url('../img/big-ben-mob.jpg'); } 
 	.hyde-park { background-image: url('../img/hyde-park-mob.jpg'); }
 	.british-museum { background-image: url('../img/british-museum-mob.jpg'); }
-
-	
 	.churchill-war-rooms { background-image: url('../img/churchill-war-rooms.jpg'); }
 	.view-shard { background-image: url('../img/view-from-the-shard.jpg'); }
 	.hms-belfast { background-image: url('../img/hms.jpg'); }
@@ -1078,7 +1073,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	.anne-frank { background-image: url('../img/anne-frank.jpg'); }
 	.rijksmuseum { background-image: url('../img/rijksmuseu-mob.jpg'); }
 	.amsterdam-centraal { background-image: url('../img/amsterdam-train-station.jpg'); }
-	.hieneken { background-image: url('../img/heineken-experience.jpg'); }
+	.heineken { background-image: url('../img/heineken-experience.jpg'); }
 	.artis { background-image: url('../img/natura-artis-magistra.jpg'); }
 	.zuiderbad { background-image: url('../img/zuiderbad.jpg'); }
 	.nemo { background-image: url('../img/NEMO.jpg'); }
@@ -1109,10 +1104,10 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	.metropolitan { background-image: url('../img/metropolitan-museum-of-art-mob.jpg'); }
 	.trade-centre { background-image: url('../img/september-11-memorial-mob.jpg'); }
 	.empire-state { background-image: url('../img/empire-state-mob.jpg'); }
-	.natural-history { ackground-image: url('../img/natural-history-mob.jpg'); }
+	.natural-history { background-image: url('../img/natural-history-mob.jpg'); }
 	.time-square { background-image: url('../img/times-square-mob.jpg'); }
 	.liberty { background-image: url('../img/liberty-mob.jpg'); }
-	.chinatown { background-image: url('img/china-town-mob.jpg'); }
+	.chinatown { background-image: url('../img/china-town-mob.jpg'); }
 
 
 
@@ -1121,12 +1116,17 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 
 
+@media(max-width:380px) { 
+	.page-content.discover-page #attraction-nav { text-align: center;
+		span { width: 33%;  }
+	}
+}
 
 
 
 
 @media(max-width:360px) { 
-	.page-content.discover-page #discover-container1{
+	.page-content.discover-page #discover-container1 {
 		.top-attraction-container .bottom-attractions-info {
 			.attraction-tips { font-size: 14px; }
 			#attraction-nav { font-size: 10px; }

@@ -50,20 +50,14 @@ jsonCallback();
 
 // Navigation bar Left panel script ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-$('.content-block p').on('click', function(){
-    $('p.active-nav').removeClass('active-nav');
-    $(this).addClass('active-nav');
-});
-
-
 $('.menu-icon-nav').on('click', function() { 
 	$(this).toggleClass('close-panel open-panel');
 });
 
 
-$('#nav-icon3').click(function(){
-	$(this).toggleClass('open');
-});
+
+
+
 
 
 
@@ -92,6 +86,7 @@ function userLoginCallback(data) {
 
 
 $$(document).on('pageInit', '.page[data-page="login"]', function(e) {
+
 
 
 	// Account validation ---------------------------------------------------------
@@ -136,8 +131,28 @@ $('#login-button-container').on('click', function() {
 /* home-page --------------------------------------------------------------------------------------------------------- */ 
 $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
-	$(".content-block p").removeClass("active");
-	$('.content-block p').eq(0).addClass('active-nav');
+				
+	    // Sort by Price - return best deals 
+	    localData.sort(function(a, b) {
+		    var a1= a.price, b1= b.price;
+		    if(a1== b1) return 0;
+		    return a1> b1? 1: -1;
+		   
+		});
+
+
+	    var todaysBestDeal = localData[0];
+  	
+	    console.log(todaysBestDeal);
+
+	    myApp.addNotification({
+	        title: 'Todays best handpicked deal!',
+	        subtitle: todaysBestDeal.destination + " " + "£" + todaysBestDeal.price + "pp " + todaysBestDeal.rating,
+	        message: 'Hello, how are you? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut posuere erat. Pellentesque id elementum urna, a aliquam ante. Donec vitae volutpat orci. Aliquam sed molestie risus, quis tincidunt dui.',
+	        media: '<img width="44" height="44" style="border-radius:100%" src="http://lorempixel.com/output/people-q-c-100-100-9.jpg">'
+	    });
+
+
 
 
 
@@ -151,7 +166,7 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
 
 
-
+	
 
 
 
@@ -167,8 +182,6 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 	// Make search page left panel navigation have active highlight in panel menu - remove it from home 
-	$(".content-block p").removeClass("active");
-	$('.content-block p').eq(1).addClass('active-nav');
 
 
 
@@ -187,7 +200,7 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 	  preloader: true, //enable preloader
 	  valueProperty: 'value', //object's "value" property name
 	  textProperty: 'text', //object's "text" property name
-	  limit: 300, //limit to 300 results
+	  limit: 1000, 
 	  dropdownPlaceholderText: 'Search avaliable departure airports...',
 	  expandInput: true, // expand input
 	  source: function(autocomplete, query, render) {
@@ -249,7 +262,7 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 	  preloader: true, //enable preloader
 	  valueProperty: 'value', //object's "value" property name
 	  textProperty: 'text', //object's "text" property name
-	  limit: 300, //limit to 20 results
+	  limit: 1000, 
 	  dropdownPlaceholderText: 'Search avaliable destinations...',
 	  expandInput: true, // expand input
 
@@ -349,13 +362,8 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 	    input: '#calendar-default',
 	    dateFormat: 'dd/mm/yyyy',
 	    closeOnSelect: true,
-	    
-
-
-	    rangePicker: true,
-	   	
+	
 	  
-
 	    events: {
 	  		from: today,
 		},
@@ -371,7 +379,7 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 	
 
 
-	// Remove user departure search input if invalid 
+	// Remove user departure search input if invalid function
 	function invalidDeparture() { 
 		
 		for (i=0; i < localData.length; i++ ) { 
@@ -385,7 +393,7 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 	}
 
 
-	// Remove user destination search input if invalid 
+	// Remove user destination search input if invalid function
 	function invalidDestination () { 
 
 		for (i=0; i < localData.length; i++ ) { 
@@ -398,6 +406,7 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 	}
 
+	// on input blur check if departure and destination input is valid 
 	$('input#autocomplete-departing-dropdown-ajax').on('blur', invalidDeparture);
 	$('input#autocomplete-destination-dropdown-ajax').on('blur', invalidDestination);
 
@@ -413,7 +422,7 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 			$(".compare-button").removeAttr('href');
 		} 
 
-		// If one of the search requirments are meet add href 
+		// If one of the search requirments are meet add href to deal landing page
 		if ( departingVal !== "" || destinationVal !== "" || dateVal !== "" ) { 
 			$(".compare-button").attr("href", "#deal-landing");
 		}
@@ -422,6 +431,7 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 	});
 
 
+console.log(localData);
 
 
 
@@ -437,7 +447,7 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 // Script for search form submit ( has to be outside of search page js, as its a global variable thats used on the search deal landing page ) ----------------------------------------------------------------------------------------------------------------------
 
-
+// Global variables 
 var departure;
 var destination;
 var date;
@@ -486,10 +496,7 @@ searchPageContainer.find('.save-storage-data').on('click', function (e) {
 $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 
-	$(".content-block p").removeClass("active");
-
-
-
+	
 
 
 	// Code to create unique departure and departure airport codes -----------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -578,7 +585,6 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 		            '<span class="result-dep-airport">' +  localData[i].depAir   + '</span>' +
 		            '<div class="result-dep-dates-container">' + 
 		              '<span class="dep-date">' +  localData[i].departureDate  + '</span>' +
-		              '<span class="dep-time">' +  localData[i].departureTime + '</span>' +
 		            '</div>' +
 		          '</div>' +
 		          
@@ -586,7 +592,6 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 		            '<span class="result-return-airport">' + localData[i].destAir + '</span>' + 
 		            '<div class="result-return-dates-container">' + 
 		              '<span class="return-date">' + localData[i].returnDate + '</span>' + 
-		              '<span class="return-time">' +  localData[i].returnTime  + '</span>' +
 		            '</div>' +
 		          '</div>' +
 
@@ -635,7 +640,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 	 		appendInputedDataToDeal();
 		}
 
-		// Date and departure airport search ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------					    
+		// Departure airport and date search ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------					    
 		
 		else if ( (localData[i].departureDate == date) && ( localData[i].departure + " " + localData[i].depAir == departure ) && (destination == "") ) { 
 			console.log("date and departure, destination empty");
@@ -658,14 +663,20 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 			console.log('destination only, other fields are empty');
 			appendInputedDataToDeal();
 		}
-	// End of if else statement 
+
+		// Date only search 
+		else if( (localData[i].departureDate.substring(0,10) == date ) && (destination == "") && (departure == "") ) { 
+			console.log('destination only, other fields are empty');
+			appendInputedDataToDeal();
+		}
+		// End of if else statement 
 
 
 
 
 
 
-	// code to manipulate deals ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		// code to manipulate deals ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 	 	// add star rating class depending on deals rating 
 	    $('.star-rating').each(function(i,e) {
@@ -687,7 +698,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 
 		if (destination == "") { 
-			 $("#search-destination").html("");
+			$("#search-destination").html("");
 		}
 		else {  
 		 	$("#search-destination").html("in" + " " + destination);
@@ -697,7 +708,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 		$("#deal-count").html(DealCounter);
 	}
-	// Closing bracket for for loop 
+	// end of for loop 
 
 
 
@@ -724,13 +735,6 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 	console.log(localData);
 
 
-	// Make best deals page have active highlight in panel menu - remove it from home 
-	$(".content-block p").removeClass("active");
-	$('.content-block p').eq(2).addClass('active-nav');
-
-	
-
-
 	$('.bottom-skip-bar').on('click', function(){ 
 		$(this).parent().parent().hide();
 	});
@@ -738,7 +742,7 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 
 		
-	// // Sort by Price - return best deals 
+    // Sort by Price - return best deals 
     localData.sort(function(a, b) {
 	    var a1= a.price, b1= b.price;
 	    if(a1== b1) return 0;
@@ -790,7 +794,6 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 		            '<span class="result-dep-airport">' +  localData[i].depAir   + '</span>' +
 		            '<div class="result-dep-dates-container">' + 
 		              '<span class="dep-date">' +  localData[i].departureDate  + '</span>' +
-		              '<span class="dep-time">' +  localData[i].departureTime + '</span>' +
 		            '</div>' +
 		          '</div>' +
 		          
@@ -798,18 +801,12 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 		            '<span class="result-return-airport">' + localData[i].destAir + '</span>' + 
 		            '<div class="result-return-dates-container">' + 
 		              '<span class="return-date">' + localData[i].returnDate + '</span>' + 
-		              '<span class="return-time">' +  localData[i].returnTime  + '</span>' +
 		            '</div>' +
 		          '</div>' +
 
 		        '</div>' + 
 
 		        '<div class="result-price-and-button-container">' + 
-		         '<span class="result-price">' +  "fr" + " " +
-		            '<span class="pnd">' + "£"  + '</span>' + 
-		            '<span class="price-inner">' + localData[i].price + '</span>' + " " + 
-		              "pp" +  
-		          '</span>' + 
 		          '<a href="#" onclick="window.open(\' '  + localData[i].deepLink  + ' \' ,   \'_system\'  ); "> ' +
 		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
 		          '</a>' + 
@@ -879,11 +876,13 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 
 
-// // Start of about page -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Start of about page -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 $$(document).on('pageInit', '.page[data-page="about"]', function(e) {
 
-	$(".content-block p").removeClass("active");
+	$(".content-block p").each(function () {
+        $(this).removeClass("active-nav");
+    });
 	
 
 
@@ -920,8 +919,6 @@ $$(document).on('pageInit', '.page[data-page="about"]', function(e) {
 $$(document).on('pageInit', '.page[data-page="discover"]', function(e) {
 
 
-	$(".content-block p").removeClass("active");
-	$('.content-block p').eq(3).addClass('active-nav');
 
 // Attraction nav ------------------------------------------------------------------
 
