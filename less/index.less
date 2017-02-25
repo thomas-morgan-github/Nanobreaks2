@@ -262,7 +262,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	}
 
 	#login-button-container{ display: block; text-align: center; margin-top: 100px; 
-		#login-button { display: inline-block; padding: 19px 100px 19px 100px; background-color: @red; color: white; font: 18px "budget"; text-transform: uppercase;  box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24); }
+		#login-button { display: inline-block; padding: 19px 100px 19px 100px; background-color: @red; color: white; font-size: 18px; .mixroboto(400); text-transform: uppercase;  box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24); }
 	}
 
 	#without-login { color: white; text-align: center; font-size: 18px; margin-top: 20px; display: block; margin-bottom: 50px; }
@@ -328,7 +328,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	#best-deals-container { background-image: url(../img/best-deals-container-bg.jpg); }
 	#discover-container { background-image: url(../img/discover-container-bg.jpg);}
 
-	.header { color: white; font: 36px "budget";  }
+	.header { color: white; font-size: 34px; .mixroboto(400);  }
 	.discription { color: white; font-size: 18px; .mixroboto(400);  position: relative;  margin-top: 10px;
 		&:after { background-position: 0px -1071px; width: 9px; height: 10px; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat;  background-size: 100% auto; content: ''; position: absolute; margin-left: 4px; bottom: 8px; } 
 	}
@@ -384,8 +384,8 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 // Nano-search popup
 
-.popup-wrappr { background: rgba(0, 0, 0, 0.5); position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;   z-index: 9;
-	.popup-swiper { height: 400px; position: absolute; top: 50%; margin-top: -200px; width: 80%; left: 50%; margin-left: -40%; z-index: 10; text-align: center; background-size: cover; background-image: url(../img/newyork-slider-bg);  
+.popup-wrappr { background: rgba(0, 0, 0, 0.5); position: fixed; top: 0px; left: 0px; width: 100%; height: 100%;   z-index: 9;
+	.popup-swiper { height: 400px; position: absolute; top: 50%; margin-top: -200px; width: 80%; left: 50%; margin-left: -40%; z-index: 10; text-align: center; background-size: cover; background-image: url(../img/newyork-slider-bg.jpg);  background-position: center center; 
 		.nano-search-icon { margin-top: 40px; }
 		.nanobreak-title { color: white; font-size: 18px; margin-top: 10px; font-size: 21px; }
 		.swiper-container { z-index: 10; color: white; height: auto;  }
@@ -524,7 +524,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 	/* Search Nano-breaks button */
 	#compare-nanobreaks-button { display: block; text-align: center; margin-top: 100px; 
-		.compare-button {  display: inline-block; padding: 19px 100px 19px 100px; background-color: @red;  color: white;  font: 18px "budget";  text-transform: uppercase; box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);  }
+		.compare-button {  display: inline-block; padding: 19px 100px 19px 100px; background-color: @red;  color: white;  font-size: 18px; .mixroboto(400);  text-transform: uppercase; box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);  }
 	}
 
 
@@ -678,20 +678,25 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	.search-bg-page { 
 		#my-form { margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;}
 		#compare-nanobreaks-button { margin-top: 30px; }
+		.popup-wrappr .popup-swiper { background-image: url(../img/newyork-slider-bg-mob.jpg) }
+
 	}
 
 }
 
 
-
-
 @media (max-width: 380px) { 
-	.navbar-fixed .page-content.search-bg-page { padding-top: 56px; }
+	.navbar-fixed .page-content.search-bg-page { padding-top: 40px; }
 }
 
 
 
+@media screen and (min-width: 500px) , screen and (max-height: 500px) {
+  .navbar-fixed .page-content.search-bg-page { padding-top: 100px;  
+	#compare-nanobreaks-button { margin-top: 50px; margin-bottom: 50px; }
+  }
 
+}
 
 
 
@@ -711,7 +716,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 // Refine search button 
 #refine-search-button {   display: block;    text-align: center;   margin-bottom: 20px; margin-top: 20px; 
-	#refine-button { display: inline-block;  padding: 19px 100px 19px 100px;   background-color: @red; color: white;   font: 18px "budget";  text-transform: uppercase;     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+	#refine-button { display: inline-block;  padding: 19px 100px 19px 100px;   background-color: @red; color: white;  font-size: 18px; .mixroboto(400); text-transform: uppercase;     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
 }
 
 // Deals found count 
@@ -832,6 +837,9 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 .page-content.best-deals-page { background-color: @dark-purple; 
 
+	.popup-wrappr .popup-swiper { background-image: url(../img/amsterdam-slider-bg.jpg); }
+
+
 	// Best Deals styling 
 	.best-result-label { text-align: left; display: block; margin-top: 10px; width: 100%;
 		.best-result-inner { font-size: 14px; background: @navy-blue; padding: 5px 8px; display: inline-block; color: white; text-align: center;
@@ -848,9 +856,18 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 		}
 		.deal-wrappr:nth-child(even) { margin-left: 0%;  }
 		.deal-wrappr:nth-child(odd) { margin-left: 1%;  }
+		.deal-wrappr.highest-rating:nth-child(odd) { margin-left: 0%; margin-right: 1%; }
 	}
 	
-	.swiper-container-horizontal>.swiper-pagination-bullets { bottom: 10px; }
+	.swiper-container-horizontal>.swiper-pagination-bullets { bottom: 0px; margin-top: 20px; }
+
+	// Filter option 
+	#filter-best-deals { width: 100%; position: fixed; bottom: 0px; left: 0px;  height: 40px;  z-index: 8; font-size: 14px;  .mixroboto(400);  text-align: center; background-color:rgba(21,140,225,.95);   margin-bottom: -1px;
+		span { position: relative; top: 9px;  color: #ffd07f;
+			&:before {  }
+		}
+	}
+
 
 
 }
@@ -876,6 +893,9 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 }
 
 
+@media (max-width: 480px) { 
+	.popup-wrappr .popup-swiper { background-image: url(../img/amsterdam-slider-bg-mob.jpg); }
+}
 
 
 
@@ -902,7 +922,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 .page-content.discover-page { background-color:  @dark-purple;  
 
 	#top-attractions-image { position: relative; display: block; width: 100%; height: 130px;  background-size: cover;   background-image: url(../img/paris-BG-landscape.jpg);  background-position: center center; 
-		#top-attractions-title { display: block; color: white; font: 21px "budget";   text-align: center; height: 10px;     text-shadow: 2px 2px 4px #000000;}
+		#top-attractions-title { display: block; color: white; font-size: 21px; .mixroboto(400);  text-align: center;     text-shadow: 2px 2px 4px #000000;}
 	}
 	#attraction-nav {  display: block; width: 100%;  position: relative;  background-color: @light-blue; color: white; 
 		span { width: 20%; text-align: center; display: inline-block; padding-top: 10px; padding-bottom: 10px; text-transform: uppercase; .mixroboto(500); opacity: 0.8; }
@@ -1143,7 +1163,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 		#button-center { text-align: center; margin-bottom: 30px;
 
 			#login-button-container {   display: inline-block;  text-align: center;   margin-top: 10px;
-				#login-button { box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);  display: inline-block; padding: 19px 104px 19px 104px; background-color: #f5344b;  color: white; font: 18px "budget";  text-transform: uppercase; }
+				#login-button { box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);  display: inline-block; padding: 19px 104px 19px 104px; background-color: #f5344b;  color: white; font-size: 18px; .mixroboto(400);  text-transform: uppercase; }
 			}
 		} 
 

@@ -56,6 +56,13 @@ $('.menu-icon-nav').on('click', function() {
 
 
 
+// function for removing active class from nav 
+function activeNavRemove() { 
+	$(".content-block p").each(function () {
+    	$(this).removeClass("active-nav");
+	});
+}
+
 
 
 
@@ -131,10 +138,7 @@ $('#login-button-container').on('click', function() {
 /* home-page --------------------------------------------------------------------------------------------------------- */ 
 $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
-		$(".content-block p").each(function () {
-        	$(this).removeClass("active-nav");
-    	});
-	
+		activeNavRemove();
 
 		$('.content-block p').eq(0).addClass('active-nav');
 				
@@ -173,9 +177,7 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 myApp.onPageReinit('home', function (page) {
    
 
-	$(".content-block p").each(function () {
-	    $(this).removeClass("active-nav");
-	});
+	activeNavRemove();
 
 
 	$('.content-block p').eq(0).addClass('active-nav');
@@ -198,11 +200,7 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
 
-
-
-	$(".content-block p").each(function () {
-        $(this).removeClass("active-nav");
-    });
+	activeNavRemove();
 	
 
 	$('.content-block p').eq(1).addClass('active-nav');
@@ -504,9 +502,7 @@ searchPageContainer.find('.save-storage-data').on('click', function (e) {
 myApp.onPageReinit('search', function (page) {
    
 
-	$(".content-block p").each(function () {
-	    $(this).removeClass("active-nav");
-	});
+	activeNavRemove();
 
 
 	$('.content-block p').eq(1).addClass('active-nav');
@@ -534,9 +530,7 @@ myApp.onPageReinit('search', function (page) {
 $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 
-	$(".content-block p").each(function () {
-        $(this).removeClass("active-nav");
-    });
+	activeNavRemove();
 	
 
 
@@ -767,11 +761,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 myApp.onPageReinit('deal-landing', function (page) {
    
 
-	console.log('page reloaded');
-
-	$(".content-block p").each(function () {
-	    $(this).removeClass("active-nav");
-	});
+	activeNavRemove();
 
 
 	// Hide previous searched deals 
@@ -988,56 +978,34 @@ myApp.onPageReinit('deal-landing', function (page) {
 
 });
 
+// end of deal landing -----------------------------------------------------
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Best deals page --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-$$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 	
 
-	console.log(localData);
-
-	$(".content-block p").each(function () {
-        $(this).removeClass("active-nav");
-    });
-	
-
-	$('.content-block p').eq(2).addClass('active-nav');
 
 
 
-	$('.bottom-skip-bar').on('click', function(){ 
-		$(this).parent().parent().hide();
-	});
 
 
 
-		
-    // Sort by Price - return best deals 
+
+
+
+// Functions for best deals page -------------------------------------------------------------------------------------------------------
+
+
+// function for sorting deals into lowest price and appending to html dynamically
+
+function bestPriceSort () { 
+
+
+
+	console.log('best price function loaded');
+
+	// Sort by Price - return best priced deals 
     localData.sort(function(a, b) {
 	    var a1= a.price, b1= b.price;
 	    if(a1== b1) return 0;
@@ -1046,6 +1014,13 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 	});
 
 
+    // add best priced deal supplier name to the best deal 
+   	$('.best-result-inner').html('Best price for your Nano-break is from ' + '<span class="best-price-supplier">' +  localData[0].clientName + '</span>');
+
+
+	$(".best-deals-page #deals-container .deal-wrappr").each(function () {
+	    $(this).remove();
+	});
 
 
 	// loop through each object in returned data array 
@@ -1115,12 +1090,135 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
     }	
 
+    // add star rating class depending on deals rating 
+    $('.star-rating').each(function(i,e) {
+        var rating = $$(this).text();
+        if( rating == 1 ) {
+           $(elem).addClass('rating-1').html('');
+        } else if (rating == 2) {
+           $(e).addClass('rating-2').html('');
+        } else if(rating == 3) {
+            $(e).addClass('rating-3').html('');
+        } else if( rating == 4) {
+           $(e).addClass('rating-4').html('');
+        } else if( rating == 5) {
+            $(e).addClass('rating-5').html('');
+        }
+    });
+
+    $('.best-result-inner').val('Best price for your Nano-break is from ');
+
+  	// add class to remove margin from top deal 
+    $('.deal-wrappr').eq(0).addClass('best');
+
+}
 
 
 
 
 
-   // add star rating class depending on deals rating 
+
+
+
+
+
+
+// sort deals by rating functionality -------------------------------------------------------------------------------
+
+function ratingSort () { 
+
+	console.log('rating function loaded');
+
+	// Store deal data in rating variable 
+   	var ratingData = localData;
+
+	// Sort by rating - return highest rated deals 
+    ratingData.sort(function(a, b) {
+	    var a1= a.rating, b1= b.rating;
+	    if(a1== b1) return 0;
+	    return a1 < b1? 1: -1;
+	   
+	});
+
+
+    $('.best-result-inner').html('Highest rated deal for your Nano-break is from ' + '<span class="best-price-supplier">' +  ratingData[0].clientName + '</span>');
+
+
+
+	// Hide previous searched deals 
+	$(".best-deals-page #deals-container .deal-wrappr").each(function () {
+	    $(this).remove();
+	});
+
+
+	// loop through each object in returned data array 
+    for( var i=0;  i <  ratingData.length;  i++) {
+  	
+
+
+       	$('.best-deals-page #deals-container').append(
+
+
+
+		    '<div class="deal-wrappr">' + 
+		      '<div class="deal-info-container" style="background-image: url(' +  ratingData[i].contentImage + '),  url(https://static2.dealchecker.co.uk/10.9-2/images/ImageLibraries/Shared/no-image450x250.jpg); ">'  +  
+		         
+		         '<div class="result-price-container">' + 
+		            '<span class="result-price">' + "fr" + " " + 
+		              '<span class="pnd">' + "£" + '</span>' + 
+		              '<span class="price-inner">'  +  ratingData[i].price + '</span>' + " " 
+		               + 'pp' + 
+		            '</span>' + 
+		          '</div>' + 
+
+		          '<div class="deal-logo">' + 
+		            '<img src="https://static2.dealchecker.co.uk/10.7-6' +  ratingData[i].clientImage + '" alt="' + '" />' + 
+		          '</div>' + 
+
+		          '<div class="inner-deal-summary-container">' + 
+		            '<span class="accomodation">' +   ratingData[i].accommodation + '</span>'  + 
+		            '<span class="destination">' +   ratingData[i].destination  + '</span>' + 
+		            '<span class="star-rating-container">' +  
+		              '<span class="star-rating">' +  ratingData[i].rating  +  '</span>' + 
+		            '</span>' +
+		          '</div>' +
+
+		      '</div>' + 
+
+		      '<div class="result-bottom">' + 
+		        '<div class="result-flight">' + 
+		          
+		          '<div class="result-outbound">' +
+		            '<span class="result-dep-airport">' +   ratingData[i].depAir   + '</span>' +
+		            '<div class="result-dep-dates-container">' + 
+		              '<span class="dep-date">' +   ratingData[i].departureDate  + '</span>' +
+		            '</div>' +
+		          '</div>' +
+		          
+		          '<div class="result-return">' + 
+		            '<span class="result-return-airport">' +  ratingData[i].destAir + '</span>' + 
+		            '<div class="result-return-dates-container">' + 
+		              '<span class="return-date">' +  ratingData[i].returnDate + '</span>' + 
+		            '</div>' +
+		          '</div>' +
+
+		        '</div>' + 
+
+		        '<div class="result-price-and-button-container">' + 
+		          '<a href="#" onclick="window.open(\' '  +  ratingData[i].deepLink  + ' \' ,   \'_system\'  ); "> ' +
+		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
+		          '</a>' + 
+		        '</div>' + 
+		      
+		      '</div>' +
+
+		    '</div>'
+
+		);
+
+    }	
+
+    // add star rating class depending on deals rating 
     $('.star-rating').each(function(i,e) {
         var rating = $$(this).text();
         if( rating == 1 ) {
@@ -1137,15 +1235,78 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
     });
 
 
-
-    // add class to remove margin from top deal 
-    $('.deal-wrappr').eq(0).addClass('best');
    
- 
-    // Add client name to best deal header 
-   	$('.best-price-supplier').html(localData[0].clientName);
+
+}
+
+
+
+
+// filter deals functionality
+$('#filter-best-deals').on('click', function () {
+  myApp.modal({
+    title:  'Sort & Filter',
+    text: '',
+    verticalButtons: true,
+    buttons: [
+      {
+        text: 'Best Price',
+        onClick: function() {
+          bestPriceSort();
+          title:  'Sort & Filter',
+          myApp.alert('Deals filtered by best price!');
+
+        }
+      },
+      {
+        text: 'Highest Rating',
+        onClick: function() {
+          ratingSort();
+          myApp.alert('Deals filtered by highest rating!');
+
+        }
+      },
       
-		   
+    ]
+  })
+});    
+
+
+
+
+
+
+
+
+
+
+// Best deals page --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+$$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
+
+	
+	$('.skip-nano-guide').on('click', function(){ 
+		$(this).parent().parent().hide();
+	});
+	
+
+	activeNavRemove();
+	$('.content-block p').eq(2).addClass('active-nav');
+
+
+	// Call best priced function on load so user sees deal filtered by best priced deals on page load 
+	bestPriceSort();
+
+
+   
+   
+ 	
+ 	
+
+   
+
 
 // End of Best deals page -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 });
@@ -1159,13 +1320,9 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 myApp.onPageReinit('best-deals', function (page) {
    
 
-	$(".content-block p").each(function () {
-	    $(this).removeClass("active-nav");
-	    console.log('remove');
-	});
-
-
+	activeNavRemove();
 	$('.content-block p').eq(2).addClass('active-nav');
+
 
 
 });
@@ -1193,9 +1350,7 @@ $$(document).on('pageInit', '.page[data-page="discover"]', function(e) {
 
 
 
-	$(".content-block p").each(function () {
-	    $(this).removeClass("active-nav");
-	});
+	activeNavRemove();
 
 	$('.content-block p').eq(3).addClass('active-nav');
 
@@ -1285,13 +1440,9 @@ $$(document).on('pageInit', '.page[data-page="discover"]', function(e) {
 // Script that runs on every other time the discover page is init\loaded 
 myApp.onPageReinit('discover', function (page) {
    
-
-	$(".content-block p").each(function () {
-	    $(this).removeClass("active-nav");
-	});
-
-
+	activeNavRemove();
 	$('.content-block p').eq(3).addClass('active-nav');
+
 
 
 });
@@ -1310,9 +1461,7 @@ myApp.onPageReinit('discover', function (page) {
 
 $$(document).on('pageInit', '.page[data-page="about"]', function(e) {
 
-	$(".content-block p").each(function () {
-        $(this).removeClass("active-nav");
-    });
+	activeNavRemove();
 	
 
 });
@@ -1324,10 +1473,7 @@ $$(document).on('pageInit', '.page[data-page="about"]', function(e) {
 myApp.onPageReinit('about', function (page) {
    
 
-	$(".content-block p").each(function () {
-	    $(this).removeClass("active-nav");
-	});
-
+	activeNavRemove();
 
 
 
@@ -1354,11 +1500,8 @@ myApp.onPageReinit('about', function (page) {
 
 $$(document).on('pageInit', '.page[data-page="settings"]', function(e) {
 
-	$(".content-block p").each(function () {
-        $(this).removeClass("active-nav");
-    });
+	activeNavRemove();
 	
-
 	$('.content-block p').eq(4).addClass('active-nav');
 
 
@@ -1370,11 +1513,7 @@ $$(document).on('pageInit', '.page[data-page="settings"]', function(e) {
 // Script that runs every time after the settings page is init\loaded 
 myApp.onPageReinit('settings', function (page) {
    
-
-	$(".content-block p").each(function () {
-	    $(this).removeClass("active-nav");
-	});
-
+	activeNavRemove();
 
 	$('.content-block p').eq(4).addClass('active-nav');
 
