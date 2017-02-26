@@ -157,13 +157,29 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 	    console.log(todaysBestDeal);
 
 	    myApp.addNotification({
-	        title: 'Todays best deal!',
-	        subtitle: todaysBestDeal.destination + " " + "£" + todaysBestDeal.price + "pp " + todaysBestDeal.rating,
+	        title: 'Todays best deal provided by ' + todaysBestDeal.clientName,
+	        subtitle: todaysBestDeal.destination + " " + todaysBestDeal.accommodation  + " " + '<div class="todays-best-deals-price-container">'  + "£" + todaysBestDeal.price + "pp " + '</div>' +  '<span class="star-rating">' + todaysBestDeal.rating +  '</span>' ,
 	        message: 'Hello, how are you? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut posuere erat. Pellentesque id elementum urna, a aliquam ante. Donec vitae volutpat orci. Aliquam sed molestie risus, quis tincidunt dui.',
-	        media: '<img width="44" height="44" style="border-radius:100%" src="http://lorempixel.com/output/people-q-c-100-100-9.jpg">'
+	        media: '<img width="44" height="44" style="border-radius:100%" src="img/deal-of-the-day.jpg">'
 	    });
 
 
+
+     	// add star rating class depending on deals rating 
+	    $('.star-rating').each(function(i,e) {
+	        var rating = $(this).text();
+	        if( rating == 1 ) {
+	           $(elem).addClass('rating-1').html('');
+	        } else if (rating == 2) {
+	           $(e).addClass('rating-2').html('');
+	        } else if(rating == 3) {
+	           $(e).addClass('rating-3').html('');
+	        } else if( rating == 4) {
+	           $(e).addClass('rating-4').html('');
+	        } else if( rating == 5) {
+	           $(e).addClass('rating-5').html('');
+	        }
+	    });
 
 
 
@@ -999,7 +1015,7 @@ myApp.onPageReinit('deal-landing', function (page) {
 
 // function for sorting deals into lowest price and appending to html dynamically
 
-function bestPriceSort () { 
+function priceLowToHigh () { 
 
 
 
@@ -1106,12 +1122,144 @@ function bestPriceSort () {
         }
     });
 
+
+    $('.best-result-label').show();
+
+
     $('.best-result-inner').val('Best price for your Nano-break is from ');
 
   	// add class to remove margin from top deal 
     $('.deal-wrappr').eq(0).addClass('best');
 
 }
+
+
+
+
+
+// function for filtering deals from highest to lowest 
+
+function priceHighToLow() { 
+
+
+
+	console.log('price high to low function loaded');
+
+	// Sort by Price - return best priced deals 
+    localData.sort(function(a, b) {
+	    var a1= a.price, b1= b.price;
+	    if(a1== b1) return 0;
+	    return a1< b1? 1: -1;
+	   
+	});
+
+
+    // add best priced deal supplier name to the best deal 
+   	$('.best-result-inner').html('Best price for your Nano-break is from ' + '<span class="best-price-supplier">' +  localData[0].clientName + '</span>');
+
+
+	$(".best-deals-page #deals-container .deal-wrappr").each(function () {
+	    $(this).remove();
+	});
+
+
+	// loop through each object in returned data array 
+    for( var i=0;  i < localData.length;  i++) {
+  	
+
+
+       	$('.best-deals-page #deals-container').append(
+
+
+
+		    '<div class="deal-wrappr">' + 
+		      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '),  url(https://static2.dealchecker.co.uk/10.9-2/images/ImageLibraries/Shared/no-image450x250.jpg); ">'  +  
+		         
+		         '<div class="result-price-container">' + 
+		            '<span class="result-price">' + "fr" + " " + 
+		              '<span class="pnd">' + "£" + '</span>' + 
+		              '<span class="price-inner">'  + localData[i].price + '</span>' + " " 
+		               + 'pp' + 
+		            '</span>' + 
+		          '</div>' + 
+
+		          '<div class="deal-logo">' + 
+		            '<img src="https://static2.dealchecker.co.uk/10.7-6' + localData[i].clientImage + '" alt="' + '" />' + 
+		          '</div>' + 
+
+		          '<div class="inner-deal-summary-container">' + 
+		            '<span class="accomodation">' +  localData[i].accommodation + '</span>'  + 
+		            '<span class="destination">' +  localData[i].destination  + '</span>' + 
+		            '<span class="star-rating-container">' +  
+		              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
+		            '</span>' +
+		          '</div>' +
+
+		      '</div>' + 
+
+		      '<div class="result-bottom">' + 
+		        '<div class="result-flight">' + 
+		          
+		          '<div class="result-outbound">' +
+		            '<span class="result-dep-airport">' +  localData[i].depAir   + '</span>' +
+		            '<div class="result-dep-dates-container">' + 
+		              '<span class="dep-date">' +  localData[i].departureDate  + '</span>' +
+		            '</div>' +
+		          '</div>' +
+		          
+		          '<div class="result-return">' + 
+		            '<span class="result-return-airport">' + localData[i].destAir + '</span>' + 
+		            '<div class="result-return-dates-container">' + 
+		              '<span class="return-date">' + localData[i].returnDate + '</span>' + 
+		            '</div>' +
+		          '</div>' +
+
+		        '</div>' + 
+
+		        '<div class="result-price-and-button-container">' + 
+		          '<a href="#" onclick="window.open(\' '  + localData[i].deepLink  + ' \' ,   \'_system\'  ); "> ' +
+		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
+		          '</a>' + 
+		        '</div>' + 
+		      
+		      '</div>' +
+
+		    '</div>'
+
+		);
+
+    }	
+
+    // add star rating class depending on deals rating 
+    $('.star-rating').each(function(i,e) {
+        var rating = $$(this).text();
+        if( rating == 1 ) {
+           $(elem).addClass('rating-1').html('');
+        } else if (rating == 2) {
+           $(e).addClass('rating-2').html('');
+        } else if(rating == 3) {
+            $(e).addClass('rating-3').html('');
+        } else if( rating == 4) {
+           $(e).addClass('rating-4').html('');
+        } else if( rating == 5) {
+            $(e).addClass('rating-5').html('');
+        }
+    });
+
+    
+
+
+    $('.best-result-label').hide();
+
+  	// add class to remove margin from top deal 
+    $('.deal-wrappr').eq(0).removeClass('rating').addClass('top-margin');
+
+}
+
+
+
+
+
 
 
 
@@ -1235,6 +1383,14 @@ function ratingSort () {
     });
 
 
+
+
+    $('.best-result-label').hide();
+
+  	// add class to remove margin from top deal 
+    $('.deal-wrappr').eq(0).addClass('rating').addClass('top-margin');
+
+
    
 
 }
@@ -1250,19 +1406,29 @@ $('#filter-best-deals').on('click', function () {
     verticalButtons: true,
     buttons: [
       {
-        text: 'Best Price',
+        text: 'PRICE - LOW TO HIGH',
         onClick: function() {
-          bestPriceSort();
+          priceLowToHigh();
           title:  'Sort & Filter',
-          myApp.alert('Deals filtered by best price!');
+          myApp.alert('Deals filtered by best price!', '');
 
         }
       },
+
+       {
+        text: 'PRICE - HIGH TO LOW',
+        onClick: function() {
+          priceHighToLow();
+          myApp.alert('Deals filtered by high to low price!', '');
+
+        }
+      },
+
       {
-        text: 'Highest Rating',
+        text: 'HIGHEST RATING',
         onClick: function() {
           ratingSort();
-          myApp.alert('Deals filtered by highest rating!');
+          myApp.alert('Deals filtered by highest rating!', '');
 
         }
       },
@@ -1297,7 +1463,7 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 
 	// Call best priced function on load so user sees deal filtered by best priced deals on page load 
-	bestPriceSort();
+	priceLowToHigh();
 
 
    
