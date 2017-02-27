@@ -225,7 +225,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	.search-walkthrough { background-image: url(../img/search-walkthrough.jpg); background-size: cover; }
 
 	// best deals walkthrough 
-	.best-deals-walkthrough { background-image: url(../img/best-deals-walkthrough.jpg); background-size: cover; }
+	.best-deals-walkthrough { background-image: url(../img/best-deals-walkthrough.jpg); background-size: cover;  }
 
 	// discover-walkthrough
 	.discover-walkthrough { background-image: url(../img/discover-walkthrough.jpg); background-size: cover;  }
@@ -293,14 +293,14 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 			.home-link:before { background-position: 0 -2909px; }
 			.search-link:before { background-position: 0 -1635px; }
 			.best-deals-link:before { background-position: 0px -3114px; }
-			.discover-link:before {  background-position: 0 -3170px; }
+			.discover-link:before {  background-position: 0 -3171px; }
 			.settings-link:before { background-position: 0 -2534px; }
 		}
 		
 		.home-link:before {     background-position: 0 -2884px; }
 		.search-link:before {     background-position: 0 -2487px; } 
 		.best-deals-link:before { background-position: 0 -3143px; } 
-		.discover-link:before { background-position: 0 -3196px; }
+		.discover-link:before { background-position: 0 -3197px; }
 		.settings-link:before {     background-position: 0 -2510px;  }
 	}
 }
@@ -343,7 +343,10 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 @media (max-width: 480px) { 
 
-	.navbar-fixed .page-content.index .splash-screen-container .nanobreaks-logo-container { margin-top: 30px; }
+	.navbar-fixed .page-content.index {
+		.splash-screen-container .nanobreaks-logo-container { margin-top: 30px; }
+		.best-deals-walkthrough { background-position: center; }
+	}
 	
 
 }
@@ -382,7 +385,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 		#email-fail.invalidEmail { display: inline-block; }
 		#email-container { display: block;
 			#email-label {  
-				&:before { margin-top: 4px; position: absolute; content: ''; width: 24px; height: 16px; background-position: 0 -2812px; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto; }
+				&:before { margin-top: 4px; position: absolute; content: ''; width: 24px; height: 16px; background-position: 0 -2813px; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto; }
 			}
 			#email-login {  min-width: 200px; background: transparent; border: 0px; border-bottom: 1px solid white; padding-left: 52px; padding-bottom:  10px;  font-size: 18px; .mixroboto(400); color: white; border-radius: 0px; }
 		}
@@ -471,12 +474,16 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	.rating-5 { background-position: 0; }
 	
 	.view-todays-deal {  display: block;
-		.view-deal-button {  text-align: right;  color: @links-blue; position: relative; display: block;
-			// &:after { position: absolute;  content: ''; width: 9px; height: 10px; background-size: 100% auto; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat;   background-position: 0 -1154px; top: 5px; margin-left: 3px;  }
+		.view-deal-button {  text-align: right;  color: @links-blue; position: relative; display: block; margin-right: 10px;
+			&:after { position: absolute;  content: ''; width: 9px; height: 10px; background-size: 100% auto; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat;   background-position: 0 -1154px; top: 5.6px;  right: -12px; }
 		}
 	}
+	
+	.todays-deal-destinations { display: inline-block; font-weight: 700; color: #53aae8; }
 
 }
+
+.list-block .item-subtitle { white-space: normal; text-overflow: normal;  }
 
 
 
@@ -548,7 +555,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 // Nano-search popup
 
 .popup-wrappr { background: rgba(0, 0, 0, 0.5); position: fixed; top: 0px; left: 0px; width: 100%; height: 100%;   z-index: 9;
-	.popup-swiper { height: 400px; position: absolute; top: 50%; margin-top: -200px; width: 80%; left: 50%; margin-left: -40%; z-index: 10; text-align: center; background-size: cover; background-image: url(../img/newyork-slider-bg.jpg);  background-position: center center; background-color: @dark-blue;
+	.popup-swiper { height: 400px; position: absolute; top: 50%; margin-top: -200px; width: 80%; left: 50%; margin-left: -40%; z-index: 10; text-align: center; background-size: cover; background-image: url(../img/newyork-slider-bg.jpg);  background-position: center center; background-color: white;
 		.nano-search-icon-container { margin-top: 40px; 
 			.nano-search-icon { fill: #ffcd20;  }
 			.nano-best-deals-icon { fill: #ffcd20; }
@@ -837,7 +844,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 		#my-form { margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;}
 		#compare-nanobreaks-button { margin-top: 30px; }
 		.popup-wrappr .popup-swiper { background-image: url(../img/newyork-slider-bg-mob.jpg) }
-
+		.swiper-container-horizontal>.swiper-pagination-bullets { margin-top: 12px; }
 	}
 
 }
@@ -896,11 +903,11 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 			}
 			
 			.inner-deal-summary-container { z-index: 1; position: absolute; display: block; bottom: 0px; font-size: 18px; color: white; left: 19px; margin-bottom: 10px;
-				.accomodation { .mixroboto(600); display: block;       text-shadow: 2px 2px 4px #000000; }
+				.accomodation { .mixroboto(600); display: block;  text-shadow: 2px 2px 4px #000000; }
 				.destination { .mixroboto(300); margin-left: 20px; display: inline-block; position: relative;
 					&::before {   background-position: 0 -2703px; width: 22px; height:17px; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat;   background-size: 100% auto; content: ''; position: absolute; top: 3px; margin-left: -26px; } 
 				}
-				.star-rating-container { display: inline-block; position: relative;  margin-left: 10px; top: -10px;
+				.star-rating-container { display: inline-block; position: relative;  margin-left: 10px; top: -10px; width: 84px;
 					.star-rating {  background-repeat: no-repeat; height: 10px; width: 59px; background-size: 118px 165px; background-image: url(../img/star-sprite.svg); content: ''; position: absolute; background-position: 0px; }					
 					.rating-1 { background-position: -46px; }
 					.rating-2 { background-position: -35px; }
@@ -908,9 +915,16 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 					.rating-4 { background-position: -12px; }
 					.rating-5 { background-position: 0; }
 				}
+				.adults { display: inline-block; position: relative; font-weight: 300; margin-left: 20px;
+					&:before { position: absolute;  background-position: 0 -2602px;  width: 27px;   height: 17px;   background-image: url(../img/SpriteSheet.svg);   background-repeat: no-repeat;   background-size: 100% auto;   content: '';   position: absolute;   top: 3px;    left: -32px; } 
+				}
+				.children { display: inline-block; position: relative; font-weight: 300; margin-left: 47px; 
+					&:before { position: absolute;     background-position: 0 -2626px;    width: 27px;    height: 24px;    background-image: url(../img/SpriteSheet.svg);    background-repeat: no-repeat;   background-size: 100% auto;    content: '';    position: absolute;    top: -2px;   left: -31px; }
+				}
 			}
 
 		}
+
 
 // Bottom of deal styling 	----------------------------
 		.result-bottom { display: block; background: @light-blue; border-top: 1px solid #3f8dc5; z-index: 7; position: relative; padding-top: 7px; padding-right: 13px; padding-bottom: 0px; padding-left: 13px;
@@ -1006,12 +1020,18 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	#deals-container {   width: 98%;   height: 100%;   display: block;   margin-left: 1%; margin-right: 1%;
 		.deal-wrappr.rating {  
 			.result-price-container { background-color:  @orange; padding-left: 45px; 
-				&::before { position: absolute; content: ''; left: 10px; width: 27px; height:24px; top: 50%; margin-top: -12px; background-repeat: no-repeat; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto;    background-position: 0 -3341px; }
+				&::before { position: absolute; content: ''; left: 8px; width: 27px; height:24px; top: 50%; margin-top: -13px; background-repeat: no-repeat; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto;    background-position: 0 -3341px; }
 			}
 		}
 		.deal-wrappr.best {  
 			.result-price-container { background-color:  @orange; padding-left: 45px; 
-				&::before { position: absolute; content: ''; left: 10px; width: 27px; height:30px; top: 50%; margin-top: -15px; background-repeat: no-repeat; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto;    background-position: 0 -3430px; }
+				&::before { position: absolute; content: ''; left: 7px; width: 27px; height:30px; top: 50%; margin-top: -16px; background-repeat: no-repeat; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto;    background-position: 0 -3430px; }
+			}
+		}
+
+		.deal-wrappr.high-to-low {  
+			.result-price-container { background-color:  @orange; padding-left: 45px; 
+				&::before { position: absolute; content: ''; left: 5px; width: 32px; height: 28px; top: 50%; margin-top: -14px; background-repeat: no-repeat; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto;    background-position: 0 -4140px; }
 			}
 		}
 		.deal-wrappr:nth-child(even) { margin-left: 0%;  }
@@ -1053,7 +1073,9 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 
 @media (max-width: 480px) { 
-	.popup-wrappr .popup-swiper { background-image: url(../img/amsterdam-slider-bg-mob.jpg); }
+	.page-content.best-deals-page {
+		.popup-wrappr .popup-swiper { background-image: url(../img/amsterdam-slider-bg-mob.jpg); }
+	}
 }
 
 

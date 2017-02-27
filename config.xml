@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
     <widget id="com.nanobreak.app"
-        versionCode="6.7" 
-        version="6.7" 
+        versionCode="6.9" 
+        version="6.9" 
         xmlns="http://www.w3.org/ns/widgets"
         xmlns:gap="http://phonegap.com/ns/1.0">
     

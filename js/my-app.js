@@ -158,9 +158,9 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
 	    myApp.addNotification({
 	        title: 'Todays best deal provided by ' + todaysBestDeal.clientName,
-	        subtitle: todaysBestDeal.destination + " " + todaysBestDeal.accommodation  + " " + '<div class="todays-best-deals-price-container">'  + "£" + todaysBestDeal.price + "pp " + '</div>' +  '<span class="star-rating">' + todaysBestDeal.rating +  '</span>' + '<a class="view-todays-deal" href="#" onclick="window.open(\' '  + todaysBestDeal.deepLink  + ' \' ,   \'_system\'  ); "> ' +  '<span class="view-deal-button">' + "View deal" +  '</span>' +  '</a>'   ,
+	        subtitle: '<div class="todays-deal-destinations">' + todaysBestDeal.destination + '</div>' +  ", " + todaysBestDeal.accommodation  + " " + '<div class="todays-best-deals-price-container">'  + "£" + todaysBestDeal.price + "pp " + '</div>' +  '<span class="star-rating">' + todaysBestDeal.rating +  '</span>' + '<a class="view-todays-deal" href="#" onclick="window.open(\' '  + todaysBestDeal.deepLink  + ' \' ,   \'_system\'  ); "> ' +  '<span class="view-deal-button">' + "View deal" +  '</span>' +  '</a>'   ,
 	        message: 'Hello, how are you? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut posuere erat. Pellentesque id elementum urna, a aliquam ante. Donec vitae volutpat orci. Aliquam sed molestie risus, quis tincidunt dui.',
-	        media: '<img width="44" height="44" style="border-radius:100%" src="img/deal-of-the-day.jpg">'
+	        media: '<img width="44" height="44" style="border-radius:100%" src="img/todays-deal-img.svg">'
 	    });
 
 
@@ -604,35 +604,37 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 	function appendInputedDataToDeal() { 
 		
-			$('.deal-landing-page #deals-container').append(
+		$('.deal-landing-page #deals-container').append(
 
 
-			    '<div class="deal-wrappr">' + 
-			      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '), url(https://static2.dealchecker.co.uk/10.9-2/images/ImageLibraries/Shared/no-image450x250.jpg);">' +  
-			         
-			         '<div class="result-price-container">' + 
-			            '<span class="result-price">' + "fr" + " " + 
-			              '<span class="pnd">' + "£" + '</span>' + 
-			              '<span class="price-inner">'  + localData[i].price + '</span>' + " " 
-			               + 'pp' + 
-			            '</span>' + 
-			          '</div>' + 
+		    '<div class="deal-wrappr">' + 
+		      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '), url(img/no-image450x250.jpg);">' +  
+		         
+		        '<div class="result-price-container">' + 
+		            '<span class="result-price">' + "fr" + " " + 
+		              '<span class="pnd">' + "£" + '</span>' + 
+		              '<span class="price-inner">'  + localData[i].price + '</span>' + " " 
+		               + 'pp' + 
+		            '</span>' + 
+		        '</div>' + 
 
-			          '<div class="deal-logo">' + 
-			            '<img src="https://static2.dealchecker.co.uk/10.7-6' + localData[i].clientImage + '" alt="' + '" />' + 
-			          '</div>' + 
+		        '<div class="deal-logo">' + 
+		            '<img src="https://static2.dealchecker.co.uk/10.7-6' + localData[i].clientImage + '" alt="' + '" />' + 
+		        '</div>' + 
 
-			          '<div class="inner-deal-summary-container">' + 
-			            '<span class="accomodation">' +  localData[i].accommodation + '</span>'  + 
-			            '<span class="destination">' +  localData[i].destination  + '</span>' + 
-			            '<span class="star-rating-container">' +  
-			              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
-		            '</span>' +
-		          '</div>' +
+		        '<div class="inner-deal-summary-container">' + 
+		            '<span class="accomodation">' +  localData[i].accommodation + '</span>'  + 
+		            '<span class="destination">' +  localData[i].destination  + '</span>' + 
+		            '<span class="star-rating-container">' +  
+		              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
+	            	'</span>' +
+	            	'<span class="adults">' +  localData[i].adults  + '</span>' +
+	            	'<span class="children">' +  localData[i].children  + '</span>' +
+ 	          	'</div>' +
 
-		      '</div>' + 
+	        '</div>' + 
 
-		      '<div class="result-bottom">' + 
+		    '<div class="result-bottom">' + 
 		        '<div class="result-flight">' + 
 		          
 		          '<div class="result-outbound">' +
@@ -652,7 +654,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 		        '</div>' + 
 
 		        '<div class="result-price-and-button-container">' + 
-		          '<a href="">' + 
+		          '<a href="#" onclick="window.open(\' '  + localData[i].deepLink  + ' \' ,   \'_system\'  ); "> ' +
 		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
 		          '</a>' + 
 		        '</div>' + 
@@ -662,10 +664,10 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 		    '</div>'
 
 		);
-
-
-			
+	
 	}
+
+
 
 
 
@@ -758,7 +760,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 	// end of for loop 
 
 
-
+	   console.log(localData);
 
 // closing brackets for deal landing scripts -------------------------------------------------------------------------------------------------------------------------------------------------------
 });
@@ -779,6 +781,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 // Script that runs on every other time the deallanding page is init\loaded  
 myApp.onPageReinit('deal-landing', function (page) {
    
+
 
 	activeNavRemove();
 
@@ -846,27 +849,29 @@ myApp.onPageReinit('deal-landing', function (page) {
 
 
 		    '<div class="deal-wrappr">' + 
-		      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '), url(https://static2.dealchecker.co.uk/10.9-2/images/ImageLibraries/Shared/no-image450x250.jpg);">' +  
+		      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '), url(img/no-image450x250.jpg);">' +  
 		         
-		         '<div class="result-price-container">' + 
+		        '<div class="result-price-container">' + 
 		            '<span class="result-price">' + "fr" + " " + 
 		              '<span class="pnd">' + "£" + '</span>' + 
 		              '<span class="price-inner">'  + localData[i].price + '</span>' + " " 
 		               + 'pp' + 
 		            '</span>' + 
-		          '</div>' + 
+		        '</div>' + 
 
-		          '<div class="deal-logo">' + 
+		        '<div class="deal-logo">' + 
 		            '<img src="https://static2.dealchecker.co.uk/10.7-6' + localData[i].clientImage + '" alt="' + '" />' + 
-		          '</div>' + 
+		        '</div>' + 
 
-		          '<div class="inner-deal-summary-container">' + 
+		        '<div class="inner-deal-summary-container">' + 
 		            '<span class="accomodation">' +  localData[i].accommodation + '</span>'  + 
 		            '<span class="destination">' +  localData[i].destination  + '</span>' + 
 		            '<span class="star-rating-container">' +  
 		              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
-	            '</span>' +
-	          '</div>' +
+	            	'</span>' +
+	            	'<span class="adults">' +  localData[i].adults  + '</span>' +
+	            	'<span class="children">' +  localData[i].children  + '</span>' +
+ 	          	'</div>' +
 
 	        '</div>' + 
 
@@ -890,7 +895,7 @@ myApp.onPageReinit('deal-landing', function (page) {
 		        '</div>' + 
 
 		        '<div class="result-price-and-button-container">' + 
-		          '<a href="">' + 
+		          '<a href="#" onclick="window.open(\' '  + localData[i].deepLink  + ' \' ,   \'_system\'  ); "> ' +
 		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
 		          '</a>' + 
 		        '</div>' + 
@@ -1052,7 +1057,7 @@ function priceLowToHigh () {
 
 
 		    '<div class="deal-wrappr">' + 
-		      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '),  url(https://static2.dealchecker.co.uk/10.9-2/images/ImageLibraries/Shared/no-image450x250.jpg); ">'  +  
+		      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '),  url(img/no-image450x250.jpg); ">'  +  
 		         
 		         '<div class="result-price-container">' + 
 		            '<span class="result-price">' + "fr" + " " + 
@@ -1072,6 +1077,8 @@ function priceLowToHigh () {
 		            '<span class="star-rating-container">' +  
 		              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
 		            '</span>' +
+		            '<span class="adults">' +  localData[i].adults  + '</span>' +
+	            	'<span class="children">' +  localData[i].children  + '</span>' +
 		          '</div>' +
 
 		      '</div>' + 
@@ -1176,7 +1183,7 @@ function priceHighToLow() {
 
 
 		    '<div class="deal-wrappr">' + 
-		      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '),  url(https://static2.dealchecker.co.uk/10.9-2/images/ImageLibraries/Shared/no-image450x250.jpg); ">'  +  
+		      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '),  url(img/no-image450x250.jpg); ">'  +  
 		         
 		         '<div class="result-price-container">' + 
 		            '<span class="result-price">' + "fr" + " " + 
@@ -1196,6 +1203,8 @@ function priceHighToLow() {
 		            '<span class="star-rating-container">' +  
 		              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
 		            '</span>' +
+		            '<span class="adults">' +  localData[i].adults  + '</span>' +
+	            	'<span class="children">' +  localData[i].children  + '</span>' +
 		          '</div>' +
 
 		      '</div>' + 
@@ -1255,7 +1264,7 @@ function priceHighToLow() {
     $('.best-result-label').hide();
 
   	// add class to remove margin from top deal 
-    $('.deal-wrappr').eq(0).removeClass('rating').addClass('top-margin');
+    $('.deal-wrappr').eq(0).addClass('top-margin').addClass('high-to-low');
 
 }
 
@@ -1312,7 +1321,7 @@ function ratingSort () {
 
 
 		    '<div class="deal-wrappr">' + 
-		      '<div class="deal-info-container" style="background-image: url(' +  ratingData[i].contentImage + '),  url(https://static2.dealchecker.co.uk/10.9-2/images/ImageLibraries/Shared/no-image450x250.jpg); ">'  +  
+		      '<div class="deal-info-container" style="background-image: url(' +  ratingData[i].contentImage + '),  url(img/no-image450x250.jpg); ">'  +  
 		         
 		         '<div class="result-price-container">' + 
 		            '<span class="result-price">' + "fr" + " " + 
@@ -1332,6 +1341,8 @@ function ratingSort () {
 		            '<span class="star-rating-container">' +  
 		              '<span class="star-rating">' +  ratingData[i].rating  +  '</span>' + 
 		            '</span>' +
+		            '<span class="adults">' +  ratingData[i].adults  + '</span>' +
+	            	'<span class="children">' +  ratingData[i].children  + '</span>' +
 		          '</div>' +
 
 		      '</div>' + 
@@ -1422,7 +1433,7 @@ $('#filter-best-deals').on('click', function () {
         text: 'PRICE - HIGH TO LOW',
         onClick: function() {
           priceHighToLow();
-          myApp.alert('Deals filtered by high to low price!', '');
+          myApp.alert('Deals price filtered by highest to lowest!', '');
 
         }
       },
@@ -1470,7 +1481,7 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 
    
-   
+   	console.log(localData);
  	
  	
 
