@@ -158,10 +158,13 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
 	    myApp.addNotification({
 	        title: 'Todays best deal provided by ' + todaysBestDeal.clientName,
-	        subtitle: todaysBestDeal.destination + " " + todaysBestDeal.accommodation  + " " + '<div class="todays-best-deals-price-container">'  + "£" + todaysBestDeal.price + "pp " + '</div>' +  '<span class="star-rating">' + todaysBestDeal.rating +  '</span>' ,
+	        subtitle: todaysBestDeal.destination + " " + todaysBestDeal.accommodation  + " " + '<div class="todays-best-deals-price-container">'  + "£" + todaysBestDeal.price + "pp " + '</div>' +  '<span class="star-rating">' + todaysBestDeal.rating +  '</span>' + '<a class="view-todays-deal" href="#" onclick="window.open(\' '  + todaysBestDeal.deepLink  + ' \' ,   \'_system\'  ); "> ' +  '<span class="view-deal-button">' + "View deal" +  '</span>' +  '</a>'   ,
 	        message: 'Hello, how are you? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut posuere erat. Pellentesque id elementum urna, a aliquam ante. Donec vitae volutpat orci. Aliquam sed molestie risus, quis tincidunt dui.',
 	        media: '<img width="44" height="44" style="border-radius:100%" src="img/deal-of-the-day.jpg">'
 	    });
+
+
+
 
 
 

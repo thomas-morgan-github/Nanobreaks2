@@ -462,15 +462,20 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 .list-block .item-text { display: none; }
 
 .notifications { 
-	.todays-best-deals-price-container { display: inline-block; font-weight: 700; color: @orange;
-	
-	}
+	.todays-best-deals-price-container { display: inline-block; font-weight: 700; color: @orange;}
 	.star-rating {  background-repeat: no-repeat; height: 10px; width: 59px; background-size: 118px 165px; background-image: url(../img/star-sprite.svg); content: ''; position: absolute; background-position: 0px; margin-left: 10px;   margin-top: 5px; }					
 	.rating-1 { background-position: -46px; }
 	.rating-2 { background-position: -35px; }
 	.rating-3 { background-position: -24px; }
 	.rating-4 { background-position: -12px; }
 	.rating-5 { background-position: 0; }
+	
+	.view-todays-deal {  display: block;
+		.view-deal-button {  text-align: right;  color: @links-blue; position: relative; display: block;
+			// &:after { position: absolute;  content: ''; width: 9px; height: 10px; background-size: 100% auto; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat;   background-position: 0 -1154px; top: 5px; margin-left: 3px;  }
+		}
+	}
+
 }
 
 
