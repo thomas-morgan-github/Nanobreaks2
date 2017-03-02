@@ -26,9 +26,9 @@ var mainView = myApp.addView('.view-main', {
 
 // Splash on load --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-setTimeout(function() {
-   $('#splash').hide();
-}, 2000); // <-- time in milliseconds
+// setTimeout(function() {
+//    $('#splash').hide();
+// }, 2000); // <-- time in milliseconds
 
 
 
@@ -218,6 +218,10 @@ myApp.onPageReinit('home', function (page) {
 $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
+	// $('input').on('focus', function(e) {
+ //    	e.preventDefault(); e.stopPropagation();
+ //    	// window.scrollTo(0, 0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
+	// });ss
 
 	activeNavRemove();
 	
@@ -750,7 +754,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 			$("#search-destination").html("");
 		}
 		else {  
-		 	$("#search-destination").html("in" + " " + destination);
+		 	$("#search-destination").html("in" + " " + destination + '<span class="refine"> , refine search to find more deals </span>'    );
 		}
 
 		var DealCounter = $('.deal-wrappr').length;
@@ -761,6 +765,10 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 
 	   console.log(localData);
+
+	
+
+
 
 // closing brackets for deal landing scripts -------------------------------------------------------------------------------------------------------------------------------------------------------
 });
@@ -782,13 +790,15 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 myApp.onPageReinit('deal-landing', function (page) {
    
 
+ 	 
+
 
 	activeNavRemove();
 
 
 	// Hide previous searched deals 
 	$(".deal-landing-page #deals-container .deal-wrappr").each(function () {
-	    $(this).hide();
+	    $(this).remove();
 	});
 
 
@@ -997,6 +1007,9 @@ myApp.onPageReinit('deal-landing', function (page) {
 		$("#deal-count").html(DealCounter);
 	}
 	// end of for loop 
+
+
+ 
 
 
 
