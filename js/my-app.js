@@ -218,10 +218,6 @@ myApp.onPageReinit('home', function (page) {
 $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
-	// $('input').on('focus', function(e) {
- //    	e.preventDefault(); e.stopPropagation();
- //    	// window.scrollTo(0, 0); //the second 0 marks the Y scroll pos. Setting this to i.e. 100 will push the screen up by 100px. 
-	// });ss
 
 	activeNavRemove();
 	
@@ -1620,6 +1616,28 @@ $$(document).on('pageInit', '.page[data-page="discover"]', function(e) {
 	
 	});
 	
+
+
+
+	// var new_script = document.createElement('script');
+	// new_script.setAttribute('src','https://maps.googleapis.com/maps/api/place/textsearch/json?query=new+york+city+point+of+interest&language=en&key=AIzaSyALztgN7CIscyL1LN2zw1yVq6EmIIz6mBA');
+	// document.head.appendChild(new_script);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

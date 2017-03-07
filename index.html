@@ -2947,8 +2947,8 @@
 
 
 
-
-    <script type="text/javascript" src="cordova.js"></script>
+<!-- 
+    <script type="text/javascript" src="cordova.js"></script> -->
    
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
@@ -2957,12 +2957,38 @@
 
 
        <!-- script for gettng grunt browser sync working delete before uploading app to app store -->
-<!--     <script id="__bs_script__">//<![CDATA[
+    <script id="__bs_script__">//<![CDATA[
       document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.5'><\/script>".replace("HOST", location.hostname));
 //]]></script>
- -->
 
-     
+
+
+
+    <script type="text/javascript">
+
+        
+        $(document).ready(function () {
+
+
+
+            $.ajax({
+                url: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=new+york+city+point+of+interest&language=en&key=AIzaSyALztgN7CIscyL1LN2zw1yVq6EmIIz6mBA', 
+                type: "GET",   
+                dataType: 'jsonp',
+                cache: false,
+                success: function(response){                          
+                    jQuery.parseJSON(response);
+                    alert(response);                   
+                }           
+            });    
+        
+
+
+
+        });  
+
+
+    </script>
 
 
 </body>

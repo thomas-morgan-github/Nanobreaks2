@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
     <widget id="com.nanobreak.app"
-        versionCode="10.3" 
-        version="10.3" 
+        versionCode="10.4" 
+        version="10.4" 
         xmlns="http://www.w3.org/ns/widgets"
         xmlns:gap="http://phonegap.com/ns/1.0"
         xmlns:android = "http://schemas.android.com/apk/res/android" >
@@ -28,10 +28,11 @@
     <!-- android 4.0 is minimum supported --> 
     <preference name="android-minSdkVersion" value="14" />
     
+    <!-- IOS support --> 
+    <preference name="deployment-target" value="7.0" />
 
-    
-    <!-- lock app in portrait --> 
-    <preference name="orientation" value="portrait" />
+
+
 
 
 
@@ -50,6 +51,11 @@
     <plugin name="cordova-plugin-splashscreen" source="npm" spec="~3.2.1" />
 
 
+
+<!-- Preferences for application --> 
+    
+    <!-- lock app in portrait --> 
+    <preference name="orientation" value="portrait" />
     <!-- splash screen preferences  -->
     <preference name="SplashScreen" value="screen" />
    <!--  <preference name="FadeSplashScreen" value="false" /> -->
@@ -60,16 +66,36 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="FadeSplashScreen" value="true" />  
     <preference name="FadeSplashScreenDuration" value="1000" /> 
-
      <!-- status bar preferences  -->
     <preference name="StatusBarBackgroundColor" value="#53aae8" />
     <preference name="android-windowSoftInputMode" value="adjustResize" />
-
-    
-
     <!-- prevent keyboard pushing up page --> 
     <preference name="fullscreen" value="false" />
     <preference name="android-windowSoftInputMode" value="adjustPan" />
+
+
+
+
+
+
+    <allow-intent href="http://*/*"/>
+    <allow-intent href="https://*/*"/>
+    <allow-intent href="tel:*"/>
+    <allow-intent href="sms:*"/>
+    <allow-intent href="mailto:*"/>
+    <allow-intent href="geo:*"/>
+    <allow-intent href="*" />
+    <allow-navigation href="http://*/*" />
+    <allow-navigation href="https://*/*" />
+    <allow-navigation href="data:*" />
+     
+    <!-- Enable requests to content: URLs -->
+    <access origin="content:///*" />
+    <access origin="*"/>
+
+
+
+
 
 
 
@@ -89,30 +115,8 @@
 
 
 
-
-    <allow-intent href="http://*/*"/>
-    <allow-intent href="https://*/*"/>
-    <allow-intent href="tel:*"/>
-    <allow-intent href="sms:*"/>
-    <allow-intent href="mailto:*"/>
-    <allow-intent href="geo:*"/>
-    <allow-intent href="*" />
-
-
-    <allow-navigation href="http://*/*" />
-    <allow-navigation href="https://*/*" />
-    <allow-navigation href="data:*" />
-
-
-     
-    <!-- Enable requests to content: URLs -->
-    <access origin="content:///*" />
-     
-
-    <access origin="*"/>
-
-
     <platform name="android">
+
         <icon density="ldpi" src="res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="res/icon/android/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="res/icon/android/drawable-hdpi-icon.png" />
@@ -120,12 +124,12 @@
         <icon density="xxhdpi" src="res/icon/android/drawable-xxhdpi-icon.png" />
         <icon density="xxxhdpi" src="res/icon/android/drawable-xxxhdpi-icon.png" />
 
-     <!--    <splash density="land-ldpi" src="res/screen/android/drawable-land-ldpi-screen.png" />
+        <splash density="land-ldpi" src="res/screen/android/drawable-land-ldpi-screen.png" />
         <splash density="land-mdpi" src="res/screen/android/drawable-land-mdpi-screen.png" />
         <splash density="land-hdpi" src="res/screen/android/drawable-land-hdpi-screen.png" />
         <splash density="land-xhdpi" src="res/screen/android/drawable-land-xhdpi-screen.png" />
         <splash density="land-xxhdpi" src="res/screen/android/drawable-land-xxhdpi-screen.png" />
-        <splash density="land-xxxhdpi" src="res/screen/android/drawable-land-xxxhdpi-screen.png" /> -->
+        <splash density="land-xxxhdpi" src="res/screen/android/drawable-land-xxxhdpi-screen.png" />
         <splash density="port-ldpi" src="res/screen/android/drawable-port-ldpi-screen.png" />
         <splash density="port-mdpi" src="res/screen/android/drawable-port-mdpi-screen.png" />
         <splash density="port-hdpi" src="res/screen/android/drawable-port-hdpi-screen.png" />
@@ -133,10 +137,26 @@
         <splash density="port-xxhdpi" src="res/screen/android/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="res/screen/android/drawable-port-xxxhdpi-screen.png" />
 
+        <allow-intent href="market:*" />
+        <allow-intent href="http://*/*"/>
+        <allow-intent href="https://*/*"/>
+        <allow-intent href="tel:*"/>
+        <allow-intent href="sms:*"/>
+        <allow-intent href="mailto:*"/>
+        <allow-intent href="geo:*"/>
+        <allow-intent href="*" />
+        <allow-navigation href="http://*/*" />
+        <allow-navigation href="https://*/*" />
+        <allow-navigation href="data:*" />
+
     </platform>
 
-<!-- 
+
+
+
+
     <platform name="ios">
+
         <icon height="57" platform="ios" src="res/icon/ios/icon.png" width="57" />
         <icon height="114" platform="ios" src="res/icon/ios/icon@2x.png" width="114" />
         <icon height="40" platform="ios" src="res/icon/ios/icon-40.png" width="40" />
@@ -154,58 +174,18 @@
         <icon height="58" platform="ios" src="res/icon/ios/icon-small@2x.png" width="58" />
         <icon height="87" platform="ios" src="res/icon/ios/icon-small@3x.png" width="87" />
 
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+
+
     </platform>
- -->
+
 
     
     <!-- required for icon & splash to work -->
     <icon src="icon.png" />
-
     <splash src="splash.png"/>
 
-
-
-
-
-
-
-
-
-
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
-
-
-    <platform name="android">
-
-        <allow-intent href="market:*" />
-       
-        <allow-intent href="http://*/*"/>
-        <allow-intent href="https://*/*"/>
-        <allow-intent href="tel:*"/>
-        <allow-intent href="sms:*"/>
-        <allow-intent href="mailto:*"/>
-        <allow-intent href="geo:*"/>
-        <allow-intent href="*" />
-
-
-
-        <allow-navigation href="http://*/*" />
-        <allow-navigation href="https://*/*" />
-        <allow-navigation href="data:*" />
-
-
-    </platform>
-
-  
-    <platform name="ios">
-        <allow-intent href="itms:*" />
-        <allow-intent href="itms-apps:*" />
-    </platform>
 
 
 </widget>
