@@ -24,6 +24,40 @@ var mainView = myApp.addView('.view-main', {
 
 
 
+
+// Check if apps run once before if so take action 
+var applaunchCount = window.localStorage.getItem('launchCount');
+
+//Check if it already exists or not
+if(applaunchCount){
+   //This is a second time launch, and count = applaunchCount
+   $('.search-bg-page .popup-wrappr').remove();
+
+   $('.best-deals-page .popup-wrappr').remove();
+
+   $('.swiper-container.walkthrough').remove();
+
+   // Load login page and skip walkthrough if app has already been opened before by user 
+ 	mainView.router.load({pageName: 'login'});
+
+}else{
+  //Local storage is not set, hence first time launch. set the local storage item
+  window.localStorage.setItem('launchCount',1);
+
+  //Do the other stuff related to first time launch
+}
+
+
+
+
+
+$('.nav-close').on('click', function (e) {
+    myApp.closePanel();
+});
+
+
+
+
 // Splash on load --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 // setTimeout(function() {
@@ -62,6 +96,8 @@ function activeNavRemove() {
     	$(this).removeClass("active-nav");
 	});
 }
+
+
 
 
 
@@ -158,7 +194,7 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
 	    myApp.addNotification({
 	        title: 'Todays best deal provided by ' + todaysBestDeal.clientName,
-	        subtitle: '<div class="todays-deal-destinations">' + todaysBestDeal.destination + '</div>' +  ", " + todaysBestDeal.accommodation  + " " + '<div class="todays-best-deals-price-container">'  + "£" + todaysBestDeal.price + "pp " + '</div>' +  '<span class="star-rating">' + todaysBestDeal.rating +  '</span>' + '<a class="view-todays-deal" href="#" onclick="window.open(\' '  + todaysBestDeal.deepLink  + ' \' ,   \'_system\'  ); "> ' +  '<span class="view-deal-button">' + "View deal" +  '</span>' +  '</a>'   ,
+	        subtitle: '<div class="todays-deal-destinations">' + todaysBestDeal.destination + '</div>' +  ", " + todaysBestDeal.accommodation  + " " + '<div class="todays-best-deals-price-container">'  + "£" + todaysBestDeal.price + "pp " + '</div>' +  '<span class="star-rating">' + todaysBestDeal.rating +  '</span>' + '<a class="view-todays-deal" href="#best-deals" > ' +  '<span class="view-deal-button">' + "View deal" +  '</span>' +  '<span class="blue-arrow-notifcation">  <svg version="1.1" id="blue-arrow-n" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="7px" height="8px" viewBox="0 0 9 10" style="enable-background:new 0 0 9 10;" xml:space="preserve"><path class="blue-arrow" d="M2.2,8.5c-0.3,0.3-0.3,0.7,0,1c0.3,0.3,0.8,0.3,1.1,0l4.3-4.1c0.3-0.3,0.3-0.7,0-1L3.3,0.4	C3,0.1,2.5,0.1,2.2,0.4s-0.3,0.7,0,1L6,5L2.2,8.5z"/></g></svg>  </span>'  + '</a>'   ,
 	        message: 'Hello, how are you? Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut posuere erat. Pellentesque id elementum urna, a aliquam ante. Donec vitae volutpat orci. Aliquam sed molestie risus, quis tincidunt dui.',
 	        media: '<img width="44" height="44" style="border-radius:100%" src="img/todays-deal-img.svg">'
 	    });
@@ -185,6 +221,9 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 	    });
 
 
+	    $(' .view-todays-deal .view-deal-button').on('click', function() { 
+	    	$('.notifications').remove();
+	    });
 
 });
 
@@ -217,7 +256,7 @@ myApp.onPageReinit('home', function (page) {
 
 $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
-
+	console.log(localData);
 
 	activeNavRemove();
 	
@@ -520,13 +559,10 @@ searchPageContainer.find('.save-storage-data').on('click', function (e) {
 // Script that runs on every other time the searchpage is page is init\loaded 
 myApp.onPageReinit('search', function (page) {
    
-
 	activeNavRemove();
-
 
 	$('.content-block p').eq(1).addClass('active-nav');
 
-	
 
 
 });
@@ -624,12 +660,15 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 		        '<div class="inner-deal-summary-container">' + 
 		            '<span class="accomodation">' +  localData[i].accommodation + '</span>'  + 
-		            '<span class="destination">' +  localData[i].destination  + '</span>' + 
+		            '<span class="destination-icon"> <svg version="1.1" id="destination-icon-red" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 width="28.4px" height="41.6px" viewBox="0 0 28.4 41.6" style="enable-background:new 0 0 28.4 41.6;" xml:space="preserve"><g><path class="destination-icon-white" d="M28.2,14.5c0-7.7-6.3-14-14-14s-14,6.3-14,14c0,10.9,14,26.4,14,26.4S28.2,25.4,28.2,14.5z M8,14.5	c0-3.4,2.8-6.2,6.2-6.2s6.2,2.8,6.2,6.2c0,3.4-2.8,6.2-6.2,6.2S8,18,8,14.5z"/></g></svg>  </span>' + 
+		            '<span class="destination">' +  localData[i].destination  + '</span>' +  
 		            '<span class="star-rating-container">' +  
 		              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
 	            	'</span>' +
-	            	'<span class="adults">' +  localData[i].adults  + '</span>' +
-	            	'<span class="children">' +  localData[i].children  + '</span>' +
+	            	'<span class="adults-icon icon">  <svg version="1.1" id="adults-icon-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="31.5px" viewBox="0 0 48 31.5" style="enable-background:new 0 0 48 31.5;" xml:space="preserve"><path id="adults_2_" class="adult-icon" d="M36.5,19.8L36.5,19.8z M11.5,19.8L11.5,19.8z M0.6,31.2h31.5v-1.3c0.2-2.4-1-4.6-3.1-5.8c-2.3-1.4-4.7-2.7-7.1-3.9c-0.6-0.5-1-1.2-1-2c-0.1-0.3-0.1-0.6-0.1-0.8c3.5-3.1,2.8-9.7,2.8-9.7c-0.4-7.4-6.6-7.4-7.2-7.4c-0.6,0-6.8-0.1-7.2,7.4c0,0-0.7,6.6,2.8,9.7c0,0.3,0,0.5-0.1,0.8c0,0.8-0.4,1.5-1,2c0,0-3.8,1.8-7.1,3.9c-2.1,1.1-3.3,3.4-3.1,5.8v1.3H0.6z M32.1,30L32.1,30C32,29.9,32.1,29.9,32.1,30z M0.6,30L0.6,30z M29.6,17c0,0-2.5,1.2-4.9,2.7c1.4,0.7,3.4,1.8,5.3,3 c1.3,0.8,2.4,1.9,3.1,3.3c0,0,0,0.1,0.1,0.1h14.3v-1l0,0c0.2-2-0.8-3.9-2.6-4.8C43,19.1,41,18,39,17c-0.5-0.4-0.8-1-0.8-1.7 c-0.1-0.2-0.1-0.5-0.1-0.7c2.9-2.6,2.3-8.1,2.3-8.1c-0.3-6.2-5.5-6.2-6-6.1c-3.2-0.1-5.9,2.3-6,5.5c0,0.2,0,0.4,0,0.6  c0,0-0.6,5.5,2.3,8.1c0,0.2,0,0.5-0.1,0.7C30.5,16,30.1,16.6,29.6,17L29.6,17z M47.4,25.1L47.4,25.1z"/>   </svg></span>' +
+                    '<span class="adults">' +  localData[i].adults  + '</span>' +
+	            	'<svg version="1.1" id="children-icon-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="47.4px" height="41.9px" viewBox="0 0 47.4 41.9" style="enable-background:new 0 0 47.4 41.9;" xml:space="preserve"> <path id="Children_Icon_2_" class="children-icon" d="M30.8,41.8V30.2l-5.9-0.5c-0.2,0-0.4,0-0.6-0.1l0,0l0,0c-0.8-0.2-1.5-0.7-1.9-1.4l-2.3-4.5v17.9h-5.8v-8h-0.8v8H7.8V23.7l-2.3,4.5c-0.7,1.3-2.3,1.9-3.6,1.2s-1.8-2.3-1.1-3.6l4.6-8.9c0.1-0.2,0.2-0.3,0.3-0.4c0.4-1.2,1.6-2,2.9-2h10.9c1.3,0,2.4,0.8,2.9,2c0.1,0.1,0.2,0.3,0.3,0.4l4.4,8.5h13.6c1,0,1.8,0.6,2.1,1.5c0.1,0.1,0.1,0.2,0.2,0.3   l3.4,6.6c0.5,0.9,0.2,2.1-0.7,2.7c-0.9,0.5-2.1,0.2-2.7-0.7l-0.1-0.1l-1.7-3.4v9.5h-4.8v-6.5h-0.6v6.5  C35.6,41.8,30.8,41.8,30.8,41.8z M31.5,19c0-2.2,1.8-4,4-4s4,1.8,4,4s-1.8,4-4,4l0,0C33.3,23.1,31.5,21.3,31.5,19z M8.7,5.8   c0-3,2.4-5.4,5.4-5.4s5.4,2.4,5.4,5.4s-2.4,5.4-5.4,5.4l0,0C11.1,11.2,8.7,8.8,8.7,5.8z"/> </svg>' 
+					+ '<span class="children">' +  localData[i].children  + '</span>' +
  	          	'</div>' +
 
 	        '</div>' + 
@@ -644,7 +683,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 		            '</div>' +
 		          '</div>' +
 		          
-		          '<div class="result-return">' + 
+		          '<div class="result-return">' + '<svg version="1.1" id="plane-icon-blue" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="74.4px" viewBox="0 0 40 74.4" style="enable-background:new 0 0 40 74.4;" xml:space="preserve"><path id="Shape_8_copy_2" class="plane-icon" d="M39.3,16.8c0,1.8-2.7,2-2.7,2h-9.3L16.8,34.7h-3.2l3.1-15.9H7.4l-6.6,6.5l1.3-7.8v-1.3l-1.3-8l6.6,6.6h9.3L13.6,0.2h3.2l10.5,14.6h9.3C36.6,14.9,39.3,15,39.3,16.8z"/><path id="Shape_8_copy_2_1_" class="plane-icon" d="M4.1,53.4h9.3l10.5-14.6h3.2L24,53.4h9.3l6.6-6.6l-1.3,8v1.3l1.3,7.8l-6.6-6.5H24	l3.1,15.9h-3.2L13.4,57.4H4.1c0,0-2.7-0.2-2.7-2S4.1,53.4,4.1,53.4z"/></svg>' +
 		            '<span class="result-return-airport">' + localData[i].destAir + '</span>' + 
 		            '<div class="result-return-dates-container">' + 
 		              '<span class="return-date">' + localData[i].returnDate + '</span>' + 
@@ -655,7 +694,8 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 		        '<div class="result-price-and-button-container">' + 
 		          '<a href="#" onclick="window.open(\' '  + localData[i].deepLink  + ' \' ,   \'_system\'  ); "> ' +
-		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
+		            '<span class="view-deal-button">' + "View deal" + '<svg version="1.1" id="view-deals-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.8px" height="13.4px" viewBox="0 0 12.8 13.4" style="enable-background:new 0 0 12.8 13.4;" xml:space="preserve"><path d="M0.9,12.4V1c0-0.3,0.2-0.5,0.4-0.7c0.3-0.2,0.6-0.1,0.9,0L12,6c0.3,0.1,0.4,0.4,0.4,0.6c0,0.3-0.2,0.5-0.4,0.7L2.3,13	c-0.1,0.1-0.3,0.1-0.5,0.2c-0.2,0-0.3,0-0.4-0.1C1.1,12.9,0.9,12.7,0.9,12.4z"/></svg>' +
+				    '</span>' + 
 		          '</a>' + 
 		        '</div>' + 
 		      
@@ -666,6 +706,8 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 		);
 	
 	}
+
+
 
 
 
@@ -753,9 +795,6 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 		 	$("#search-destination").html("in" + " " + destination + '<span class="refine"> , refine search to find more deals </span>'    );
 		}
 
-		var DealCounter = $('.deal-wrappr').length;
-
-		$("#deal-count").html(DealCounter);
 	}
 	// end of for loop 
 
@@ -763,6 +802,9 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 	   console.log(localData);
 
 	
+	var DealCounter = $('.deal-landing-page #deals-container .deal-wrappr').length;
+
+	$("#deal-count").html(DealCounter);
 
 
 
@@ -786,8 +828,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 myApp.onPageReinit('deal-landing', function (page) {
    
 
- 	 
-
+ 	
 
 	activeNavRemove();
 
@@ -871,11 +912,14 @@ myApp.onPageReinit('deal-landing', function (page) {
 
 		        '<div class="inner-deal-summary-container">' + 
 		            '<span class="accomodation">' +  localData[i].accommodation + '</span>'  + 
-		            '<span class="destination">' +  localData[i].destination  + '</span>' + 
+		            '<span class="destination-icon"> <svg version="1.1" id="destination-icon-red" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 width="28.4px" height="41.6px" viewBox="0 0 28.4 41.6" style="enable-background:new 0 0 28.4 41.6;" xml:space="preserve"><g><path class="destination-icon-white" d="M28.2,14.5c0-7.7-6.3-14-14-14s-14,6.3-14,14c0,10.9,14,26.4,14,26.4S28.2,25.4,28.2,14.5z M8,14.5	c0-3.4,2.8-6.2,6.2-6.2s6.2,2.8,6.2,6.2c0,3.4-2.8,6.2-6.2,6.2S8,18,8,14.5z"/></g></svg>  </span>' + 
+		            '<span class="destination">' +  localData[i].destination  + '</span>' +  
 		            '<span class="star-rating-container">' +  
 		              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
 	            	'</span>' +
+	            	'<span class="adults-icon icon">  <svg version="1.1" id="adults-icon-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="31.5px" viewBox="0 0 48 31.5" style="enable-background:new 0 0 48 31.5;" xml:space="preserve"><path id="adults_2_" class="adult-icon" d="M36.5,19.8L36.5,19.8z M11.5,19.8L11.5,19.8z M0.6,31.2h31.5v-1.3c0.2-2.4-1-4.6-3.1-5.8c-2.3-1.4-4.7-2.7-7.1-3.9c-0.6-0.5-1-1.2-1-2c-0.1-0.3-0.1-0.6-0.1-0.8c3.5-3.1,2.8-9.7,2.8-9.7c-0.4-7.4-6.6-7.4-7.2-7.4c-0.6,0-6.8-0.1-7.2,7.4c0,0-0.7,6.6,2.8,9.7c0,0.3,0,0.5-0.1,0.8c0,0.8-0.4,1.5-1,2c0,0-3.8,1.8-7.1,3.9c-2.1,1.1-3.3,3.4-3.1,5.8v1.3H0.6z M32.1,30L32.1,30C32,29.9,32.1,29.9,32.1,30z M0.6,30L0.6,30z M29.6,17c0,0-2.5,1.2-4.9,2.7c1.4,0.7,3.4,1.8,5.3,3 c1.3,0.8,2.4,1.9,3.1,3.3c0,0,0,0.1,0.1,0.1h14.3v-1l0,0c0.2-2-0.8-3.9-2.6-4.8C43,19.1,41,18,39,17c-0.5-0.4-0.8-1-0.8-1.7 c-0.1-0.2-0.1-0.5-0.1-0.7c2.9-2.6,2.3-8.1,2.3-8.1c-0.3-6.2-5.5-6.2-6-6.1c-3.2-0.1-5.9,2.3-6,5.5c0,0.2,0,0.4,0,0.6  c0,0-0.6,5.5,2.3,8.1c0,0.2,0,0.5-0.1,0.7C30.5,16,30.1,16.6,29.6,17L29.6,17z M47.4,25.1L47.4,25.1z"/>   </svg></span>' +
 	            	'<span class="adults">' +  localData[i].adults  + '</span>' +
+	            	'<svg version="1.1" id="children-icon-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="47.4px" height="41.9px" viewBox="0 0 47.4 41.9" style="enable-background:new 0 0 47.4 41.9;" xml:space="preserve"> <path id="Children_Icon_2_" class="children-icon" d="M30.8,41.8V30.2l-5.9-0.5c-0.2,0-0.4,0-0.6-0.1l0,0l0,0c-0.8-0.2-1.5-0.7-1.9-1.4l-2.3-4.5v17.9h-5.8v-8h-0.8v8H7.8V23.7l-2.3,4.5c-0.7,1.3-2.3,1.9-3.6,1.2s-1.8-2.3-1.1-3.6l4.6-8.9c0.1-0.2,0.2-0.3,0.3-0.4c0.4-1.2,1.6-2,2.9-2h10.9c1.3,0,2.4,0.8,2.9,2c0.1,0.1,0.2,0.3,0.3,0.4l4.4,8.5h13.6c1,0,1.8,0.6,2.1,1.5c0.1,0.1,0.1,0.2,0.2,0.3   l3.4,6.6c0.5,0.9,0.2,2.1-0.7,2.7c-0.9,0.5-2.1,0.2-2.7-0.7l-0.1-0.1l-1.7-3.4v9.5h-4.8v-6.5h-0.6v6.5  C35.6,41.8,30.8,41.8,30.8,41.8z M31.5,19c0-2.2,1.8-4,4-4s4,1.8,4,4s-1.8,4-4,4l0,0C33.3,23.1,31.5,21.3,31.5,19z M8.7,5.8   c0-3,2.4-5.4,5.4-5.4s5.4,2.4,5.4,5.4s-2.4,5.4-5.4,5.4l0,0C11.1,11.2,8.7,8.8,8.7,5.8z"/> </svg>' +
 	            	'<span class="children">' +  localData[i].children  + '</span>' +
  	          	'</div>' +
 
@@ -891,7 +935,7 @@ myApp.onPageReinit('deal-landing', function (page) {
 		            '</div>' +
 		          '</div>' +
 		          
-		          '<div class="result-return">' + 
+		          '<div class="result-return">' + '<svg version="1.1" id="plane-icon-blue" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="74.4px" viewBox="0 0 40 74.4" style="enable-background:new 0 0 40 74.4;" xml:space="preserve"><path id="Shape_8_copy_2" class="plane-icon" d="M39.3,16.8c0,1.8-2.7,2-2.7,2h-9.3L16.8,34.7h-3.2l3.1-15.9H7.4l-6.6,6.5l1.3-7.8v-1.3l-1.3-8l6.6,6.6h9.3L13.6,0.2h3.2l10.5,14.6h9.3C36.6,14.9,39.3,15,39.3,16.8z"/><path id="Shape_8_copy_2_1_" class="plane-icon" d="M4.1,53.4h9.3l10.5-14.6h3.2L24,53.4h9.3l6.6-6.6l-1.3,8v1.3l1.3,7.8l-6.6-6.5H24	l3.1,15.9h-3.2L13.4,57.4H4.1c0,0-2.7-0.2-2.7-2S4.1,53.4,4.1,53.4z"/></svg>' +
 		            '<span class="result-return-airport">' + localData[i].destAir + '</span>' + 
 		            '<div class="result-return-dates-container">' + 
 		              '<span class="return-date">' + localData[i].returnDate + '</span>' + 
@@ -902,7 +946,7 @@ myApp.onPageReinit('deal-landing', function (page) {
 
 		        '<div class="result-price-and-button-container">' + 
 		          '<a href="#" onclick="window.open(\' '  + localData[i].deepLink  + ' \' ,   \'_system\'  ); "> ' +
-		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
+		            '<span class="view-deal-button">' + "View deal" + '<svg version="1.1" id="view-deals-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.8px" height="13.4px" viewBox="0 0 12.8 13.4" style="enable-background:new 0 0 12.8 13.4;" xml:space="preserve"><path d="M0.9,12.4V1c0-0.3,0.2-0.5,0.4-0.7c0.3-0.2,0.6-0.1,0.9,0L12,6c0.3,0.1,0.4,0.4,0.4,0.6c0,0.3-0.2,0.5-0.4,0.7L2.3,13	c-0.1,0.1-0.3,0.1-0.5,0.2c-0.2,0-0.3,0-0.4-0.1C1.1,12.9,0.9,12.7,0.9,12.4z"/></svg>' +
 		          '</a>' + 
 		        '</div>' + 
 		      
@@ -998,14 +1042,14 @@ myApp.onPageReinit('deal-landing', function (page) {
 		 	$("#search-destination").html("in" + " " + destination);
 		}
 
-		var DealCounter = $('.deal-wrappr').length;
-
-		$("#deal-count").html(DealCounter);
 	}
 	// end of for loop 
 
 
- 
+	var DealCounter = $('.deal-landing-page #deals-container .deal-wrappr').length;
+
+	$("#deal-count").html(DealCounter);
+
 
 
 
@@ -1081,12 +1125,15 @@ function priceLowToHigh () {
 		          '</div>' + 
 
 		          '<div class="inner-deal-summary-container">' + 
-		            '<span class="accomodation">' +  localData[i].accommodation + '</span>'  + 
-		            '<span class="destination">' +  localData[i].destination  + '</span>' + 
+		            '<span class="accomodation">' +  localData[i].accommodation + '</span>'  +
+		            '<span class="destination-icon"> <svg version="1.1" id="destination-icon-red" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 width="28.4px" height="41.6px" viewBox="0 0 28.4 41.6" style="enable-background:new 0 0 28.4 41.6;" xml:space="preserve"><g><path class="destination-icon-white" d="M28.2,14.5c0-7.7-6.3-14-14-14s-14,6.3-14,14c0,10.9,14,26.4,14,26.4S28.2,25.4,28.2,14.5z M8,14.5	c0-3.4,2.8-6.2,6.2-6.2s6.2,2.8,6.2,6.2c0,3.4-2.8,6.2-6.2,6.2S8,18,8,14.5z"/></g></svg>  </span>' + 
+		            '<span class="destination">' +  localData[i].destination  + '</span>' +  
 		            '<span class="star-rating-container">' +  
 		              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
 		            '</span>' +
+		           	'<span class="adults-icon icon">  <svg version="1.1" id="adults-icon-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="31.5px" viewBox="0 0 48 31.5" style="enable-background:new 0 0 48 31.5;" xml:space="preserve"><path id="adults_2_" class="adult-icon" d="M36.5,19.8L36.5,19.8z M11.5,19.8L11.5,19.8z M0.6,31.2h31.5v-1.3c0.2-2.4-1-4.6-3.1-5.8c-2.3-1.4-4.7-2.7-7.1-3.9c-0.6-0.5-1-1.2-1-2c-0.1-0.3-0.1-0.6-0.1-0.8c3.5-3.1,2.8-9.7,2.8-9.7c-0.4-7.4-6.6-7.4-7.2-7.4c-0.6,0-6.8-0.1-7.2,7.4c0,0-0.7,6.6,2.8,9.7c0,0.3,0,0.5-0.1,0.8c0,0.8-0.4,1.5-1,2c0,0-3.8,1.8-7.1,3.9c-2.1,1.1-3.3,3.4-3.1,5.8v1.3H0.6z M32.1,30L32.1,30C32,29.9,32.1,29.9,32.1,30z M0.6,30L0.6,30z M29.6,17c0,0-2.5,1.2-4.9,2.7c1.4,0.7,3.4,1.8,5.3,3 c1.3,0.8,2.4,1.9,3.1,3.3c0,0,0,0.1,0.1,0.1h14.3v-1l0,0c0.2-2-0.8-3.9-2.6-4.8C43,19.1,41,18,39,17c-0.5-0.4-0.8-1-0.8-1.7 c-0.1-0.2-0.1-0.5-0.1-0.7c2.9-2.6,2.3-8.1,2.3-8.1c-0.3-6.2-5.5-6.2-6-6.1c-3.2-0.1-5.9,2.3-6,5.5c0,0.2,0,0.4,0,0.6  c0,0-0.6,5.5,2.3,8.1c0,0.2,0,0.5-0.1,0.7C30.5,16,30.1,16.6,29.6,17L29.6,17z M47.4,25.1L47.4,25.1z"/>   </svg></span>' +
 		            '<span class="adults">' +  localData[i].adults  + '</span>' +
+		           	'<svg version="1.1" id="children-icon-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="47.4px" height="41.9px" viewBox="0 0 47.4 41.9" style="enable-background:new 0 0 47.4 41.9;" xml:space="preserve"> <path id="Children_Icon_2_" class="children-icon" d="M30.8,41.8V30.2l-5.9-0.5c-0.2,0-0.4,0-0.6-0.1l0,0l0,0c-0.8-0.2-1.5-0.7-1.9-1.4l-2.3-4.5v17.9h-5.8v-8h-0.8v8H7.8V23.7l-2.3,4.5c-0.7,1.3-2.3,1.9-3.6,1.2s-1.8-2.3-1.1-3.6l4.6-8.9c0.1-0.2,0.2-0.3,0.3-0.4c0.4-1.2,1.6-2,2.9-2h10.9c1.3,0,2.4,0.8,2.9,2c0.1,0.1,0.2,0.3,0.3,0.4l4.4,8.5h13.6c1,0,1.8,0.6,2.1,1.5c0.1,0.1,0.1,0.2,0.2,0.3   l3.4,6.6c0.5,0.9,0.2,2.1-0.7,2.7c-0.9,0.5-2.1,0.2-2.7-0.7l-0.1-0.1l-1.7-3.4v9.5h-4.8v-6.5h-0.6v6.5  C35.6,41.8,30.8,41.8,30.8,41.8z M31.5,19c0-2.2,1.8-4,4-4s4,1.8,4,4s-1.8,4-4,4l0,0C33.3,23.1,31.5,21.3,31.5,19z M8.7,5.8   c0-3,2.4-5.4,5.4-5.4s5.4,2.4,5.4,5.4s-2.4,5.4-5.4,5.4l0,0C11.1,11.2,8.7,8.8,8.7,5.8z"/> </svg>' +
 	            	'<span class="children">' +  localData[i].children  + '</span>' +
 		          '</div>' +
 
@@ -1102,7 +1149,7 @@ function priceLowToHigh () {
 		            '</div>' +
 		          '</div>' +
 		          
-		          '<div class="result-return">' + 
+		          '<div class="result-return">' + '<svg version="1.1" id="plane-icon-blue" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="74.4px" viewBox="0 0 40 74.4" style="enable-background:new 0 0 40 74.4;" xml:space="preserve"><path id="Shape_8_copy_2" class="plane-icon" d="M39.3,16.8c0,1.8-2.7,2-2.7,2h-9.3L16.8,34.7h-3.2l3.1-15.9H7.4l-6.6,6.5l1.3-7.8v-1.3l-1.3-8l6.6,6.6h9.3L13.6,0.2h3.2l10.5,14.6h9.3C36.6,14.9,39.3,15,39.3,16.8z"/><path id="Shape_8_copy_2_1_" class="plane-icon" d="M4.1,53.4h9.3l10.5-14.6h3.2L24,53.4h9.3l6.6-6.6l-1.3,8v1.3l1.3,7.8l-6.6-6.5H24	l3.1,15.9h-3.2L13.4,57.4H4.1c0,0-2.7-0.2-2.7-2S4.1,53.4,4.1,53.4z"/></svg>' +
 		            '<span class="result-return-airport">' + localData[i].destAir + '</span>' + 
 		            '<div class="result-return-dates-container">' + 
 		              '<span class="return-date">' + localData[i].returnDate + '</span>' + 
@@ -1113,7 +1160,7 @@ function priceLowToHigh () {
 
 		        '<div class="result-price-and-button-container">' + 
 		          '<a href="#" onclick="window.open(\' '  + localData[i].deepLink  + ' \' ,   \'_system\'  ); "> ' +
-		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
+		            '<span class="view-deal-button">' + "View deal" + '<svg version="1.1" id="view-deals-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.8px" height="13.4px" viewBox="0 0 12.8 13.4" style="enable-background:new 0 0 12.8 13.4;" xml:space="preserve"><path d="M0.9,12.4V1c0-0.3,0.2-0.5,0.4-0.7c0.3-0.2,0.6-0.1,0.9,0L12,6c0.3,0.1,0.4,0.4,0.4,0.6c0,0.3-0.2,0.5-0.4,0.7L2.3,13	c-0.1,0.1-0.3,0.1-0.5,0.2c-0.2,0-0.3,0-0.4-0.1C1.1,12.9,0.9,12.7,0.9,12.4z"/></svg>' +
 		          '</a>' + 
 		        '</div>' + 
 		      
@@ -1150,7 +1197,14 @@ function priceLowToHigh () {
   	// add class to remove margin from top deal 
     $('.deal-wrappr').eq(0).addClass('best');
 
+
+    $('.deal-wrappr.best .result-price-container').prepend( '<svg version="1.1" id="banner-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"width="38.6px" height="55.4px" viewBox="0 0 38.6 55.4" style="enable-background:new 0 0 38.6 55.4;" xml:space="preserve"><path class="banner-icon" d="M19.5,12c-0.1,0-0.3,0-0.4,0c-2.1,0.2-4.1,2-3.9,4.7c0,0.2,0,0.4,0.1,0.7c-0.2,0-0.4,0-0.5,0c-0.6,0-1,0.6-1,1.1s0.6,1,1.1,1h0.6c0,0.4,0.1,0.8,0.1,1.1c0,0.9-0.2,1.6-0.9,2.6c-0.2,0.3-0.2,0.8-0.1,1.1s0.6,0.6,1,0.6h7.2c0.6,0,1.1-0.5,1.1-1.1s-0.5-1.1-1.1-1.1h-5.5c0.3-0.7,0.4-1.4,0.4-2.1c0-0.4,0-0.7-0.1-1.1h2.6c0.6,0,1.1-0.5,1.1-1.1s-0.5-1.1-1.1-1.1h-2.8c0-0.3,0-0.5-0.1-0.8l0,0c-0.1-1.6,0.9-2.3,2-2.4c0.6-0.1,1.1,0.1,1.5,0.4s0.7,0.7,0.8,1.5c0.1,0.6,0.6,1,1.2,1c0.6-0.1,1-0.6,1-1.2c-0.1-1.3-0.8-2.4-1.7-3C21.4,12.3,20.4,12,19.5,12z"/><path class="banner-icon" d="M15.9,39.6c0.6,0,1.2-0.1,1.8-0.3l-6.1,15.2c-0.2,0.5-0.8,0.5-1.1,0.1l-2.9-5.1c-0.1-0.2-0.3-0.2-0.5-0.2L1.7,51c-0.5,0.2-0.9-0.3-0.7-0.8l5.8-14.4c0.8,0.4,1.6,0.6,2.5,0.6c0.4,0,0.7-0.1,1.1-0.1h0.1l0.1,0.1C11.6,38.4,13.7,39.6,15.9,39.6z M32.2,35.9c-0.8,0.4-1.6,0.6-2.6,0.6c-0.4,0-0.7-0.1-1.1-0.1h-0.1l-0.1,0.1c-1.1,1.9-3.1,3.1-5.3,3.1c-0.6,0-1.2-0.1-1.8-0.3l6.1,15.3c0.2,0.5,0.8,0.5,1.1,0.1l2.9-5.1c0.1-0.2,0.3-0.2,0.5-0.2l5.4,1.7c0.5,0.2,0.9-0.3,0.7-0.8L32.2,35.9z"/><path class="banner-icon" d="M37.1,17.1c1.1,1,1.1,2.7,0,3.6l-0.7,0.6c-0.8,0.7-1.1,1.8-0.6,2.8l0.4,0.9c0.6,1.4-0.2,2.9-1.6,3.3l-0.9,0.2c-1,0.3-1.7,1.2-1.8,2.2l-0.1,0.9c-0.1,1.5-1.4,2.5-2.9,2.3L28,33.7c-1-0.2-2.1,0.3-2.6,1.2l-0.5,0.8c-0.7,1.3-2.4,1.6-3.6,0.8l-0.8-0.6c-0.8-0.6-2-0.6-2.8,0l-0.8,0.5c-1.2,0.8-2.9,0.5-3.5-0.8l-0.5-0.8c-0.5-0.9-1.5-1.4-2.5-1.2l-0.9,0.2C8,34,6.7,33,6.7,31.5l-0.1-0.9c-0.1-1.1-0.8-1.9-1.8-2.2l-0.9-0.2c-1.4-0.4-2.1-1.9-1.6-3.3L2.7,24c0.4-0.9,0.2-2.1-0.6-2.8l-0.7-0.6c-1.1-1-1.1-2.7,0-3.6l0.7-0.6c0.8-0.7,1.1-1.8,0.6-2.8l-0.4-0.9c-0.6-1.4,0.2-2.9,1.6-3.3l0.9-0.2C5.8,8.9,6.5,8,6.6,7l0.1-0.9c0.1-1.5,1.4-2.5,2.9-2.3L10.5,4c1,0.2,2.1-0.3,2.6-1.2L13.6,2c0.7-1.3,2.4-1.6,3.6-0.8L18,1.8c0.8,0.6,2,0.6,2.8,0l0.8-0.5c1.2-0.8,2.9-0.5,3.5,0.8l0.5,0.8c0.5,0.9,1.5,1.4,2.5,1.2L29,3.9c1.5-0.2,2.8,0.8,2.8,2.3l0.1,0.9C32,8.2,32.7,9,33.7,9.3l0.9,0.2c1.4,0.4,2.1,1.9,1.6,3.3l-0.4,0.9c-0.4,0.9-0.2,2.1,0.6,2.8L37.1,17.1z M31.1,18.9C31.1,12.3,25.8,7,19.2,7S7.3,12.3,7.3,18.9s5.3,11.9,11.9,11.9S31.1,25.5,31.1,18.9z"/></svg>' );
+
+
+
 }
+
+
 
 
 
@@ -1208,11 +1262,14 @@ function priceHighToLow() {
 
 		          '<div class="inner-deal-summary-container">' + 
 		            '<span class="accomodation">' +  localData[i].accommodation + '</span>'  + 
-		            '<span class="destination">' +  localData[i].destination  + '</span>' + 
+		            '<span class="destination-icon"> <svg version="1.1" id="destination-icon-red" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 width="28.4px" height="41.6px" viewBox="0 0 28.4 41.6" style="enable-background:new 0 0 28.4 41.6;" xml:space="preserve"><g><path class="destination-icon-white" d="M28.2,14.5c0-7.7-6.3-14-14-14s-14,6.3-14,14c0,10.9,14,26.4,14,26.4S28.2,25.4,28.2,14.5z M8,14.5	c0-3.4,2.8-6.2,6.2-6.2s6.2,2.8,6.2,6.2c0,3.4-2.8,6.2-6.2,6.2S8,18,8,14.5z"/></g></svg>  </span>' + 
+		            '<span class="destination">' +  localData[i].destination  + '</span>' +
 		            '<span class="star-rating-container">' +  
 		              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
 		            '</span>' +
+		         	'<span class="adults-icon icon">  <svg version="1.1" id="adults-icon-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="31.5px" viewBox="0 0 48 31.5" style="enable-background:new 0 0 48 31.5;" xml:space="preserve"><path id="adults_2_" class="adult-icon" d="M36.5,19.8L36.5,19.8z M11.5,19.8L11.5,19.8z M0.6,31.2h31.5v-1.3c0.2-2.4-1-4.6-3.1-5.8c-2.3-1.4-4.7-2.7-7.1-3.9c-0.6-0.5-1-1.2-1-2c-0.1-0.3-0.1-0.6-0.1-0.8c3.5-3.1,2.8-9.7,2.8-9.7c-0.4-7.4-6.6-7.4-7.2-7.4c-0.6,0-6.8-0.1-7.2,7.4c0,0-0.7,6.6,2.8,9.7c0,0.3,0,0.5-0.1,0.8c0,0.8-0.4,1.5-1,2c0,0-3.8,1.8-7.1,3.9c-2.1,1.1-3.3,3.4-3.1,5.8v1.3H0.6z M32.1,30L32.1,30C32,29.9,32.1,29.9,32.1,30z M0.6,30L0.6,30z M29.6,17c0,0-2.5,1.2-4.9,2.7c1.4,0.7,3.4,1.8,5.3,3 c1.3,0.8,2.4,1.9,3.1,3.3c0,0,0,0.1,0.1,0.1h14.3v-1l0,0c0.2-2-0.8-3.9-2.6-4.8C43,19.1,41,18,39,17c-0.5-0.4-0.8-1-0.8-1.7 c-0.1-0.2-0.1-0.5-0.1-0.7c2.9-2.6,2.3-8.1,2.3-8.1c-0.3-6.2-5.5-6.2-6-6.1c-3.2-0.1-5.9,2.3-6,5.5c0,0.2,0,0.4,0,0.6  c0,0-0.6,5.5,2.3,8.1c0,0.2,0,0.5-0.1,0.7C30.5,16,30.1,16.6,29.6,17L29.6,17z M47.4,25.1L47.4,25.1z"/>   </svg></span>' +
 		            '<span class="adults">' +  localData[i].adults  + '</span>' +
+	            	'<svg version="1.1" id="children-icon-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="47.4px" height="41.9px" viewBox="0 0 47.4 41.9" style="enable-background:new 0 0 47.4 41.9;" xml:space="preserve"> <path id="Children_Icon_2_" class="children-icon" d="M30.8,41.8V30.2l-5.9-0.5c-0.2,0-0.4,0-0.6-0.1l0,0l0,0c-0.8-0.2-1.5-0.7-1.9-1.4l-2.3-4.5v17.9h-5.8v-8h-0.8v8H7.8V23.7l-2.3,4.5c-0.7,1.3-2.3,1.9-3.6,1.2s-1.8-2.3-1.1-3.6l4.6-8.9c0.1-0.2,0.2-0.3,0.3-0.4c0.4-1.2,1.6-2,2.9-2h10.9c1.3,0,2.4,0.8,2.9,2c0.1,0.1,0.2,0.3,0.3,0.4l4.4,8.5h13.6c1,0,1.8,0.6,2.1,1.5c0.1,0.1,0.1,0.2,0.2,0.3   l3.4,6.6c0.5,0.9,0.2,2.1-0.7,2.7c-0.9,0.5-2.1,0.2-2.7-0.7l-0.1-0.1l-1.7-3.4v9.5h-4.8v-6.5h-0.6v6.5  C35.6,41.8,30.8,41.8,30.8,41.8z M31.5,19c0-2.2,1.8-4,4-4s4,1.8,4,4s-1.8,4-4,4l0,0C33.3,23.1,31.5,21.3,31.5,19z M8.7,5.8   c0-3,2.4-5.4,5.4-5.4s5.4,2.4,5.4,5.4s-2.4,5.4-5.4,5.4l0,0C11.1,11.2,8.7,8.8,8.7,5.8z"/> </svg>' +
 	            	'<span class="children">' +  localData[i].children  + '</span>' +
 		          '</div>' +
 
@@ -1228,7 +1285,7 @@ function priceHighToLow() {
 		            '</div>' +
 		          '</div>' +
 		          
-		          '<div class="result-return">' + 
+		          '<div class="result-return">' + '<svg version="1.1" id="plane-icon-blue" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="74.4px" viewBox="0 0 40 74.4" style="enable-background:new 0 0 40 74.4;" xml:space="preserve"><path id="Shape_8_copy_2" class="plane-icon" d="M39.3,16.8c0,1.8-2.7,2-2.7,2h-9.3L16.8,34.7h-3.2l3.1-15.9H7.4l-6.6,6.5l1.3-7.8v-1.3l-1.3-8l6.6,6.6h9.3L13.6,0.2h3.2l10.5,14.6h9.3C36.6,14.9,39.3,15,39.3,16.8z"/><path id="Shape_8_copy_2_1_" class="plane-icon" d="M4.1,53.4h9.3l10.5-14.6h3.2L24,53.4h9.3l6.6-6.6l-1.3,8v1.3l1.3,7.8l-6.6-6.5H24	l3.1,15.9h-3.2L13.4,57.4H4.1c0,0-2.7-0.2-2.7-2S4.1,53.4,4.1,53.4z"/></svg>' +
 		            '<span class="result-return-airport">' + localData[i].destAir + '</span>' + 
 		            '<div class="result-return-dates-container">' + 
 		              '<span class="return-date">' + localData[i].returnDate + '</span>' + 
@@ -1239,7 +1296,7 @@ function priceHighToLow() {
 
 		        '<div class="result-price-and-button-container">' + 
 		          '<a href="#" onclick="window.open(\' '  + localData[i].deepLink  + ' \' ,   \'_system\'  ); "> ' +
-		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
+		            '<span class="view-deal-button">' + "View deal" + '<svg version="1.1" id="view-deals-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.8px" height="13.4px" viewBox="0 0 12.8 13.4" style="enable-background:new 0 0 12.8 13.4;" xml:space="preserve"><path d="M0.9,12.4V1c0-0.3,0.2-0.5,0.4-0.7c0.3-0.2,0.6-0.1,0.9,0L12,6c0.3,0.1,0.4,0.4,0.4,0.6c0,0.3-0.2,0.5-0.4,0.7L2.3,13	c-0.1,0.1-0.3,0.1-0.5,0.2c-0.2,0-0.3,0-0.4-0.1C1.1,12.9,0.9,12.7,0.9,12.4z"/></svg>' +
 		          '</a>' + 
 		        '</div>' + 
 		      
@@ -1274,6 +1331,9 @@ function priceHighToLow() {
 
   	// add class to remove margin from top deal 
     $('.deal-wrappr').eq(0).addClass('top-margin').addClass('high-to-low');
+
+    $('.deal-wrappr.high-to-low .result-price-container').prepend( '<svg version="1.1" id="high-to-low-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="43.8px" height="43.3px" viewBox="0 0 43.8 43.3" style="enable-background:new 0 0 43.8 43.3;" xml:space="preserve"><g transform="translate(0,-952.36218)"><path class="price-icon" d="M24.5,953.8c-0.2,0-0.5,0.1-0.6,0.3L3.1,974.9c-0.8,0.8-1.2,1.7-1.2,2.8c0,1,0.5,2,1.2,2.7L16,993.3c0.7,0.7,1.7,1.2,2.7,1.2s2-0.5,2.7-1.2l20.8-20.8c0.2-0.2,0.3-0.4,0.3-0.6V958c0-2.2-1.8-4.2-4.2-4.2L24.5,953.8L24.5,953.8z M40.7,957.9v13.5l-20.5,20.5c-0.4,0.4-0.9,0.7-1.4,0.7s-1-0.2-1.4-0.7L4.5,979c-0.5-0.5-0.6-0.9-0.6-1.4s0.2-1,0.6-1.5L25,955.6h13.5C39.7,955.6,40.7,956.7,40.7,957.9z M31.2,961.4c0,1.9,1.6,3.5,3.5,3.5s3.5-1.6,3.5-3.5s-1.6-3.5-3.5-3.5C32.8,957.9,31.2,959.5,31.2,961.4z M36.3,961.4c0,0.9-0.7,1.6-1.6,1.6c-0.9,0-1.6-0.7-1.6-1.6s0.7-1.6,1.6-1.6S36.3,960.5,36.3,961.4z"/></g><path class="price-icon" d="M16.1,27.6c0.7-0.5,1.3-1.1,1.8-1.7s0.7-1.3,0.7-2c0-0.2,0-0.5-0.1-0.7s-0.1-0.4-0.3-0.7H16v-1h1.5c0,0-0.1-0.2-0.3-0.6c-0.2-0.4-0.4-0.8-0.4-1c-0.1-0.2-0.1-0.4-0.2-0.7c0-0.3-0.1-0.5-0.1-0.8c0-1,0.4-1.9,1.2-2.7c0.8-0.8,2-1.2,3.6-1.2c1.5,0,2.6,0.4,3.3,1.2c0.7,0.8,1.1,1.9,1.2,3.4H24c0-1-0.2-1.7-0.7-2.3c-0.5-0.5-1.2-0.8-2.1-0.8s-1.6,0.2-2.1,0.7s-0.7,1.1-0.7,1.8c0,0.3,0.1,0.7,0.2,1c0.1,0.4,0.5,1,0.9,1.9h3.2v1h-2.8c0.1,0.3,0.1,0.5,0.1,0.7s0,0.3,0,0.5c0,0.7-0.2,1.3-0.6,1.9s-1,1.3-1.8,1.9c0.5-0.2,0.9-0.4,1.3-0.5s0.9-0.2,1.3-0.2c0.5,0,1.1,0.1,1.9,0.3c0.8,0.2,1.3,0.3,1.5,0.3c0.3,0,0.6-0.1,0.8-0.2c0.2-0.1,0.4-0.2,0.7-0.5l0.8,1.3c-0.4,0.3-0.7,0.5-1,0.7c-0.5,0.2-1,0.3-1.5,0.3c-0.4,0-1.1-0.2-2-0.5s-1.7-0.5-2.2-0.5s-1,0.1-1.4,0.3c-0.3,0.1-0.6,0.3-1,0.5L16.1,27.6z"/></svg>' );
+
 
 }
 
@@ -1346,11 +1406,14 @@ function ratingSort () {
 
 		          '<div class="inner-deal-summary-container">' + 
 		            '<span class="accomodation">' +   ratingData[i].accommodation + '</span>'  + 
-		            '<span class="destination">' +   ratingData[i].destination  + '</span>' + 
+		           	'<span class="destination-icon"> <svg version="1.1" id="destination-icon-red" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"	 width="28.4px" height="41.6px" viewBox="0 0 28.4 41.6" style="enable-background:new 0 0 28.4 41.6;" xml:space="preserve"><g><path class="destination-icon-white" d="M28.2,14.5c0-7.7-6.3-14-14-14s-14,6.3-14,14c0,10.9,14,26.4,14,26.4S28.2,25.4,28.2,14.5z M8,14.5	c0-3.4,2.8-6.2,6.2-6.2s6.2,2.8,6.2,6.2c0,3.4-2.8,6.2-6.2,6.2S8,18,8,14.5z"/></g></svg>  </span>' + 
+		            '<span class="destination">' +  ratingData[i].destination  + '</span>' +  
 		            '<span class="star-rating-container">' +  
 		              '<span class="star-rating">' +  ratingData[i].rating  +  '</span>' + 
 		            '</span>' +
+		            '<span class="adults-icon icon">  <svg version="1.1" id="adults-icon-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="48px" height="31.5px" viewBox="0 0 48 31.5" style="enable-background:new 0 0 48 31.5;" xml:space="preserve"><path id="adults_2_" class="adult-icon" d="M36.5,19.8L36.5,19.8z M11.5,19.8L11.5,19.8z M0.6,31.2h31.5v-1.3c0.2-2.4-1-4.6-3.1-5.8c-2.3-1.4-4.7-2.7-7.1-3.9c-0.6-0.5-1-1.2-1-2c-0.1-0.3-0.1-0.6-0.1-0.8c3.5-3.1,2.8-9.7,2.8-9.7c-0.4-7.4-6.6-7.4-7.2-7.4c-0.6,0-6.8-0.1-7.2,7.4c0,0-0.7,6.6,2.8,9.7c0,0.3,0,0.5-0.1,0.8c0,0.8-0.4,1.5-1,2c0,0-3.8,1.8-7.1,3.9c-2.1,1.1-3.3,3.4-3.1,5.8v1.3H0.6z M32.1,30L32.1,30C32,29.9,32.1,29.9,32.1,30z M0.6,30L0.6,30z M29.6,17c0,0-2.5,1.2-4.9,2.7c1.4,0.7,3.4,1.8,5.3,3 c1.3,0.8,2.4,1.9,3.1,3.3c0,0,0,0.1,0.1,0.1h14.3v-1l0,0c0.2-2-0.8-3.9-2.6-4.8C43,19.1,41,18,39,17c-0.5-0.4-0.8-1-0.8-1.7 c-0.1-0.2-0.1-0.5-0.1-0.7c2.9-2.6,2.3-8.1,2.3-8.1c-0.3-6.2-5.5-6.2-6-6.1c-3.2-0.1-5.9,2.3-6,5.5c0,0.2,0,0.4,0,0.6  c0,0-0.6,5.5,2.3,8.1c0,0.2,0,0.5-0.1,0.7C30.5,16,30.1,16.6,29.6,17L29.6,17z M47.4,25.1L47.4,25.1z"/>   </svg></span>' +
 		            '<span class="adults">' +  ratingData[i].adults  + '</span>' +
+		            '<svg version="1.1" id="children-icon-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="47.4px" height="41.9px" viewBox="0 0 47.4 41.9" style="enable-background:new 0 0 47.4 41.9;" xml:space="preserve"> <path id="Children_Icon_2_" class="children-icon" d="M30.8,41.8V30.2l-5.9-0.5c-0.2,0-0.4,0-0.6-0.1l0,0l0,0c-0.8-0.2-1.5-0.7-1.9-1.4l-2.3-4.5v17.9h-5.8v-8h-0.8v8H7.8V23.7l-2.3,4.5c-0.7,1.3-2.3,1.9-3.6,1.2s-1.8-2.3-1.1-3.6l4.6-8.9c0.1-0.2,0.2-0.3,0.3-0.4c0.4-1.2,1.6-2,2.9-2h10.9c1.3,0,2.4,0.8,2.9,2c0.1,0.1,0.2,0.3,0.3,0.4l4.4,8.5h13.6c1,0,1.8,0.6,2.1,1.5c0.1,0.1,0.1,0.2,0.2,0.3   l3.4,6.6c0.5,0.9,0.2,2.1-0.7,2.7c-0.9,0.5-2.1,0.2-2.7-0.7l-0.1-0.1l-1.7-3.4v9.5h-4.8v-6.5h-0.6v6.5  C35.6,41.8,30.8,41.8,30.8,41.8z M31.5,19c0-2.2,1.8-4,4-4s4,1.8,4,4s-1.8,4-4,4l0,0C33.3,23.1,31.5,21.3,31.5,19z M8.7,5.8   c0-3,2.4-5.4,5.4-5.4s5.4,2.4,5.4,5.4s-2.4,5.4-5.4,5.4l0,0C11.1,11.2,8.7,8.8,8.7,5.8z"/> </svg>' +
 	            	'<span class="children">' +  ratingData[i].children  + '</span>' +
 		          '</div>' +
 
@@ -1366,7 +1429,7 @@ function ratingSort () {
 		            '</div>' +
 		          '</div>' +
 		          
-		          '<div class="result-return">' + 
+		          '<div class="result-return">' + '<svg version="1.1" id="plane-icon-blue" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="74.4px" viewBox="0 0 40 74.4" style="enable-background:new 0 0 40 74.4;" xml:space="preserve"><path id="Shape_8_copy_2" class="plane-icon" d="M39.3,16.8c0,1.8-2.7,2-2.7,2h-9.3L16.8,34.7h-3.2l3.1-15.9H7.4l-6.6,6.5l1.3-7.8v-1.3l-1.3-8l6.6,6.6h9.3L13.6,0.2h3.2l10.5,14.6h9.3C36.6,14.9,39.3,15,39.3,16.8z"/><path id="Shape_8_copy_2_1_" class="plane-icon" d="M4.1,53.4h9.3l10.5-14.6h3.2L24,53.4h9.3l6.6-6.6l-1.3,8v1.3l1.3,7.8l-6.6-6.5H24	l3.1,15.9h-3.2L13.4,57.4H4.1c0,0-2.7-0.2-2.7-2S4.1,53.4,4.1,53.4z"/></svg>' +
 		            '<span class="result-return-airport">' +  ratingData[i].destAir + '</span>' + 
 		            '<div class="result-return-dates-container">' + 
 		              '<span class="return-date">' +  ratingData[i].returnDate + '</span>' + 
@@ -1377,7 +1440,7 @@ function ratingSort () {
 
 		        '<div class="result-price-and-button-container">' + 
 		          '<a href="#" onclick="window.open(\' '  +  ratingData[i].deepLink  + ' \' ,   \'_system\'  ); "> ' +
-		            '<span class="view-deal-button">' + "View deal" +  '</span>' + 
+		            '<span class="view-deal-button">' + "View deal" + '<svg version="1.1" id="view-deals-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.8px" height="13.4px" viewBox="0 0 12.8 13.4" style="enable-background:new 0 0 12.8 13.4;" xml:space="preserve"><path d="M0.9,12.4V1c0-0.3,0.2-0.5,0.4-0.7c0.3-0.2,0.6-0.1,0.9,0L12,6c0.3,0.1,0.4,0.4,0.4,0.6c0,0.3-0.2,0.5-0.4,0.7L2.3,13	c-0.1,0.1-0.3,0.1-0.5,0.2c-0.2,0-0.3,0-0.4-0.1C1.1,12.9,0.9,12.7,0.9,12.4z"/></svg>' +
 		          '</a>' + 
 		        '</div>' + 
 		      
@@ -1414,7 +1477,11 @@ function ratingSort () {
     $('.deal-wrappr').eq(0).addClass('rating').addClass('top-margin');
 
 
+
+    $('.deal-wrappr.rating .result-price-container').prepend('<svg version="1.1" id="deal-rating-star-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"width="47.5px" height="45.8px" viewBox="0 0 47.5 45.8" style="enable-background:new 0 0 47.5 45.8;" xml:space="preserve"><g transform="translate(0,-952.36218)"><path class="star-icon" d="M37.4,997.3c0.9-0.1,1.6-0.8,1.5-1.7c0-0.1,0-0.1,0-0.2L36,981.6l10.7-9.5c0.7-0.6,0.7-1.6,0.1-2.3c-0.3-0.3-0.6-0.5-1-0.5l-14.4-1.6l-6-12.8c-0.4-0.8-1.3-1.2-2.2-0.8c-0.4,0.2-0.7,0.4-0.8,0.8l-6,12.8L2,969.3c-0.9,0.1-1.6,0.9-1.5,1.8c0,0.4,0.2,0.7,0.5,1l10.7,9.5l-2.9,13.8c-0.2,0.9,0.4,1.7,1.3,1.9c0.4,0.1,0.8,0,1.1-0.2l12.6-6.9l12.6,6.9C36.8,997.3,37.1,997.4,37.4,997.3z M34.9,992.6l-10.2-5.7c-0.5-0.3-1.1-0.3-1.6,0l-10.2,5.7l2.4-11.2c0.1-0.6-0.1-1.1-0.5-1.5l-8.7-7.7l11.7-1.3c0.6-0.1,1.1-0.4,1.3-0.9l4.9-10.4l4.9,10.4c0.2,0.5,0.7,0.9,1.3,0.9l11.7,1.3l-8.7,7.7c-0.4,0.4-0.6,1-0.5,1.5C32.6,981.4,34.9,992.6,34.9,992.6z"/></g></svg>' );
+
    
+
 
 }
 
@@ -1422,7 +1489,7 @@ function ratingSort () {
 
 
 // filter deals functionality
-$('#filter-best-deals').on('click', function () {
+$('.toolbar.toolbar-bottom').on('click', function () {
   myApp.modal({
     title:  'Sort & Filter',
     text: '',
@@ -1452,6 +1519,14 @@ $('#filter-best-deals').on('click', function () {
         onClick: function() {
           ratingSort();
           myApp.alert('Deals filtered by highest rating!', '');
+
+        }
+      },
+
+       {
+        text: 'CLOSE',
+        onClick: function() {
+          
 
         }
       },
@@ -1489,10 +1564,8 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 	priceLowToHigh();
 
 
-   
-   	console.log(localData);
- 	
- 	
+
+
 
    
 
@@ -1514,13 +1587,13 @@ myApp.onPageReinit('best-deals', function (page) {
 
 
 
+
+
+
+
+
+
 });
-
-
-
-
-
-
 
 
 
@@ -1713,7 +1786,7 @@ $$(document).on('pageInit', '.page[data-page="settings"]', function(e) {
 
 	activeNavRemove();
 	
-	$('.content-block p').eq(4).addClass('active-nav');
+	$('.content-block p').eq(3).addClass('active-nav');
 
 
 });
@@ -1726,7 +1799,7 @@ myApp.onPageReinit('settings', function (page) {
    
 	activeNavRemove();
 
-	$('.content-block p').eq(4).addClass('active-nav');
+	$('.content-block p').eq(3).addClass('active-nav');
 
 
 });

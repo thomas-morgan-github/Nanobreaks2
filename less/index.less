@@ -46,53 +46,45 @@
 }
 
 .navbar .center { margin-left: -75px;  }
-.navbar .right:first-child { right: 22px; }
+.navbar .right:first-child { right: 22px;  }
+.menu-icon-nav { width: 40px; height: 40px; }
+
+
 
 
 
 /* Panel styling */
 
-.panel { background: white;
-	p { margin: 0px; }
-	.account-link { color: black; .mixroboto(400); margin-left: 62px; display: block; font-size: 18px; margin-top: 50px; }
-	.login-link { color: @orange;  .mixroboto(400); margin-left: 62px; display: block; font-size: 18px; padding-top: 0px; margin-top: 0px;  }
-	#nav-image-top { background-size: cover; display: block; background-image: url(../img/nav-bg-top.jpg); width: 100%; height: 160px; position: relative; background-position: center center; 
-		.centered-content { padding: 0px;
-			.user-details-container { display: none;}
-			#user-account-image { display: block; position: relative; 
-				.white { fill:  white;  }
-			}
-			#user-details { display: inline-block;  margin-left: 10px;
-				#user-name { font-size: 18px; .mixroboto(400); display: block; color: white;  text-overflow: ellipsis;  overflow: hidden;  white-space: nowrap; width: 150px;  }
-				#user-email { display: block; .mixroboto(300); color: white; text-overflow: ellipsis;  overflow: hidden;  white-space: nowrap; width: 150px; text-align: center;}
-			}
-			#nav-nanobreak-logo-container { display: block;
-				.st0{fill:url(#Shape_1_copy_2_); }
-         		.st1{fill:#FFCD20; stroke:#FFFFFF; stroke-width:2;}
-			}
-			#nanobreak-logo-nav-title { color: white; font: 30px "enso"; position: relative; display: block; top: -5px;}
+.panel { background: @orange; width: 150px; 
+
+
+	.content-block { margin-top: 0px; margin-left: 0px; margin-bottom: 0px;  margin-right: 0px;  padding: 0px; 
+		a { display: block; width: 100%; height: 100%; }
+		p { margin: 0px; width: 100%;  display: block; text-align: center;  border-bottom: solid 2px rgb(240, 102, 0); padding-bottom: 20px; padding-top: 20px;}
+		p.active-nav {  background-color: white; 
+			#nav-home-icon , #nav-search-icon , #nav-best-deals-icon, #nav-settings-icon { fill: @orange ;     transition: fill 1s ease;    }
+			.nav-text { color : @orange;  transition: color 1s ease;  }
 
 		}
-	}
-	.content-block { margin-top: 60px; margin-left: 0px; margin-right: 0px; padding: 0px; 
-		p { padding-top: 15px; padding-bottom: 15px; margin: 0px; color: @text-grey;}
-		p.active-nav { color: black;
-			.search-link , .best-deals-link ,  .discover-link , .settings-link , .home-link { color: black; }
-			.home-link:before {  background-position: 0 -2909px; } 
-			.search-link:before {  background-image: url(../img/SpriteSheet.svg); width: 23px; height: 27px;  content: ''; background-repeat: no-repeat; background-size: 100% auto; display: inline-block; position: absolute; left: 19px; background-position: 0  -1634px;  margin-top: 0px; }
-			.settings-link:before {  background-image: url(../img/SpriteSheet.svg); width: 23px; height: 23px;  content: ''; background-repeat: no-repeat; background-size: 100% auto; display: inline-block; position: absolute; left: 18px; background-position: 0 -2534px;  margin-top: 1px;}
-			.best-deals-link:before { background-image: url(../img/SpriteSheet.svg); width: 29px; height: 32px;  content: ''; background-repeat: no-repeat; background-size: 100% auto; display: inline-block; position: absolute; left: 16px; background-position: 0 -3817px;  margin-top: -3px;}	
-			.discover-link:before { background-image: url(../img/SpriteSheet.svg); width: 28px; height: 27px;  content: ''; background-repeat: no-repeat; background-size: 100% auto; display: inline-block; position: absolute; left: 16px; background-position: 0 -3169px;  margin-top: -2px;}	
-		}
-		.search-link , .about-link, .best-deals-link, .discover-link, .settings-link , .home-link { .mixroboto(300); color: @text-grey; font-size: 18px; margin-left: 62px; display: block;}
-		.home-link:before {  background-image: url(../img/SpriteSheet.svg); width: 24px; height: 23px;  content: ''; background-repeat: no-repeat; background-size: 100% auto; display: inline-block; position: absolute; left: 19px; background-position: 0  -2884px;  margin-top: 0px; }
-		.search-link:before {  background-image: url(../img/SpriteSheet.svg); width: 23px; height: 24px;  content: ''; background-repeat: no-repeat; background-size: 100% auto; display: inline-block; position: absolute; left: 19px; background-position: 0  -2486px;  margin-top: 0px; }
-		.best-deals-link:before { background-image: url(../img/SpriteSheet.svg); width: 29px; height: 32px;  content: ''; background-repeat: no-repeat; background-size: 100% auto; display: inline-block; position: absolute; left: 16px; background-position: 0 -3782px;  margin-top: -3px;}	
-		.settings-link:before {  background-image: url(../img/SpriteSheet.svg); width: 23px; height: 23px;  content: ''; background-repeat: no-repeat; background-size: 100% auto; display: inline-block; position: absolute; left: 18px; background-position: 0 -2510px;  margin-top: 1px;}
-		.discover-link:before { background-image: url(../img/SpriteSheet.svg); width: 28px; height: 27px;  content: ''; background-repeat: no-repeat; background-size: 100% auto; display: inline-block; position: absolute; left: 16px; background-position: 0 -3196px;  margin-top: -2px;}	
+		.nav-text { color: white; .mixroboto(500); text-align: center;  font-size: 18px; margin-top: 10px; display: block;  text-transform: uppercase; }
+		#nav-home-icon , #nav-search-icon , #nav-best-deals-icon, #nav-settings-icon { fill: white; display: block; margin: 0 auto; }
+		#nav-home-icon { width: 40px; height: 40px; }
+		#nav-search-icon {  width: 40px; height: 40px;  }
+		#nav-best-deals-icon { width: 50px; height: 50px; }
+		#nav-settings-icon {  }
 
 	}
+
+	.nav-close { position: absolute; bottom: 20px; right: 20px; }
+	#nav-close-icon { fill: white; width: 40px; height: 40px; }
+
+
 }
+
+
+
+
+
 
 
 .panel-overlay { top: 56px; }
@@ -107,35 +99,6 @@
 #nav-icon3 span:nth-child(1) { top: 0px; }
 #nav-icon3 span:nth-child(2), #nav-icon3 span:nth-child(3) { top: 6px; height: 2px; }
 #nav-icon3 span:nth-child(4) { top: 12px; height: 2px; }
-
-
-
-@media (max-width: 600px) { 
-	.panel .content-block {
-		p.active-nav {
-			.home-link:before { background-position: 0 -2909px; }
-			.search-link:before { background-position: 0 -1635px; }
-			.best-deals-link:before { background-position: 0px -3818px; }
-			.discover-link:before {  background-position: 0 -3171px; }
-			.settings-link:before { background-position: 0 -2534px; }
-		}
-		
-		.home-link:before {     background-position: 0 -2884px; }
-		.search-link:before {     background-position: 0 -2487px; } 
-		.best-deals-link:before { background-position: 0 -3782px; } 
-		.discover-link:before { background-position: 0 -3197px; }
-		.settings-link:before {     background-position: 0 -2510px;  }
-	}
-}
-
-
-@media (max-width:480px) {
-	.panel {
-		.content-block { margin-top: 20px; }
-
-	}
-}
-
 
 
 
@@ -156,22 +119,13 @@
 // Calender Popups stying ---------------------------------------------------------------------------------------------------------------------
 
 // Next Icon 
-i.icon.icon-next { background-image: url(../img/SpriteSheet.svg); background-position: 0 -886px; width: 10px; height:  12px; }
-i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-position: 0 -921px; width: 10px; height:  12px;  }
+i.icon.icon-next { background-image: url(../img/arrow-right-svg.svg);  width: 10px; height:  12px; background-size: 10px 12px; background-repeat: no-repeat; content: ''; position: absolute;}
+i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10px; height:  12px; background-size: 10px 12px; background-repeat: no-repeat; content: ''; position: absolute; }
 .toolbar-inner { color: black;  }
 
 
 
 
-
-// custom preloader styling
-.preloader {  -webkit-animation: preloader-outer 3.3s linear infinite;  animation: preloader-outer 1.3s linear infinite }
-
-.preloader-indicator-modal {  margin-left: -46px; margin-top: -46px; border-radius: 50%; padding: 16px;   background: transparent;
-	.preloader { width: 60px; height: 60px; }
-}
-
-.preloader-white {  background-image: url(../img/preloader.svg); }
 
 
 // styling to center content
@@ -182,7 +136,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 // slide walkthrough description styling
 .info-container { display: block; color: white; 
-	.info-title {  display: block; font: 40px "budget"; margin-top: 10px; }
+	.info-title {  display: block; font-size: 40px; .mixroboto(500); margin-top: 10px; line-height: 35px; margin-bottom: 20px; }
 	.info-description { font-size: 18px; .mixroboto(400);  margin-top: 10px; }
 }
 
@@ -217,6 +171,8 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 		.best-deals-icon { fill: white;  }
 	}	
 
+	#luggage-icon { fill: white; width: 300px; height: 110px; margin-bottom: 20px; }
+
 
 	#nanobreak-logo-nav-title { color: white; font: 45px "enso"; }
 
@@ -227,11 +183,11 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	// search walkthrough 
 	.search-walkthrough { background-image: url(../img/search-walkthrough.jpg); background-size: cover; }
 
-	// best deals walkthrough 
-	.best-deals-walkthrough { background-image: url(../img/best-deals-walkthrough.jpg); background-size: cover;  }
+	// best deals walkthrough  
+	.best-deals-walkthrough { background-image: url(../img/best-deals-walkthrough.jpg); background-size: cover; background-position: center center;  }
 
 	// discover-walkthrough
-	.discover-walkthrough { background-image: url(../img/discover-walkthrough.jpg); background-size: cover;  }
+	.what-is-a-nanobreak-walkthrough { background-image: url(../img/discover-walkthrough.jpg); background-size: cover;  }
 
 	// Travel tips walkthrough 
 	.travel-trip-walkthrough { background-image: url(../img/travel-tip-walkthrough.jpg); background-size: cover;  }
@@ -313,16 +269,9 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 @media (min-width:480px)  {  
 	#app-description { max-width: none; }
 
+
 }
 
-
-
-
-@media screen and (min-width: 320px) and (max-height: 600px) and (orientation: landscape) {
-	#search-layer1, #best-deals-layer1, #discover-layer1, #travel-tip-layer1 { display: none; }
-	.centered-content { padding-top: 40px; }
-	.inner-container {  vertical-align: top;}
-}
 
 
 
@@ -332,6 +281,8 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 		.splash-screen-container .nanobreaks-logo-container { margin-top: 30px; }
 		.best-deals-walkthrough { background-position: center; }
 	}
+
+	.info-container .info-title { font-size: 32px; }
 	
 
 }
@@ -363,14 +314,16 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 		.logo-text { display: block; font: 45px "enso"; color: white;  }
 	}
 
-	#title-description { color: white;  font: 21px "budget"; text-align: center; margin-top: 50px; }
+	#title-description { color: white;  font-size: 21px; .mixroboto(500); text-align: center; margin-top: 50px; }
 
 	#login-container {  display: block; margin-top: 60px; color: white; text-align: center;
 		#email-fail { display: none; position: relative; top: -20px;  background-color: @error-pink;  padding: 8px; border: 1px solid red; color: black; }
 		#email-fail.invalidEmail { display: inline-block; }
-		#email-container { display: block;
+		#email-container { display: block; position: relative;
+			#email-icon-login { width: 24px; height: 16px;  position: absolute; top: 6px; margin-left: 5px; } 
+			.email-icon-white { fill: white; }
 			#email-label {  
-				&:before { margin-top: 4px; position: absolute; content: ''; width: 24px; height: 16px; background-position: 0 -2813px; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto; }
+				// &:before { margin-top: 4px; position: absolute; content: ''; width: 24px; height: 16px; background-position: 0 -2813px; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto; }	
 			}
 			#email-login {  min-width: 200px; background: transparent; border: 0px; border-bottom: 1px solid white; padding-left: 52px; padding-bottom:  10px;  font-size: 18px; .mixroboto(400); color: white; border-radius: 0px; }
 		}
@@ -395,19 +348,6 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 
 
-@media (min-width:1000px)  { 
-	.navbar-fixed .page-content.login-page #login-container #password-container #password-label:before { background-position: 0 -4896px; }
-}
-
-@media (min-width:600px)  {  
-
-	.navbar-fixed .page-content.login-page #login-container #password-container #password-label:before { background-position: 0 -4896px; }
-
-	.page-content.login-page #login-container {
-		#email-container #email-label:before {  background-position: 0 -2804px; }
-		#password-container #password-label:before { background-position: 0 -4829px; }
-	}
-}
 
 
 @media (max-width: 480px) {
@@ -418,9 +358,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 		#title-description { display: none; }
 	}
 
-	.navbar-fixed .page-content.login-page { background-image: url(../img/login-bg-mob.jpg);
-		#login-container #password-container #password-label:before {  background-position: 0px -4896px; }
-	}
+	.navbar-fixed .page-content.login-page { background-image: url(../img/login-bg-mob.jpg);	}
 
 }
 
@@ -458,13 +396,19 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	.rating-4 { background-position: -12px; }
 	.rating-5 { background-position: 0; }
 	
-	.view-todays-deal {  display: block;
-		.view-deal-button {  text-align: right;  color: @links-blue; position: relative; display: block; margin-right: 10px; font-weight: 700; margin-top: 6px;
-			&:after { position: absolute;  content: ''; width: 9px; height: 10px; background-size: 100% auto; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat;   background-position: 0 -1154px; top: 5.6px;  right: -12px; }
+	.view-todays-deal {  display: block; text-align: right;
+		.view-deal-button {    color: @links-blue; position: relative; display: block; margin-right: 3px; font-weight: 700; margin-top: 6px; display: inline-block;
+		    &:after { 	position: absolute;  content: ''; width: 12px; height: 43px; background-size: 100% auto; background-image: url(../img/new-sprite.svg); background-repeat: no-repeat; background-position: -5px -464px; top: 50%; margin-top: -11px;  background-color: transparent; right: -18px;  }
 		}
 	}
 	
 	.todays-deal-destinations { display: inline-block; font-weight: 700; color: #757575; }
+
+	.blue-arrow-notifcation { display: inline-block; position: relative; top: 0.3px; 
+		.blue-arrow { fill: #0f4da8; }
+	}
+
+
 
 }
 
@@ -472,21 +416,45 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 
 
-// Home page styling 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Home page styling -------------------------------------------------------------------------------------------------------------------------------------
+
+
+
 .home-page { text-align: center;
-	
-	a { text-decoration: none; height: 100%; width:100%; }
 
-	#search-container, #best-deals-container, #discover-container, #travel-tips-container { cursor: pointer; position: relative; display: block; width: 100%; background-size: cover; height: 200px; margin-bottom: 2px; background-position: center center; }
+	.nano-search-icon-container { margin-top: 0px; }
 	
-	#search-container { background-image: url(../img/search-container-bg.jpg); }
+	a { text-decoration: none; height: 100%; width:100%; display: block; }
+
+	#search-container, #best-deals-container { cursor: pointer; position: relative; display: block; width: 100%; background-size: cover; height: 50%;  background-position: center center; }
+	
+	#search-container { background-image: url(../img/search-container-bg.jpg);  margin-bottom: 2px; }
 	#best-deals-container { background-image: url(../img/best-deals-container-bg.jpg); }
-	#discover-container { background-image: url(../img/discover-container-bg.jpg);}
 
-	.header { color: white; font-size: 34px; .mixroboto(500);  }
-	.discription { color: white; font-size: 18px; .mixroboto(400);  position: relative;  margin-top: 10px;
-		&:after { background-position: 0px -1071px; width: 9px; height: 10px; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat;  background-size: 100% auto; content: ''; position: absolute; margin-left: 4px; bottom: 8px; } 
+	.header { color: @light-yellow; font-size: 34px; .mixroboto(500);  }
+	.discription { color: white; font-size: 18px; .mixroboto(400);  position: relative;  margin-top: 10px; display: inline-block;	}
+	.arrow-svg-white {  display: inline-block; position: relative; top: 1px;
+		.white-arrow-discription { fill:#FFFFFF; }
 	}
+
+	#search-deals , #find-best-deals { .mixroboto(300); color: white; margin-top: 10px; font-size: 16px; }
 
 }
 
@@ -496,7 +464,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 @media (min-width:600px)  {  
 
 	.home-page { 
-		#search-container, #best-deals-container, #discover-container, #travel-tips-container { height: 33.3%; }
+		#search-container, #best-deals-container { height: 50%; }
 		.discription:after {  background-position: 0 -1071px; }
 		
 	}
@@ -504,21 +472,6 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 }
 
 
-@media screen and (min-width: 320px) and (max-height: 600px) and (orientation: landscape) {
-		
-	.home-page {
-		#search-container, #best-deals-container, #discover-container , #travel-tips-container { min-height: 200px; }
-	}
-}
-
-
-
-@media screen and (min-width: 320px) and (min-height: 600px) and (orientation: landscape) {
-		
-	.home-page {
-		#search-container, #best-deals-container, #discover-container , #travel-tips-container { min-height: 300px; }
-	}
-}
 
 
 @media (max-width:480px) { 
@@ -529,10 +482,16 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 		
 		#search-container { background-image: url(../img/search-container-bg-mob.jpg); }
 		#best-deals-container { background-image: url(../img/best-deals-container-bg-mob.jpg); }
-		#discover-container { background-image: url(../img/discover-container-bg-mob.jpg);}
 
 	}
 }
+
+
+
+
+
+
+
 
 
 
@@ -543,12 +502,8 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 // Nano-search popup
 
 .popup-wrappr { background: rgba(0, 0, 0, 0.5); position: fixed; top: 0px; left: 0px; width: 100%; height: 100%;   z-index: 9;
-	.popup-swiper { height: 400px; position: absolute; top: 50%; margin-top: -200px; width: 80%; left: 50%; margin-left: -40%; z-index: 10; text-align: center; background-size: cover; background-image: url(../img/newyork-slider-bg.jpg);  background-position: center center; background-color: white;
-		.nano-search-icon-container { margin-top: 40px; 
-			.nano-search-icon { fill: #ffcd20;  }
-			.nano-best-deals-icon { fill: #ffcd20; }
-			.circle { fill:none; stroke:#ffcd20; stroke-width:1.5769; stroke-miterlimit:10;}
-		}
+	.popup-swiper { height: 400px; position: absolute; top: 50%; margin-top: -200px; width: 80%; left: 50%; margin-left: -40%; z-index: 10; text-align: center; background-size: cover; background-image: url(../img/newyork-slider-bg.jpg);  background-position: center center; background-color: transparent;
+		
 		.nanobreak-title { color: white; font-size: 18px; margin-top: 10px; font-size: 21px; font-weight: 500;}
 		.swiper-container { z-index: 10; color: white; height: auto;  }
 		.pop-up-info { width: 90%; text-align: center; margin: 0 auto; margin-top: 40px; font-size: 16px; }
@@ -559,6 +514,23 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	}
 	.popup-swiper.best-deals { background-position: bottom center; }
 }
+
+
+.nano-search-icon-container { margin-top: 40px; 
+	.nano-search-icon { fill: #ffcd20;  }
+	.nano-best-deals-icon { fill: #ffcd20; }
+	.circle { fill:none; stroke:#ffcd20; stroke-width:1.5769; stroke-miterlimit:10;}
+}
+
+
+
+.yellow-icon-best-deals-circle { fill:none;stroke:#FFCD20; stroke-width:1.5769; stroke-miterlimit:10; }
+.yellow-icon-best-deals { fill:#FFCD20; }
+
+
+
+
+
 
 
 
@@ -643,22 +615,21 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	 // Icons grey for in active input fields  ------------------------------------------------------------------------------------------------------
 		
 		.leaving-icon  { position: relative;
-			&::before { background-position: 0px -2380px; width: 25px; height:23px; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat; background-size: 100% auto; content: ''; position: absolute; top: -36px; left: 7px; } 
+			#calender-icon-search { fill: white; width: 25px; height: 23px; position: absolute; top: -37px; left: 7px; }
 		}
 		
-		.adults-icon { position: relative;
-			&::before { background-position: 0px -2602px; width: 27px; height:17px; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat;   background-size: 100% auto; content: ''; position: absolute; top: -33px; left: 7px; } 
+		.adults-icon { position: relative;			
+			#adults-icon-search { fill: white; width: 27px; height: 17px; position: absolute; top: -32px; left: 7px; }
 		}
 
 		.childrens-icon { position: relative;
-			&::before { background-position: 0 -2626px; width: 27px; height:24px; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat;   background-size: 100% auto; content: ''; position: absolute; top: -38px; left: 7px; } 
+			#children-icon-search { fill: white;   width: 27px; height:24px; top: -37px; position: absolute; left: 9px;}
 		}
 
-		.infants-icon { position: relative;
-			&::before {  background-position: 0 -2657px; width: 27px; height:19px; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat;   background-size: 100% auto; content: ''; position: absolute; top: -34px; left: 7px; } 
-		}
 
-		.down-arrow-icon { background-position:  0 -2078px; width: 17px; height: 10px; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat;   background-size: 100% auto; content: ''; position: absolute; top: 44px; right: 16px; } 
+		.down-arrow-icon {  position: absolute; right: 10px; top: 50%; 
+			#white-dropdown-search { width: 17px; height: 10px; fill: white;  }
+		} 
 
 
 
@@ -750,8 +721,8 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 .autocomplete-dropdown .list-block {
 	div {  left: -10px; 
-		div { margin-left: 0px; padding-left: 40px; background: transparent; 
-			&:before {  width: 22px; height: 20px; background-image: url(../img/SpriteSheet.svg);  background-position: 0 -1842px; background-size: 100% auto; background-repeat: no-repeat; background-color: transparent; position: absolute;  content: ''; display: block; margin-top: 0px; left: 10px; }
+		div { margin-left: 0px; padding-left: 20px; background: transparent; 
+			// &:before {  width: 22px; height: 20px; background-image: url(../img/SpriteSheet.svg);  background-position: 0 -1842px; background-size: 100% auto; background-repeat: no-repeat; background-color: transparent; position: absolute;  content: ''; display: block; margin-top: 0px; left: 10px; }
 		}
 	}
 }
@@ -801,16 +772,6 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	.search-bg-page { 
 	
 		.adults-container { width: 100%;  display: block;}
-		
-		#my-form {
-			.leaving-container  {  margin-bottom: 40px; }
-			.list-block { margin-bottom: 40px; }
-			.adults-icon::before {  background-position: 0 -2602px; }
-			.childrens-icon::before { background-position: 0 -2626px;  }
-			.infants-icon::before { background-position: 0 -2656px; }
-			.leaving-icon::before { background-position: 0 -2380px; }
-			.down-arrow-icon { background-position: 0 -2078px; }
-		}
 
 		i.icon.icon-next {  background-position: 0 -882px; }
 		i.icon.icon-prev {  background-position: 0 -917px; }
@@ -842,6 +803,48 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 	.navbar-fixed .page-content.search-bg-page { margin-top: 0px;  padding-top: 20px;}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// global icon styling 
+
+
+.destination-icon { fill: #f5344b; position: relative; top: 2px;
+	#destination-icon-red { width: 14px; height: 21px; margin-top: -2px;   }
+}
+
+.adults-icon { position: relative;			
+	#adults-icon-search { fill: white; width: 27px; height: 17px; position: absolute;  left: -10px; top: 2px; }
+}
+
+
+#children-icon-search { position: relative; width: 27px; height:24px;  top: 4px; left: 23px;
+	.children-icon { fill: white; position: absolute; left: -9px;  }
+}
+
+
+#plane-icon-blue { width: 23px; height: 35px;  position: absolute; left: -1px; top: 2px;
+	.plane-icon { fill: #a0ecff; position: absolute; left: -10px;  }
+}
+
+
+#view-deals-arrow { width: 7px; height: 10px; position: absolute;  top: 50%; margin-top: -4.5px;  right: 12px;     }
 
 
 
@@ -893,10 +896,12 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 			}
 			
 			.inner-deal-summary-container { z-index: 1; position: absolute; display: block; bottom: 0px; font-size: 18px; color: white; left: 19px; margin-bottom: 10px;
-				.accomodation { .mixroboto(600); display: block;  text-shadow: 2px 2px 4px #000000; }
-				.destination { .mixroboto(300); margin-left: 20px; display: inline-block; position: relative;
-					&::before {   background-position: 0 -2703px; width: 22px; height:17px; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat;   background-size: 100% auto; content: ''; position: absolute; top: 3px; margin-left: -26px; } 
-				}
+				.accomodation { .mixroboto(600); display: block;  text-shadow: 2px 2px 4px #000000; margin-bottom: 5px; }
+
+				.destination , 	.destination-country  { .mixroboto(300); margin-left: 5px; display: inline-block; position: relative; }
+
+				
+
 				.star-rating-container { display: inline-block; position: relative;  margin-left: 10px; top: -10px; width: 84px;
 					.star-rating {  background-repeat: no-repeat; height: 10px; width: 59px; background-size: 118px 165px; background-image: url(../img/star-sprite.svg); content: ''; position: absolute; background-position: 0px; }					
 					.rating-1 { background-position: -46px; }
@@ -905,12 +910,15 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 					.rating-4 { background-position: -12px; }
 					.rating-5 { background-position: 0; }
 				}
-				.adults { display: inline-block; position: relative; font-weight: 300; margin-left: 20px;
-					&:before { position: absolute;  background-position: 0 -2602px;  width: 27px;   height: 17px;   background-image: url(../img/SpriteSheet.svg);   background-repeat: no-repeat;   background-size: 100% auto;   content: '';   position: absolute;   top: 3px;    left: -32px; } 
-				}
-				.children { display: inline-block; position: relative; font-weight: 300; margin-left: 47px; 
-					&:before { position: absolute;     background-position: 0 -2626px;    width: 27px;    height: 24px;    background-image: url(../img/SpriteSheet.svg);    background-repeat: no-repeat;   background-size: 100% auto;    content: '';    position: absolute;    top: -2px;   left: -31px; }
-				}
+
+			
+
+				.adults { display: inline-block; position: relative; font-weight: 300; margin-left: 20px; 		}
+
+
+			
+
+				.children { display: inline-block; position: relative; font-weight: 300; margin-left: 30px; }
 			}
 
 		}
@@ -931,7 +939,9 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 					}
 				}
 				.result-return { float: none; padding-left: 33px; margin-left: 12px; position: relative; display: inline-block;
-					&::before { left: 0; top: 50%; position: absolute; content: ''; display: block; background-repeat: no-repeat; background-image: url(../img/SpriteSheet.svg); margin-top: -17px; width: 23px; height: 35px; background-position: 0 -2314px; background-size: 100% auto; }
+
+					
+					// &::before { left: 0; top: 50%; position: absolute; content: ''; display: block; background-repeat: no-repeat; background-image: url(../img/new-sprite.svg); margin-top: -29px; width: 23px; height: 60px; background-position: 0 -299px; background-size: 100% auto; }
 					.result-return-airport { color: white; font-size: 14px; font-weight: 700; line-height: normal; margin: 0; padding: 0; }
 					.result-return-dates-container { font-weight: 300; font-size: 12px; 
 						.results-return-dates { margin-left: 2px;
@@ -943,9 +953,7 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 			}
 			.result-price-and-button-container { float: none; margin-top: 10px; text-align: center;
 				a { display: inline-block;
-					.view-deal-button {   display: block;  padding-top: 9px;  padding-bottom: 9px;  float: left;  background: #ffd43e;  background: linear-gradient(to bottom, #ffd43e 0, #f6bf00 100%);   color: black;   text-shadow: 0 1px 0 #ffd237;     font-size: 14px; color: black;   font-weight: bold;   font-style: normal;   position: relative;   padding: 6px 13px;   padding-right: 26px;   border-radius: 3px; padding-top: 8px;
-						&::after { position: absolute; content: ''; right: 14px; width: 7px; height: 9px; top: 50%; margin-top: -5px; background-repeat: no-repeat; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto; background-position: 0px -695px; }
-					}
+					.view-deal-button {   display: block;  padding-top: 9px;  padding-bottom: 9px;  float: left;  background: #ffd43e;  background: linear-gradient(to bottom, #ffd43e 0, #f6bf00 100%);   color: black;   text-shadow: 0 1px 0 #ffd237;     font-size: 14px; color: black;   font-weight: bold;   font-style: normal;   position: relative;   padding: 6px 13px;   padding-right: 26px;   border-radius: 3px; padding-top: 8px;	}
 				}
 			}
 		}
@@ -993,14 +1001,26 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 // best deals ---------------------------------------------------------------------------------------------
 
 
+// Filter option 
+.toolbar { background-color:rgba(21,140,225,.95);   height: 40px; 
+	&::before { display: none; }
+}
+
+#filter-best-deals { width: 100%; position: relative;  height: 100%;  z-index: 8; font-size: 14px;  .mixroboto(400);  text-align: center; background-color: transparent;   display: block; 
+	#filter-icon-container { width: 23px; height: 22px; fill: #ffd07f; display: inline-block; margin-right: 5px; margin-top: 8px;}
+	span { position: relative; top: 9px;  color: #ffd07f;	display: inline-block; top: -6px;	}
+}
+
 
 .page-content.best-deals-page { background-color: @dark-purple; 
+    
+
+	#banner-icon { fill:white; height: 35px; width: 30px; left: 6px; position: absolute;  }
+	#high-to-low-icon { fill:white; height: 35px; width: 30px; left: 6px; position: absolute; margin-top: 2px; }
+	#deal-rating-star-icon {  fill:white; height: 26px; width: 30px; left: 8px; position: absolute; margin-top: 5px;   }
 
 	.popup-wrappr .popup-swiper { background-image: url(../img/amsterdam-slider-bg.jpg); }
 
-	
-	.yellow-icon-best-deals-circle { fill:none;stroke:#FFCD20; stroke-width:1.5769; stroke-miterlimit:10; }
-    .yellow-icon-best-deals { fill:#FFCD20; }
 
 
 	// Best Deals styling 
@@ -1013,36 +1033,25 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 	#deals-container {   width: 98%;   height: 100%;   display: block;   margin-left: 1%; margin-right: 1%;
 		.deal-wrappr.rating {  
-			.result-price-container { background-color:  @orange; padding-left: 45px; 
-				&::before { position: absolute; content: ''; left: 8px; width: 27px; height:24px; top: 50%; margin-top: -13px; background-repeat: no-repeat; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto;    background-position: 0 -3341px; }
-			}
+			.result-price-container { background-color:  @orange; padding-left: 45px; 	}
 		}
 		.deal-wrappr.best {  
-			.result-price-container { background-color:  @orange; padding-left: 45px; 
-				&::before { position: absolute; content: ''; left: 7px; width: 27px; height:30px; top: 50%; margin-top: -16px; background-repeat: no-repeat; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto;    background-position: 0 -3430px; }
-			}
+			.result-price-container { background-color:  @orange; padding-left: 45px; }
 		}
-
 		.deal-wrappr.high-to-low {  
-			.result-price-container { background-color:  @orange; padding-left: 45px; 
-				&::before { position: absolute; content: ''; left: 5px; width: 32px; height: 28px; top: 50%; margin-top: -14px; background-repeat: no-repeat; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto;    background-position: 0 -4140px; }
-			}
+			.result-price-container { background-color:  @orange; padding-left: 45px; }
 		}
 		.deal-wrappr:nth-child(even) { margin-left: 0%;  }
 		.deal-wrappr:nth-child(odd) { margin-left: 1%;  }
 		.deal-wrappr.highest-rating:nth-child(odd) { margin-left: 0%; margin-right: 1%; }
+		.deal-wrappr:last-of-type { margin-bottom: 50px;}
 	}
 	
 	.swiper-container-horizontal>.swiper-pagination-bullets { bottom: 0px; margin-top: 20px; }
 
-	// Filter option 
-	#filter-best-deals { width: 100%; position: fixed; bottom: 0px; left: 0px;  height: 40px;  z-index: 8; font-size: 14px;  .mixroboto(400);  text-align: center; background-color:rgba(21,140,225,.95);   margin-bottom: -1px;
-		span { position: relative; top: 9px;  color: #ffd07f;
-			&:before { background-position: 0 -2267px;  width: 18px; height: 17px; background-image: url(../img/SpriteSheet.svg); background-repeat: no-repeat; background-size: 100% auto;  content: '';  position: absolute; top: 0px;   margin-left: -26px; }
-		}
-	}
 
 	.top-margin { margin-top: 10px; }
+
 
 }
 
@@ -1089,252 +1098,14 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 
 
 
-
-
-// Discover -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-.page-content.discover-page { background-color:  @dark-purple;  
-
-	#top-attractions-image { position: relative; display: block; width: 100%; height: 130px;  background-size: cover;   background-image: url(../img/paris-BG-landscape.jpg);  background-position: center center; 
-		#top-attractions-title { display: block; color: white; font-size: 21px; .mixroboto(400);  text-align: center;     text-shadow: 2px 2px 4px #000000;}
-	}
-	#attraction-nav {  display: block; width: 100%;  position: relative;  background-color: @light-blue; color: white; 
-		span { width: 20%; text-align: center; display: inline-block; padding-top: 10px; padding-bottom: 10px; text-transform: uppercase; .mixroboto(500); opacity: 0.8; }
-		span.active-destination { border-bottom: 4px solid white; opacity: 1; }
-	}
-
-	#discover-container1 { margin-right: 1%; margin-left: 1%; margin-top: 10px; width: 98%; height: 100%; display: block; position: relative;
-		
-		.top-attraction-container { display: block; background-size: cover; width: 100%;  height: 300px; background-color: black; margin-bottom: 10px; color: white; position: relative; background-position: center center;
-			
-			.attraction-name { .mixroboto(500); font-size: 21px; position: relative; padding-left: 10px; padding-top: 10px; padding-bottom: 10px; z-index: 2; text-shadow: 2px 2px 4px #000000;   color: @light-yellow; display: block; margin-right: 110px;}
-			
-			.attraction-rating { position: absolute; top: 10px; right: 10px; font-size: 24px; z-index: 2;  color: white; .mixroboto(700); background-color: @orange; width: 60px; height: 60px; border-bottom-right-radius: 6px; border-top-right-radius: 6px; border-top-left-radius: 6px;  line-height: 60px;  text-align: center; }
-			
-			.attraction-address { position: relative; z-index: 2; font-size: 16px; text-shadow: 2px 2px 4px #000000; padding-left: 10px; padding-bottom: 10px; display: block; margin-right: 110px; }
-			
-			.bottom-attractions-info { position: absolute; bottom: 0px;   position: absolute; width: 100%; 
-				.attraction-tips { position: relative; padding: 10px; display: inline-block; z-index: 2; font-size: 18px;  text-shadow: 2px 2px 4px #000000;  }
-				.see-more { color: white; padding: 10px; display: inline-block; z-index: 2; position: relative; float: right; padding-bottom: 15px;
-					.see-more-link { position: relative; font-weight: 700; padding: 6px 25px 6px 10px; z-index: 4;   background: #ffd43e;  background: linear-gradient(to bottom, #ffd43e 0, #f6bf00 100%);   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd43e', endColorstr='#f6bf00', GradientType=0);    text-shadow: 0 1px 0 #ffd237; border-radius: 3px; 
-						.attraction-link { display: inline-block; font-size: 13px; z-index: 4;  color: black; text-transform: uppercase;  }
-						&::after { position: absolute;   background-image: url(../img/SpriteSheet.svg);   background-size: 100% auto;  content: '';   background-repeat: no-repeat;    background-position: 0 -629px;   width: 7px;   height: 8px; margin-top: 6px; margin-left: 7px; }
-					}
-				}
-			}
-
-
-			&::after { position: absolute; width: 100%; height:100%;  top:0; left:0;  background: rgba(0, 0, 0, 0.5); opacity: 1; content: '';}
-		}
-
-
-		.top-attraction-container { display: block; background-position: center center; background-size: cover;}
-		
-		#london-attractions.hide-attractions , #paris-attractions.hide-attractions , #amsterdam-attractions.hide-attractions , #rome-attractions.hide-attractions , #new-york-attractions.hide-attractions { display: none; }
-
-	
-
-	}
-
-
-}
-
- 
-// Top attraction images 
-
-// london
-.big-ben { background-image: url('../img/big-ben.jpg'); } 
-.hyde-park { background-image: url('../img/hyde-park.jpg'); }
-.british-museum { background-image: url('../img/british-museum.jpg'); }
-.churchill-war-rooms { background-image: url('../img/churchill-war-rooms.jpg'); }
-.view-shard { background-image: url('../img/view-from-the-shard.jpg'); }
-.hms-belfast { background-image: url('../img/hms.jpg'); }
-.london-eye { background-image: url('../img/london-eye.jpg'); }
-.tower-of-london { background-image: url('../img/tower.jpg'); }
-.madame-tussauds { background-image: url('../img/madame-tussauds.jpg'); }
-.london-dungeon { background-image: url('../img/london-dungeons.jpg'); }
-
-
-// paris 
-.eiffel-tower { background-image: url('../img/eiffel-tower.jpg'); }
-.chaumont-park { background-image: url('../img/chaumontpark.jpg'); }
-.louvre { background-image: url('../img/musee-du-louvre.jpg'); }
-.notre-dam { background-image: url('../img/notre-dame.jpg'); }
-.sainte-chapelle { background-image: url('../img/sainte-chapelle.jpg'); }
-.disneylandparis { background-image: url('../img/disney-paris.jpg');}
-.triomphe { background-image: url('../img/arc-de-triomphe.jpg'); }
-.grand-palais { background-image: url('../img/grand-palais.jpg'); }
-.catacombes { background-image: url('../img/catacombes.jpg'); }
-.villette { background-image: url('../img/park-la-villette.jpg'); }
-
-
-
-// amsterdam 
-.van-sloten { background-image: url('../img/van-sloten.jpg'); }
-.anne-frank { background-image: url('../img/anne-frank.jpg'); }
-.rijksmuseum { background-image: url('../img/rijksmuseu.jpg'); }
-.amsterdam-centraal { background-image: url('../img/amsterdam-train-station.jpg'); }
-.heineken { background-image: url('../img/heineken-experience.jpg'); }
-.artis { background-image: url('../img/natura-artis-magistra.jpg'); }
-.zuiderbad { background-image: url('../img/zuiderbad.jpg'); }
-.nemo { background-image: url('../img/NEMO.jpg'); }
-.dam-square { background-image: url('../img/dam-square.jpg'); }
-.iamsterdam { background-image: url('../img/iamsterdam.jpg'); }
-
-
-
-// rome 
-.pantheon { background-image: url('../img/Pantheon.jpg'); }
-.colosseum { background-image: url('../img/colosseum.jpg'); }
-.roman-forum { background-image: url('../img/roman-forum.jpg'); }
-.laterano { background-image: url('../img/laterano.jpg'); }
-.navona { background-image: url('../img/piazza-navona.jpg'); }
-.vatican { background-image: url('../img/vatican.jpg'); }
-.castel-sant-angelo { background-image: url('../img/castel-of-the-holy-angel.jpg'); }
-.galleria { background-image: url('../img/Galleria-Borghese.jpg'); }
-.trevi { background-image: url('../img/trevi-fountain.jpg');  }
-.spanish-steps { background-image: url('../img/spanish-steps.jpg'); }
-
-
-
-
-// new-york 
-.centeral-park { background-image: url('../img/centeral-park.jpg'); }
-.high-line { background-image: url('../img/High-Line.jpg'); }
-.top-of-the-rock { background-image: url('../img/top-of-the-rock.jpg'); }
-.metropolitan { background-image: url('../img/metropolitan-museum-of-art.jpg'); }
-.trade-center { background-image: url('../img/september-11-memorial.jpg'); }
-.empire-state { background-image: url('../img/empire-state.jpg'); }
-.natural-history { background-image: url('../img/natural-history.jpg'); }
-.time-square { background-image: url('../img/times-square.jpg'); }
-.liberty { background-image: url('../img/liberty.jpg'); }
-.chinatown { background-image: url('../img/china-town.jpg'); }
-
-
-
-
-@media (max-width: 600px) { 
-	.page-content.discover-page #discover-container1 .top-attraction-container { height: 400px; 
-
-	}
-
-}
-
-
-
-@media(max-width:480px) { 
-	
-	// london 
-	.big-ben { background-image: url('../img/big-ben-mob.jpg'); } 
-	.hyde-park { background-image: url('../img/hyde-park-mob.jpg'); }
-	.british-museum { background-image: url('../img/british-museum-mob.jpg'); }
-	.churchill-war-rooms { background-image: url('../img/churchill-war-rooms.jpg'); }
-	.view-shard { background-image: url('../img/view-from-the-shard.jpg'); }
-	.hms-belfast { background-image: url('../img/hms.jpg'); }
-	.london-eye { background-image: url('../img/london-eye-mob.jpg'); }
-	.tower-of-london { background-image: url('../img/tower-mob.jpg'); }
-	.madame-tussauds { background-image: url('../img/madame-tussauds-mob.jpg'); }
-	.london-dungeon { background-image: url('../img/london-dungeons-mob.jpg'); }
-
-
-	// paris 
-	.eiffel-tower { background-image: url('../img/eiffel-tower-mob.jpg'); }
-	.chaumont-park { background-image: url('../img/chaumontpark.jpg'); }
-	.louvre { background-image: url('../img/musee-du-louvre-mob.jpg'); }
-	.notre-dam { background-image: url('../img/notre-dame-mob.jpg'); }
-	.sainte-chapelle { background-image: url('../img/sainte-chapelle.jpg'); }
-	.disneylandparis { background-image: url('../img/disney-paris-mob.jpg');}
-	.triomphe { background-image: url('../img/arc-de-triomphe-mob.jpg'); }
-	.grand-palais { background-image: url('../img/grand-palais-mob.jpg'); }
-	.catacombes { background-image: url('../img/catacombes.jpg'); }
-	.villette { background-image: url('../img/park-la-villette-mob.jpg'); }
-
-
-
-	// amsterdam 
-	.van-sloten { background-image: url('../img/van-sloten.jpg'); }
-	.anne-frank { background-image: url('../img/anne-frank.jpg'); }
-	.rijksmuseum { background-image: url('../img/rijksmuseu-mob.jpg'); }
-	.amsterdam-centraal { background-image: url('../img/amsterdam-train-station-mob.jpg'); }
-	.heineken { background-image: url('../img/heineken-experience-mob.jpg'); }
-	.artis { background-image: url('../img/natura-artis-magistra.jpg'); }
-	.zuiderbad { background-image: url('../img/zuiderbad.jpg'); }
-	.nemo { background-image: url('../img/NEMO.jpg'); }
-	.dam-square { background-image: url('../img/dam-square-mob.jpg'); }
-	.iamsterdam { background-image: url('../img/iamsterdam-mob.jpg'); }
-
-
-
-	// rome 
-	.pantheon { background-image: url('../img/Pantheon-mob.jpg'); }
-	.colosseum { background-image: url('../img/colosseum.jpg'); }
-	.roman-forum { background-image: url('../img/roman-forum.jpg'); }
-	.laterano { background-image: url('../img/laterano-mob.jpg'); }
-	.navona { background-image: url('../img/piazza-navona.jpg'); }
-	.vatican { background-image: url('../img/vatican-mob.jpg'); }
-	.castel-sant-angelo { background-image: url('../img/castel-of-the-holy-angel.jpg'); }
-	.galleria { background-image: url('../img/Galleria-Borghese-mob.jpg'); }
-	.trevi { background-image: url('../img/trevi-fountain-mob.jpg');  }
-	.spanish-steps { background-image: url('../img/spanish-steps-mob.jpg'); }
-
-
-
-
-	// new-york 
-	.centeral-park { background-image: url('../img/centeral-park-mob.jpg'); }
-	.high-line { background-image: url('../img/High-Line-mob.jpg'); }
-	.top-of-the-rock { background-image: url('../img/top-of-the-rock-mob.jpg'); }
-	.metropolitan { background-image: url('../img/metropolitan-museum-of-art-mob.jpg'); }
-	.trade-centre { background-image: url('../img/september-11-memorial-mob.jpg'); }
-	.empire-state { background-image: url('../img/empire-state-mob.jpg'); }
-	.natural-history { background-image: url('../img/natural-history-mob.jpg'); }
-	.time-square { background-image: url('../img/times-square-mob.jpg'); }
-	.liberty { background-image: url('../img/liberty-mob.jpg'); }
-	.chinatown { background-image: url('../img/china-town-mob.jpg'); }
-
-
-
-
-}
-
-
-
-@media(max-width:380px) { 
-	.page-content.discover-page #attraction-nav { text-align: center;
-		span { width: 33%;  }
-	}
-}
-
-
-
-
-@media(max-width:360px) { 
-	.page-content.discover-page #discover-container1 {
-		.top-attraction-container .bottom-attractions-info {
-			.attraction-tips { font-size: 14px; }
-			#attraction-nav { font-size: 10px; }
-			.see-more .see-more-link .attraction-link { font-size: 14px; }
-		}
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
 // Settings ---------------------------------------------------------------------------------------------------
 
 
 .page-content.settings-page  { background-color: @dark-purple;
 	#settings-container { 
 		
+		
+
 		#button-center { text-align: center; margin-bottom: 30px;
 
 			#login-button-container {   display: inline-block;  text-align: center;   margin-top: 10px;
@@ -1345,9 +1116,13 @@ i.icon.icon-prev{ 	background-image: url(../img/SpriteSheet.svg) ; background-po
 		.section-title { text-align: center; text-transform: uppercase; color: @dark-grey; .mixroboto(600); font-size: 18px; margin-bottom: 10px; margin-top: 30px; }
 		
 
-		.link-container { background-color: @royal-blue; display: block; width: 100%; 
-			.settings-links { color: white; padding-left: 15px; padding-top: 20px; padding-bottom: 20px; display: block; .mixroboto(500); font-size: 18px; position: relative;
-				&::after { right: 15px; width: 15px; height: 15px; background-image: url(../img/SpriteSheet.svg); background-position: 0 -1873px; background-size: 100% auto; background-repeat: no-repeat; background-color: transparent; position: absolute;  content: ''; display: block; top: 50%; margin-top: -6px;  }
+		.link-container { background-color: @royal-blue; display: block; width: 100%; position: relative;
+			.settings-links { color: white;  padding-top: 20px; padding-bottom: 20px;  .mixroboto(500); font-size: 18px; position: relative; display: inline-block;	width: 100%;
+				span { margin-left: 15px; }
+			}
+			.arrow-white-settings { position: absolute; top: 50%; right: 20px; margin-top: -7px; 
+				.arrow-white-settings-svg { width: 15px; height: 15px; }
+				.white { fill : white; }
 			}
 		}		
 	
