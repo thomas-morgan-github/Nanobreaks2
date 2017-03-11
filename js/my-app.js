@@ -30,6 +30,11 @@ var applaunchCount = window.localStorage.getItem('launchCount');
 
 //Check if it already exists or not
 if(applaunchCount){
+
+	 // Load login page and skip walkthrough if app has already been opened before by user 
+ 	mainView.router.load({pageName: 'login'});
+
+
    //This is a second time launch, and count = applaunchCount
    $('.search-bg-page .popup-wrappr').remove();
 
@@ -37,8 +42,8 @@ if(applaunchCount){
 
    $('.swiper-container.walkthrough').remove();
 
-   // Load login page and skip walkthrough if app has already been opened before by user 
- 	mainView.router.load({pageName: 'login'});
+  
+
 
 }else{
   //Local storage is not set, hence first time launch. set the local storage item
@@ -46,7 +51,6 @@ if(applaunchCount){
 
   //Do the other stuff related to first time launch
 }
-
 
 
 
