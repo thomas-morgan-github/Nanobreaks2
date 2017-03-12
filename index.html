@@ -495,14 +495,14 @@
             <div class="navbar">
               <div class="navbar-inner">
                 
-                <div class="left">
+                <!-- <div class="left">
                   <a href="#" class="link icon-only back">
                       <i class="icon icon-back"></i>
                   </a>
-                </div>
+                </div> -->
 
               
-                <div class="center sliding">
+                <div class="center home sliding ">
                   <a href="#home">
               
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -771,7 +771,6 @@
 
             <div class="page-content search-bg-page">
             
-              <a href="index.html" class="back"> Go back to home page </a>
               
               <div class="popup-wrappr">  
                 <div class="popup-swiper">    
@@ -826,25 +825,23 @@
 
                       <form id="my-form" method="GET" class="list-block">
                       
-                        <div class="autosuggest-labels">Departing From:</div>
-                        <div class="list-block">
-                          <ul> 
-                            <li class="item-content">    
-                              <div class="item-input">
-                                <input type="text" name="departure" placeholder="Leaving from..." id="autocomplete-departing-dropdown-ajax" >
-                              </div>
-                              
-                            </li>
-                          </ul>
-                        </div>
+                      <div class="autosuggest-labels">Departing From:</div>
+                      <div class="list-block">
+                        <ul id="departing">
+                          <li class="item-content">
+                            <div class="item-input">
+                              <input type="text" placeholder="Enter a departure airport..." id="autocomplete-dropdown-all"></div>
+                          </li>
+                        </ul>
+                      </div>
 
                         
-                        <div class="autosuggest-labels">Traveling To:</div>
+                      <div class="autosuggest-labels">Traveling To:</div>
                         <div class="list-block">
-                          <ul> 
+                          <ul id="travel"> 
                             <li class="item-content item-content-dropdown-expand">    
                               <div class="item-input">
-                                <input type="text" name="" placeholder="Enter a destination..." id="autocomplete-destination-dropdown-ajax">
+                                <input type="text" name="" placeholder="Enter a destination..." id="autocomplete-dropdown-all">
                               </div>
                             
                             </li>
@@ -1000,7 +997,7 @@
                
                      
                 <div class="left">
-                  <a href="#" class="link icon-only back">
+                  <a href="#login" class="link icon-only back">
                       <i class="icon icon-back"></i>
                   </a>
                 </div>
@@ -2210,9 +2207,9 @@
     <script type="application/javascript" src="https://dealchecker.co.uk:8181/holidays/nano-deals-jsonp.html?numberOfWeeks=45"> </script>
 
 
-<!-- 
 
-    <script type="text/javascript" src="cordova.js"></script> -->
+
+<!--     <script type="text/javascript" src="cordova.js"></script> -->
    
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">

@@ -32,7 +32,7 @@ var applaunchCount = window.localStorage.getItem('launchCount');
 if(applaunchCount){
 
 	 // Load login page and skip walkthrough if app has already been opened before by user 
- 	mainView.router.load({pageName: 'login'});
+ 	mainView.router.load({pageName: 'home'});
 
 
    //This is a second time launch, and count = applaunchCount
@@ -58,6 +58,12 @@ if(applaunchCount){
 $('.nav-close').on('click', function (e) {
     myApp.closePanel();
 });
+
+
+
+setTimeout(function() {
+	navigator.splashscreen.hide();
+}, 2000); 
 
 
 
@@ -180,6 +186,9 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
 		activeNavRemove();
 
+
+
+
 		$('.content-block p').eq(0).addClass('active-nav');
 				
 	    // Sort by Price - return best deals 
@@ -274,132 +283,213 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
 
-	// Autocomplete drop downs for departing destination -------------------------------------2----------------------------------------------------------
 
-	var autocompleteDropdownAjax = myApp.autocomplete ({
 
-	  input: '#autocomplete-departing-dropdown-ajax',
-	  openIn: 'dropdown',
-	  preloader: true, //enable preloader
-	  valueProperty: 'value', //object's "value" property name
-	  textProperty: 'text', //object's "text" property name
-	  limit: 1000, 
-	  dropdownPlaceholderText: 'Search avaliable departure airports...',
-	  expandInput: true, // expand input
-	  source: function(autocomplete, query, render) {
-	    var results = [];
-	    var returned = [];
-	    if (query.length === 0) {
-	      render(results);
-	      return;
+	// Autocomplete drop downs for departing airport -----------------------------------------------------------------------------------------------
+
+	var autocompleteDropdownAll = myApp.autocomplete({
+
+	    input: '#departing #autocomplete-dropdown-all',
+	    openIn: 'dropdown',
+	    source: function (autocomplete, query, render) {
+	        
+
+	        var results = [];
+	        var departureWithAirportCode = [];
+
+
+
+// if theres no destination selected show all avaliable airports
+
+
+			// loop through local data and add all depature airport and departure airport codes to empty array 
+			for ( var i = 0 ; i < localData.length; i ++ ) { 
+				departureWithAirportCode.push( localData[i].departure + " " + localData[i].depAir );
+			}
+
+
+			// Create empty array to hold only unique depature airport and departure airport code values 
+			var uniqueDepartureAirportNames = [];
+
+	    	var destinationInputVal = $('#travel #autocomplete-dropdown-all').val();
+
+
+	    	if ( destinationInputVal  == "" ) {
+
+				for(var i in departureWithAirportCode){
+				    if(uniqueDepartureAirportNames.indexOf(departureWithAirportCode[i]) === -1){
+				        uniqueDepartureAirportNames.push(departureWithAirportCode[i]);
+				    }
+				}
+			 
+
+			    // loop through unique depature airport and departure airport code values and push to results array (show in input dropdown) if users inputed text matches array values 
+			    for (var i = 0; i < uniqueDepartureAirportNames.length; i++) {
+			       
+			       	if (uniqueDepartureAirportNames[i].toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(uniqueDepartureAirportNames[i]);
+			    
+			    }
+			}
+
+
+
+
+
+// if theres a destination selected show only airports avalible to that destination
+
+
+			var departureAirportAvaliableForDestination = [];
+
+			var uniqueDepartureAirportAvaliableForDestination = [];
+
+
+			for ( var i = 0; i < localData.length; i ++ ) { 
+
+				if ( destinationInputVal == localData[i].destination  ) { 
+
+					departureAirportAvaliableForDestination.push( localData[i].departureAirport + " " + localData[i].depAir );
+
+					for(var i in departureAirportAvaliableForDestination){
+					    if(uniqueDepartureAirportAvaliableForDestination.indexOf(departureAirportAvaliableForDestination[i]) === -1){
+					        uniqueDepartureAirportAvaliableForDestination.push(departureAirportAvaliableForDestination[i]);
+					    }
+					}
+
+
+
+					// loop through unique depature airport and departure airport code values and push to results array (show in input dropdown) if users inputed text matches array values 
+				    for (var i = 0; i < uniqueDepartureAirportNames.length; i++) {
+				       
+				       	if (uniqueDepartureAirportNames[i].toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(uniqueDepartureAirportNames[i]);
+				    
+				    }
+							
+
+
+			        // Render items by passing array with result items
+			        render(results);
+
+
+				}
+
+
+			}
+
+
+	        // Render items by passing array with result items
+	        render(results);
+
+
 	    }
 
 
-	    // Show Preloader
-	    autocomplete.showPreloader();
 
-	    // Create empty array that will hold all departure airports and departure airport codes 
-		var departureWithAirportCode = [];
+	});
 
-		// loop through local data and add all depature airport and departure airport codes to empty array 
-		for ( var i = 0 ; i < localData.length; i ++ ) { 
-			departureWithAirportCode.push(localData[i].departure + " " + localData[i].depAir );
-		}
 
-		// Create empty array to hold only unique depature airport and departure airport code values 
-		var uniqueDepartureAirportNames = [];
 
-		for(var i in departureWithAirportCode){
-		    if(uniqueDepartureAirportNames.indexOf(departureWithAirportCode[i]) === -1){
-		        uniqueDepartureAirportNames.push(departureWithAirportCode[i]);
+
+
+
+
+
+// Autocomplete drop downs for destination -----------------------------------------------------------------------------------------------
+
+
+	var autocompleteDropdownAll = myApp.autocomplete({
+	    
+	    input: '#travel #autocomplete-dropdown-all',
+	    openIn: 'dropdown',
+	    source: function (autocomplete, query, render) {
+	  
+
+			var results = [];	 
+			var allDestinations = [];
+	    	var avaliableDestinations = [];
+
+
+	    	var departureAirport = $('#departing #autocomplete-dropdown-all').val();
+
+
+			for ( var i = 0 ; i < localData.length; i ++ ) { 
+
+		    	
+
+
+// show all destinations if no airport has been selected 
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Show only destinations avaliable for selected airport
+
+		    	if (( departureAirport == localData[i].departure + " " + localData[i].departureAirportCode )) { 
+
+		    		avaliableDestinations.push(localData[i].destination);
+
+
+		    		 // Create empty array to hold only unique departure airport and departure airport code values 
+				    var uniqueDestinationNames = [];
+
+
+					for(var i in avaliableDestinations){
+				        if( uniqueDestinationNames.indexOf(avaliableDestinations[i]) === -1){
+				            uniqueDestinationNames.push(avaliableDestinations[i]);
+				        }
+				    }
+
+
+
+				    console.log(uniqueDestinationNames);
+
+				    for (var i = 0; i < uniqueDestinationNames.length; i++) { 
+				       	if (uniqueDestinationNames[i].toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(uniqueDestinationNames[i]);
+				    }
+
+
+				    // Render items by passing array with result items
+			        render(results);
+
+		    				   
+		    	}
+
+		    	
+
+
+
+
+		    
+
+
+
+
+
+
 		    }
-		}
-	 
 
-	    // loop through unique depature airport and departure airport code values and push to results array (show in input dropdown) if users inputed text matches array values 
-	    for (var i = 0; i < uniqueDepartureAirportNames.length; i++) {
-	       
-	       	if (uniqueDepartureAirportNames[i].toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(uniqueDepartureAirportNames[i]);
-	    
+
+
+		  
+
 	    }
-
-	    // Hide Preoloader
-	    autocomplete.hidePreloader();
-	   
-	    // Render items by passing array with result items
-	    render(results);
-
-
-	  }
 
 	});
 
 
 
 
-	// Autocomplete drop down for destination --------------------------------------------------------------------------------------------------------------------------------------------------------
-
-	var autocompleteDropdownAjax = myApp.autocomplete ({
-	  input: '#autocomplete-destination-dropdown-ajax',
-	  openIn: 'dropdown',
-	  preloader: true, //enable preloader
-	  valueProperty: 'value', //object's "value" property name
-	  textProperty: 'text', //object's "text" property name
-	  limit: 1000, 
-	  dropdownPlaceholderText: 'Search avaliable destinations...',
-	  expandInput: true, // expand input
-
-	  source: function(autocomplete, query, render) {
-	    var results = [];
-	    var returned = [];
-	    if (query.length === 0) {
-	      render(results);
-	      return;
-	    }
-
-	    // Show Preloader
-	    autocomplete.showPreloader();
-
-
-	    // Create empty array that will hold all destination airports and destination airport codes 
-	    var destinationOnly = [];
-
-	    // loop through local data and add all depature airport and departure airport codes to empty array 
-	    for ( var i = 0 ; i < localData.length; i ++ ) { 
-	    	destinationOnly.push(localData[i].destination);
-	    }
 
 
 
-	    // Create empty array to hold only unique depature airport and departure airport code values 
-	    var uniqueDestinationNames = [];
-
-
-		for(var i in destinationOnly){
-	        if( uniqueDestinationNames.indexOf(destinationOnly[i]) === -1){
-	            uniqueDestinationNames.push(destinationOnly[i]);
-	        }
-	    }
-
-
-
-	    // loop through unique destination values and push to results array (show in input dropdown) if users inputed text matches array values 
-	    for (var i = 0; i <  uniqueDestinationNames.length; i++) {
-	       
-	       	if ( uniqueDestinationNames[i].toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push( uniqueDestinationNames[i]);
-	    
-	    }
-
-
-	    // Hide Preoloader
-	    autocomplete.hidePreloader();
-	   
-	    // Render items by passing array with result items
-	    render(results);
-
-		
-	  }
-	});
 
 
 
@@ -544,8 +634,8 @@ searchPageContainer.find('.save-storage-data').on('click', function (e) {
 	
 	e.preventDefault();
 
-	departure = $(searchPageContainer).find("#autocomplete-departing-dropdown-ajax" ).val();
-	destination = $(searchPageContainer).find("#autocomplete-destination-dropdown-ajax").val();
+	departure = $(searchPageContainer).find("#departing #autocomplete-dropdown-all" ).val();
+	destination = $(searchPageContainer).find("#travel #autocomplete-dropdown-all").val();
 	date = $(searchPageContainer).find("#calendar-default").val();
 	deals = $(searchPageContainer).find("#best-deals").val();
 	adults = $(searchPageContainer).find("#adults").val();
@@ -554,6 +644,10 @@ searchPageContainer.find('.save-storage-data').on('click', function (e) {
 
    
 });
+
+
+
+
 
 
 
@@ -570,6 +664,23 @@ myApp.onPageReinit('search', function (page) {
 
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -737,12 +848,28 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 	 		appendInputedDataToDeal();
 		}
 
+
+
+
+
+
+
+
+
+
+
+
+
 		// Departure airport and date search ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------					    
 		
 		else if ( (localData[i].departureDate == date) && ( localData[i].departure + " " + localData[i].depAir == departure ) && (destination == "") ) { 
 			console.log("date and departure, destination empty");
 	 		appendInputedDataToDeal();
 		}
+
+
+
+
 
 		// Departure only search ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------					    
 		
@@ -752,12 +879,16 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 	    }
 
+
+
 		// Destination only search ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------					    
 
 		else if( (localData[i].destination == destination ) && (date == "") && (departure == "") ) { 
 			console.log('destination only, other fields are empty');
 			appendInputedDataToDeal();
 		}
+
+
 
 		// Date only search 
 		else if( (localData[i].departureDate.substring(0,10) == date ) && (destination == "") && (departure == "") ) { 
@@ -814,6 +945,16 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 // closing brackets for deal landing scripts -------------------------------------------------------------------------------------------------------------------------------------------------------
 });
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1480,8 +1621,7 @@ function ratingSort () {
   	// add class to remove margin from top deal 
     $('.deal-wrappr').eq(0).addClass('rating').addClass('top-margin');
 
-
-
+    // add result icon to 
     $('.deal-wrappr.rating .result-price-container').prepend('<svg version="1.1" id="deal-rating-star-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"width="47.5px" height="45.8px" viewBox="0 0 47.5 45.8" style="enable-background:new 0 0 47.5 45.8;" xml:space="preserve"><g transform="translate(0,-952.36218)"><path class="star-icon" d="M37.4,997.3c0.9-0.1,1.6-0.8,1.5-1.7c0-0.1,0-0.1,0-0.2L36,981.6l10.7-9.5c0.7-0.6,0.7-1.6,0.1-2.3c-0.3-0.3-0.6-0.5-1-0.5l-14.4-1.6l-6-12.8c-0.4-0.8-1.3-1.2-2.2-0.8c-0.4,0.2-0.7,0.4-0.8,0.8l-6,12.8L2,969.3c-0.9,0.1-1.6,0.9-1.5,1.8c0,0.4,0.2,0.7,0.5,1l10.7,9.5l-2.9,13.8c-0.2,0.9,0.4,1.7,1.3,1.9c0.4,0.1,0.8,0,1.1-0.2l12.6-6.9l12.6,6.9C36.8,997.3,37.1,997.4,37.4,997.3z M34.9,992.6l-10.2-5.7c-0.5-0.3-1.1-0.3-1.6,0l-10.2,5.7l2.4-11.2c0.1-0.6-0.1-1.1-0.5-1.5l-8.7-7.7l11.7-1.3c0.6-0.1,1.1-0.4,1.3-0.9l4.9-10.4l4.9,10.4c0.2,0.5,0.7,0.9,1.3,0.9l11.7,1.3l-8.7,7.7c-0.4,0.4-0.6,1-0.5,1.5C32.6,981.4,34.9,992.6,34.9,992.6z"/></g></svg>' );
 
    
@@ -1602,138 +1742,6 @@ myApp.onPageReinit('best-deals', function (page) {
 
 
 
-
-
-
-
-
-
-
-
-// Start of discover page -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-$$(document).on('pageInit', '.page[data-page="discover"]', function(e) {
-
-
-
-	activeNavRemove();
-
-	$('.content-block p').eq(3).addClass('active-nav');
-
-
-
-// Attraction nav ------------------------------------------------------------------
-
-	$('#attraction-nav span').on('click', function() { 
-		
-		$(this).parent().children().removeClass('active-destination');
-		$(this).addClass('active-destination');
-
-	});
-
-
-// London -----------------------------------------------------------------------
-
-
-	$('.london').on('click', function () { 
-			    	
-		$("#london-attractions").removeClass("hide-attractions");
-		$("#paris-attractions , #rome-attractions , #amsterdam-attractions , #new-york-attractions").addClass("hide-attractions");
-
-	}); 
-
-
-
-
-// Paris ------------------------------------------------------------------------
-	
-	
-	$('.paris').on('click', function () { 
-	
-		$("#paris-attractions").removeClass("hide-attractions");
-		$("#london-attractions , #rome-attractions , #amsterdam-attractions , #new-york-attractions").addClass("hide-attractions");
-
-	});
-
-
-
- // Amsterdam ------------------------------------------------------------------------
-
-
-	$('.amsterdam').on('click', function() { 
-
-		$("#amsterdam-attractions").removeClass("hide-attractions");
-		$("#london-attractions , #rome-attractions , #paris-attractions , #new-york-attractions").addClass("hide-attractions");
-	
-	});
-
-
-
-
-// Rome ------------------------------------------------------------------------
-	
-
-	$('.rome').on('click', function() { 
-		$("#rome-attractions").removeClass("hide-attractions");
-		$("#london-attractions , #amsterdam-attractions , #paris-attractions , #new-york-attractions").addClass("hide-attractions");
-	});
-	
-
-
- 
-
-// New York ------------------------------------------------------------------------
-	
-
-
-	$('.new-york').on('click', function () { 
-
-		$("#new-york-attractions").removeClass("hide-attractions");
-		$("#london-attractions , #amsterdam-attractions , #paris-attractions , #rome-attractions").addClass("hide-attractions");
-	
-	});
-	
-
-
-
-	// var new_script = document.createElement('script');
-	// new_script.setAttribute('src','https://maps.googleapis.com/maps/api/place/textsearch/json?query=new+york+city+point+of+interest&language=en&key=AIzaSyALztgN7CIscyL1LN2zw1yVq6EmIIz6mBA');
-	// document.head.appendChild(new_script);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-});
-
-
-
-
-
-
-// Script that runs on every other time the discover page is init\loaded 
-myApp.onPageReinit('discover', function (page) {
-   
-	activeNavRemove();
-	$('.content-block p').eq(3).addClass('active-nav');
-
-
-
-});
 
 
 

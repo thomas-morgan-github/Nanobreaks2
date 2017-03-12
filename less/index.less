@@ -45,7 +45,7 @@
 	a.link { padding: 0; }
 }
 
-.navbar .center { margin-left: -120px;  }
+.navbar .center { margin-left: -110px;  }
 .navbar .right:first-child { right: 22px;  }
 .menu-icon-nav { width: 40px; height: 40px; }
 
@@ -112,18 +112,12 @@
 
 
 
-
-
-
-
 // Calender Popups stying ---------------------------------------------------------------------------------------------------------------------
 
 // Next Icon 
 i.icon.icon-next { background-image: url(../img/arrow-right-svg.svg);  width: 10px; height:  12px; background-size: 10px 12px; background-repeat: no-repeat; content: ''; position: absolute;}
 i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10px; height:  12px; background-size: 10px 12px; background-repeat: no-repeat; content: ''; position: absolute; }
 .toolbar-inner { color: black;  }
-
-
 
 
 
@@ -414,7 +408,9 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 .list-block .item-subtitle { white-space: normal; text-overflow: normal;  }
 
-
+.navbar .center.home {
+    margin-left: -77px;
+}
 
 
 
@@ -439,22 +435,25 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 .home-page { text-align: center;
 
-	.nano-search-icon-container { margin-top: 0px; }
+	
+
+
+	.nano-search-icon-container { margin-top: 0px; display: inline-block; right: 43px;  position: relative;}
 	
 	a { text-decoration: none; height: 100%; width:100%; display: block; }
 
 	#search-container, #best-deals-container { cursor: pointer; position: relative; display: block; width: 100%; background-size: cover; height: 50%;  background-position: center center; }
 	
-	#search-container { background-image: url(../img/search-container-bg.jpg);  margin-bottom: 2px; }
+	#search-container { background-image: url(../img/search-container-bg.jpg);  margin-bottom: 2px;  margin-top: -2px;}
 	#best-deals-container { background-image: url(../img/best-deals-container-bg.jpg); }
 
-	.header { color: @light-yellow; font-size: 34px; .mixroboto(500);  }
-	.discription { color: white; font-size: 18px; .mixroboto(400);  position: relative;  margin-top: 10px; display: inline-block;	}
-	.arrow-svg-white {  display: inline-block; position: relative; top: 1px;
+	.header { color: @light-yellow; font-size: 34px; .mixroboto(500); position: relative; left: -30px; top: -23px; display: inline-block; }
+	.discription { color: white; font-size: 18px; .mixroboto(400);  position: relative;  margin-top: 10px; display: block; }
+	.arrow-svg-white {  display: inline-block; position: relative; top: 0px;
 		.white-arrow-discription { fill:#FFFFFF; }
 	}
 
-	#search-deals , #find-best-deals { .mixroboto(300); color: white; margin-top: 10px; font-size: 16px; }
+	#search-deals , #find-best-deals { .mixroboto(500); color: white; margin-top: 10px; font-size: 16px; }
 
 }
 
@@ -612,7 +611,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	
 
 	
-	 // Icons grey for in active input fields  ------------------------------------------------------------------------------------------------------
+	 // Icons for input fields  ------------------------------------------------------------------------------------------------------
 		
 		.leaving-icon  { position: relative;
 			#calender-icon-search { fill: white; width: 25px; height: 23px; position: absolute; top: -37px; left: 7px; }
@@ -649,7 +648,6 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 				span { display: inline-block; }
 				span + span { margin-left: 10px;  }
 			 }
-			 li:hover, li.active {  background: grey;}
 	 	} 
 	}
 
@@ -667,10 +665,6 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 /* === Autocomplete === */
 
-.autocomplete-page .navbar .autocomplete-preloader {
-  margin-right: 16px;
-}
-
 
 .autocomplete-dropdown {
 
@@ -681,6 +675,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
   width: 100%;
   left: 0;
 
+
 }
 .autocomplete-dropdown .autocomplete-dropdown-inner {
   position: relative;
@@ -689,6 +684,8 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
   height: 100%;
   z-index: 1;
 }
+
+
 .autocomplete-dropdown .autocomplete-preloader {
   display: block;
   position: absolute;
@@ -698,6 +695,8 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
   width: 20px;
   height: 20px;
 }
+
+
 .autocomplete-dropdown .autocomplete-preloader .preloader-inner-gap,
 .autocomplete-dropdown .autocomplete-preloader .preloader-inner-half-circle {
   border-width: 3px;
@@ -719,7 +718,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
   color: #212121;
 }
 
-.autocomplete-dropdown .list-block {
+.autocomplete-dropdown .list-block {  
 	div {  left: -10px; 
 		div { margin-left: 0px; padding-left: 20px; background: transparent; 
 			// &:before {  width: 22px; height: 20px; background-image: url(../img/SpriteSheet.svg);  background-position: 0 -1842px; background-size: 100% auto; background-repeat: no-repeat; background-color: transparent; position: absolute;  content: ''; display: block; margin-top: 0px; left: 10px; }
@@ -742,6 +741,16 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 		
 	}
 }
+
+
+
+
+@media (max-width: 800px) {
+	
+	.autocomplete-dropdown .list-block { margin-left: -40px; }
+
+}
+
 
 
 
@@ -785,6 +794,9 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	.search-bg-page { 	
 		#deals-container .deal-wrappr:nth-child(even) { margin-left: 0; }
 	}
+
+	.autocomplete-dropdown .list-block { margin-left: -10px; }
+
 }
 
 @media (max-width: 480px) { 
@@ -800,7 +812,9 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 
 @media (max-width: 380px) { 
-	.navbar-fixed .page-content.search-bg-page { margin-top: 0px;  padding-top: 20px;}
+	.navbar-fixed .page-content.search-bg-page { margin-top: 0px;  padding-top: 0px;
+		.centered-content { margin-top: 10px; }
+	}
 }
 
 
