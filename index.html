@@ -830,7 +830,17 @@
                         <ul id="departing">
                           <li class="item-content">
                             <div class="item-input">
-                              <input type="text" placeholder="Enter a departure airport..." id="autocomplete-dropdown-all"></div>
+                              
+                              <input type="text" placeholder="Enter a departure airport..." id="autocomplete-dropdown-all">
+                             
+                              <span class="remove-text departing-text">
+                                <svg version="1.1" id="remove-text-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                   width="18.1px" height="18.8px" viewBox="0 0 18.1 18.8" style="enable-background:new 0 0 18.1 18.8;" xml:space="preserve">
+                                  <path d="M17.8,1.2l-0.7-0.7L8.9,8.6L0.8,0.5L0.1,1.2l8.1,8.1l-8.1,8.1l0.7,0.7L8.9,10l8.1,8.1l0.7-0.7L9.6,9.3L17.8,1.2z"/>
+                                </svg>
+                              </span>
+
+                            </div>
                           </li>
                         </ul>
                       </div>
@@ -841,18 +851,43 @@
                           <ul id="travel"> 
                             <li class="item-content item-content-dropdown-expand">    
                               <div class="item-input">
+                                
                                 <input type="text" name="" placeholder="Enter a destination..." id="autocomplete-dropdown-all">
+                                
+                                <span class="remove-text destination-text">
+                                  <svg version="1.1" id="remove-text-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                     width="18.1px" height="18.8px" viewBox="0 0 18.1 18.8" style="enable-background:new 0 0 18.1 18.8;" xml:space="preserve">
+                                    <path d="M17.8,1.2l-0.7-0.7L8.9,8.6L0.8,0.5L0.1,1.2l8.1,8.1l-8.1,8.1l0.7,0.7L8.9,10l8.1,8.1l0.7-0.7L9.6,9.3L17.8,1.2z"/>
+                                  </svg>
+                                </span>
+
                               </div>
                             
                             </li>
                           </ul>
                         </div>
 
+
+
+                      <!-- Calender --> 
                         <div class="leaving-container">
+                          
                           <label>Leaving:</label>
                          
 
-                          <input type="text" name="date"  placeholder="Departure date..."  readonly id="calendar-default">
+<!--                           <input type="text" name="date"  placeholder="Departure date..."  readonly id="calendar-default"> -->
+
+
+                          <span class="remove-text calender-text">
+                            <svg version="1.1" id="remove-text-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                               width="18.1px" height="18.8px" viewBox="0 0 18.1 18.8" style="enable-background:new 0 0 18.1 18.8;" xml:space="preserve">
+                              <path d="M17.8,1.2l-0.7-0.7L8.9,8.6L0.8,0.5L0.1,1.2l8.1,8.1l-8.1,8.1l0.7,0.7L8.9,10l8.1,8.1l0.7-0.7L9.6,9.3L17.8,1.2z"/>
+                            </svg>
+                          </span>
+
+                          
+                          <span id="calender-drop-down"><span contentEditable=true data-text="Choose a departure date..."></span></span>
+
                           <span class="leaving-icon icon">     
                             
                             <svg version="1.1" id="calender-icon-search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -876,7 +911,23 @@
                             </svg>
 
                           </span>
+
+
+
+                          <ul id="calender-list-dropdown">
+                           
+                          </ul>
+
+                            
+
+                            
+
+
                         </div>
+
+
+
+
 
 
                         <div class="adults-container">
@@ -922,6 +973,8 @@
                             <li>6</li>
                             <li>7</li>
                           </ul>
+
+
                         </div>
 
                         <div class="children-container">
@@ -1277,28 +1330,7 @@
               </div>
 
                       
-              <div id="filter-best-deals" >
-                <svg version="1.1" id="filter-icon-container" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                   width="12.8px" height="13.4px" viewBox="0 0 12.8 13.4" style="enable-background:new 0 0 12.8 13.4;" xml:space="preserve">
-
-                <g>
-                  <g>
-                    <path class="filter-icon" d="M10.8,11.8c-0.2,0.8-0.9,1.4-1.7,1.4c-0.8,0-1.5-0.6-1.7-1.4H1c-0.2,0-0.4-0.2-0.4-0.4c0-0.2,0.2-0.4,0.4-0.4
-                      h6.4c0.2-0.8,0.9-1.4,1.7-1.4c0.8,0,1.5,0.6,1.7,1.4h1c0.2,0,0.4,0.2,0.4,0.4c0,0.2-0.2,0.4-0.4,0.4H10.8z M2,6.4
-                      C2.1,5.6,2.9,5,3.7,5s1.5,0.6,1.7,1.4h6.4c0.2,0,0.4,0.2,0.4,0.4S12,7.3,11.8,7.3H5.4C5.2,8,4.5,8.6,3.7,8.6S2.1,8,2,7.3H1
-                      c-0.2,0-0.4-0.2-0.4-0.4S0.8,6.4,1,6.4H2z M10.8,2.8c-0.2,0.8-0.9,1.4-1.7,1.4c-0.8,0-1.5-0.6-1.7-1.4H1c-0.2,0-0.4-0.2-0.4-0.4
-                      S0.8,1.9,1,1.9h6.4c0.2-0.8,0.9-1.4,1.7-1.4c0.8,0,1.5,0.6,1.7,1.4h1c0.2,0,0.4,0.2,0.4,0.4s-0.2,0.4-0.4,0.4H10.8z M8.2,2.3
-                      c0,0.5,0.4,0.9,0.9,0.9c0.5,0,0.9-0.4,0.9-0.9S9.6,1.4,9.1,1.4C8.6,1.4,8.2,1.8,8.2,2.3z M4.6,6.8c0-0.5-0.4-0.9-0.9-0.9
-                      S2.8,6.3,2.8,6.8s0.4,0.9,0.9,0.9S4.6,7.3,4.6,6.8z M8.2,11.3c0,0.5,0.4,0.9,0.9,0.9c0.5,0,0.9-0.4,0.9-0.9c0-0.5-0.4-0.9-0.9-0.9
-                      C8.6,10.4,8.2,10.8,8.2,11.3z"/>
-                  </g>
-                </g>
-                </svg>
-                <span>Sort & Filter</span>
-              </div>          
-
-
-
+              
 
             </div>
 
@@ -1409,7 +1441,7 @@
                 <div class="section-title">About</div>
 
                 <div class="link-container">
-                  <a href="#about" class="settings-links"> <span> About dealchecker Nanobreak App </span> </a>
+                  <a href="#about" class="settings-links"> <span> About Nanobreak App </span> </a>
                   <span class="arrow-white-settings">
                     <svg version="1.1" class="arrow-white-settings-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                        width="27.3px" height="48.8px" viewBox="0 0 27.3 48.8" style="enable-background:new 0 0 27.3 48.8;" xml:space="preserve">
@@ -1418,6 +1450,18 @@
                     </svg>
                   </span>
                 </div>
+
+                 <div class="link-container">
+                  <a href="" class="settings-links pb-standalone-video"> <span> About dealchecker.co.uk </span> </a>
+                  <span class="arrow-white-settings">
+                    <svg version="1.1" class="arrow-white-settings-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                       width="27.3px" height="48.8px" viewBox="0 0 27.3 48.8" style="enable-background:new 0 0 27.3 48.8;" xml:space="preserve">
+                    <path class="white" d="M1.2,45.1c-0.8,0.8-0.8,2,0,2.8s2,0.8,2.8,0l22-22c0.8-0.8,0.8-2,0-2.8l0,0L4,1.1c-0.8-0.8-2-0.8-2.8,0
+                      s-0.8,2,0,2.8l20.4,20.3L1.2,45.1z"/>
+                    </svg>
+                  </span>
+                </div>
+
 
                 <div class="section-title ">Website</div>
               
@@ -2209,7 +2253,7 @@
 
 
 
-<!--     <script type="text/javascript" src="cordova.js"></script> -->
+    <script type="text/javascript" src="cordova.js"></script>
    
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
@@ -2218,10 +2262,10 @@
 
 
    <!-- script for gettng grunt browser sync working delete before uploading app to app store -->
-    <script id="__bs_script__">//<![CDATA[
+   <!--  <script id="__bs_script__">//<![CDATA[
       document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.5'><\/script>".replace("HOST", location.hostname));
 //]]></script>
-
+ -->
 
 
 
