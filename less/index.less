@@ -34,6 +34,14 @@
 
 
 
+
+
+
+
+
+
+
+
 // Navigation Styling 
 
 .navbar { background:  @dark-blue; z-index: 60001; box-shadow: 2px 3px rgba(0,0,0,.1);
@@ -529,9 +537,9 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 
 
+#date { display: block;  z-index: 999;}
 
-
-
+.hasDatepicker { display: block; z-index: 9999;}
 
 
 
@@ -540,11 +548,18 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 .navbar-fixed .page-content.search-bg-page { padding-top: 0px;  }
 
+
+
+
+
 [contentEditable=true]:empty:not(:focus):before{
     content:attr(data-text)
 }
 
 .search-bg-page { padding-bottom:30px; background-image: url(../img/new-search-bg.jpg);  width: 100%; height: 100%; position: absolute; top: 0px; left: 0px; background-size: cover; background-position: 50% 50%; background-repeat: none;  
+	
+	#children-icon-search { margin-left: 0px; left: 0px; }
+
 	.centered-content { text-align: left; padding: 0px; width: 80%; }
 
 
@@ -574,8 +589,8 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 		
 		.adults-container, .children-container { width: 48%; display: inline-block; float:left;  position: relative;  margin-top: 0px;		}
 		
-		.adults-container { margin-right: 2%;}
-		.children-container { margin-left: 2%; }
+		.adults-container { margin-right: 2%; margin-top: 14px; }
+		.children-container { margin-left: 2%; margin-top: 14px; }
 
 		
 
@@ -606,7 +621,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	 // Icons for input fields  ------------------------------------------------------------------------------------------------------
 
 		// remove input text icon 
-		.remove-text { position: absolute; right: 15px; top: 15px; 
+		.remove-text { position: absolute; right: 15px; top: 15px; display: none;
 			#remove-text-icon { fill: white; }
 		}
 
@@ -631,6 +646,10 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 
 
+
+		.leaving-container input[type="text"] { text-indent: 49px; }
+
+
 	}
 
 
@@ -640,7 +659,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	// Input drop down styling ----------------------------------------------------------------------------------------------------------------
 
 	.adults-container.active ,   .children-container.active  { display: block;
-		ul { z-index: 9; display: block;  list-style: none;   margin: 0;   padding: 0;  margin-top: -1px; background-color: white; width: 100%; position: absolute;}
+		ul { z-index: 9; display: block;  list-style: none;   margin: 0;   padding: 0;  margin-top: -1px; background-color: white; width: 100%; position: absolute; max-height: 150px;     overflow: scroll; }
 	}
 
 	.adults-container,  .children-container { 
@@ -746,6 +765,66 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 
 
+
+
+// Calender datepicker styling  ---------------------------------------------------------------------------
+
+.ui-datepicker {
+background: #fff; /* Old browsers */
+padding:10px;
+border:1px solid #ccc;
+}
+ 
+.ui-datepicker table {
+width:278px;
+}
+ 
+.ui-datepicker table td {
+text-align:center;
+}
+ 
+.ui-datepicker a {
+cursor:pointer;
+text-decoration:none;
+}
+ 
+.ui-datepicker-prev {
+}
+ 
+.ui-datepicker-next {
+float:right;
+}
+ 
+.ui-datepicker-title {
+text-align: center;
+font-weight:bold;
+margin-top: 10px; 
+}
+
+
+
+#calendar { display: none; background-color: white; border: 1px solid #ccc; }
+#calendar.show-calender { display: block; position: absolute; }
+#calendar-default { background: rgba(255,255,255,0.2); }
+
+.search-bg-page #my-form { 
+
+	.leaving-container { position: relative; 
+		.remove-text { bottom: 7px; top: auto; }
+	}
+
+}
+
+.ui-state-disabled { opacity: 0.4; }
+#close-calender { display: block; text-align: center; color: #2196f3; padding-bottom: 5px; }
+.ui-datepicker { border: 0px; }
+
+
+
+
+
+
+
 @media (max-width: 800px) {
 	
 	.autocomplete-dropdown .list-block { margin-left: -40px; }
@@ -756,65 +835,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 
 
-
-
-
-
-// Calender stying dropdown 
-.search-bg-page #my-form { 
-	.remove-text.calender-text { position: absolute; right: 15px; top: 38px; 
-		#remove-text-icon { fill: white; }
-	}
-}
-
-
-#calender-drop-down { display: block;  width: 100%;  height: 48px;  border-radius: 2px;   border: 0; background: rgba(255,255,255,0.2) ; 
-	span { position: relative; top: 14px; left: 42px; color: white;  }
-}
-
-
-.leaving-container.active  { display: block;
-	ul { z-index: 9; display: block;  list-style: none;   margin: 0;   padding: 0;  margin-top: -1px; background-color: white; width: 100%; position: absolute; margin-bottom: 40px;  height: 240px; overflow: scroll; }
-}
-
-.leaving-container { margin-bottom: 14px; position: relative;
- 	ul { display: none; 
-		 li {  padding: 8px; display: inline-block;  width: 100%; border-left: 2px solid grey; text-align: center;
-			span { display: inline-block; }
-			span + span { margin-left: 10px;  }
-		 }
- 	} 
-}
-
-
-
-
-
-// Calender styling popup
-
-// hide dates except friday and saturday 
-.picker-calendar-week-day:nth-child(1), .picker-calendar-week-day:nth-child(2) , .picker-calendar-week-day:nth-child(3) , .picker-calendar-week-day:nth-child(4) , .picker-calendar-week-day:nth-child(7) { display: none; }
-
-.picker-calendar-day.picker-calendar-day-selected span { background: @orange; }
-
-.picker-calendar-day , .picker-calendar-week-days .picker-calendar-week-day { width: calc(100% / 2); }
-
-
-// (only show fri & sat)
-.picker-calendar-row { 
-	.picker-calendar-day:nth-child(1), .picker-calendar-day:nth-child(2) , .picker-calendar-day:nth-child(3)  , .picker-calendar-day:nth-child(4) , .picker-calendar-day:nth-child(7)  { display: none; }
-
-}
-
-
-
-
-
-
-
-
-
-/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle) */
 
 @media (min-width:600px)  {  
 	
@@ -854,7 +875,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 @media (max-width: 380px) { 
 	.navbar-fixed .page-content.search-bg-page { margin-top: 0px;  padding-top: 0px;
-		.centered-content { margin-top: 10px; }
+		.centered-content { margin-top: 50px; }
 	}
 }
 
@@ -887,7 +908,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 }
 
 
-#children-icon-search { position: relative; width: 27px; height:24px;  top: 4px; left: 23px;
+#children-icon-search { position: relative; width: 27px; height:24px;  top: 4px; margin-left: 23px;
 	.children-icon { fill: white; position: absolute; left: -9px;  }
 }
 
@@ -959,12 +980,10 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 				img { width: 143px; height: 25px;   }
 			}
 			
-			.inner-deal-summary-container { z-index: 1; position: absolute; display: block; bottom: 0px; font-size: 18px; color: white; left: 19px; margin-bottom: 10px;
+			.inner-deal-summary-container { z-index: 1; position: absolute; display: block; bottom: 0px; font-size: 18px; color: white; padding-left: 19px; padding-right: 10px; margin-bottom: 10px;
 				.accomodation { .mixroboto(600); display: block;  text-shadow: 2px 2px 4px #000000; margin-bottom: 5px; }
 
 				.destination , 	.destination-country  { .mixroboto(300); margin-left: 5px; display: inline-block; position: relative; }
-
-				
 
 				.star-rating-container { display: inline-block; position: relative;  margin-left: 10px; top: -10px; width: 84px;
 					.star-rating {  background-repeat: no-repeat; height: 10px; width: 59px; background-size: 118px 165px; background-image: url(../img/star-sprite.svg); content: ''; position: absolute; background-position: 0px; }					
@@ -975,14 +994,8 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 					.rating-5 { background-position: 0; }
 				}
 
-			
-
 				.adults { display: inline-block; position: relative; font-weight: 300; margin-left: 20px; 		}
-
-
-			
-
-				.children { display: inline-block; position: relative; font-weight: 300; margin-left: 30px; }
+				.children { display: inline-block; position: relative; font-weight: 300; margin-left: 9px; }
 			}
 
 		}
@@ -1177,7 +1190,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 			}
 		} 
 
-		.section-title { text-align: center; text-transform: uppercase; color: @dark-grey; .mixroboto(600); font-size: 18px; margin-bottom: 10px; margin-top: 30px; }
+		.section-title { text-align: center; text-transform: uppercase; .mixroboto(600); font-size: 18px; margin-bottom: 10px; margin-top: 30px; color: white;}
 		
 
 		.link-container { background-color: @royal-blue; display: block; width: 100%; position: relative;
@@ -1189,7 +1202,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 				.white { fill : white; }
 			}
 		}		
-	
+		.link-container.dealchecker-video { margin-top: 2px; }
 		.link-container.social { margin-top: 2px;}
 	}
 }

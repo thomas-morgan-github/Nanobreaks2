@@ -25,6 +25,8 @@ var mainView = myApp.addView('.view-main', {
 
 
 
+
+
 // Check if apps run once before if so take action 
 var applaunchCount = window.localStorage.getItem('launchCount');
 
@@ -65,16 +67,13 @@ function onOffline() {
    alert("Device not connected to internet, reconnect to the internet to use application");
 }
 
-document.addEventListener("online", onOnline, false);
+// document.addEventListener("online", onOnline, false);
  
-function onOnline() {
-    // Handle the online event 
-       alert("Device connected to internet, full use of application enabled");
+// function onOnline() {
+//     // Handle the online event 
+//        alert("Device connected to internet, full use of application enabled");
 
-}
-
-
-
+// }
 
 
 
@@ -86,18 +85,22 @@ $('.nav-close').on('click', function (e) {
 
 
 
+
+
+
+
 setTimeout(function() {
 	navigator.splashscreen.hide();
-}, 2000); 
+}, 1000); 
 
 
 
 
 // Splash on load --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-// setTimeout(function() {
-//    $('#splash').hide();
-// }, 2000); // <-- time in milliseconds
+setTimeout(function() {
+   $('#splash').hide();
+}, 2000); // <-- time in milliseconds
 
 
 
@@ -289,6 +292,30 @@ myApp.onPageReinit('home', function (page) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  /* Search-page --------------------------------------------------------------------------------------------------------- */ 
 
 
@@ -408,8 +435,6 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
 
-	console.log(localData);
-
 
 
 
@@ -521,8 +546,7 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
 	$('.remove-text.calender-text').on('click', function() { 
-		$(this).next().children().html('');
-		$('.leaving-container').removeClass('active');
+		$('#calendar-default').val('');
 	});
 
 
@@ -540,7 +564,7 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
 
-	$('#calender-drop-down, #adults-dropdown, #children-dropdown').on('click', function () { 
+	$(' #adults-dropdown, #children-dropdown').on('click', function () { 
 
 		$(this).parents().addClass('active');
 
@@ -567,61 +591,88 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
 
-	// Script for calender --------------------------------------------------------------------------------------------------------------------------
 
-	// var today = new Date();
+// Remove user departure search input if invalid function
+function invalidDeparture() { 
 	
-	// var calendarDefault = myApp.calendar({
-	    
-	//     input: '#calendar-default',
-	//     dateFormat: 'dd/mm/yyyy',
-	//     closeOnSelect: true,
 
-	  
-	//     events: {
-	//   		from: today,
-	// 	},
+	for (i=0; i < localData.length; i++ ) { 
+	 
+	 	if( $$('#departing #autocomplete-dropdown-all').val() !== localData[i].departure + " " + localData[i].depAir ) { 
+	 		$$('#departing #autocomplete-dropdown-all').val("");	
+	 	}
 
-	// 	disabled: {
-	// 		to: today
-	// 	},
+	}
+
+}
 
 
+// Remove user destination search input if invalid function
+function invalidDestination () { 
 
-	// });       
+	for (i=0; i < localData.length; i++ ) { 
+	 
+	 	if( $('#travel #autocomplete-dropdown-all').val() !== localData[i].destination ) { 
+	 		$('#travel #autocomplete-dropdown-all').val("");	
+	 	}
 
+	}
 
-
-
-	$('ul').on('click', ".calender-dates", function() { 
-		console.log('hi');
-		var value = $(this).html();
-		var input = $('#calender-drop-down span');
-	    input.html(value);
-	    $(this).parents().eq(1).removeClass('active');	
-	    return false;
-	});
+}
 
 
 
 
-	$('#calender-drop-down').on('click', function () { 
+// on input blur check if departure and destination input is valid 
+$('#departing input#autocomplete-dropdown-all').on('blur', invalidDeparture);
+$('#travel input#autocomplete-dropdown-all').on('blur', invalidDestination);
+
+
+
+
+
+
+
+
+// Start of calender scripting --------------------------------------------------
+
+
+
+var avaliableHolidayDates = [];
+var uniqueHolidayDates = [];
+
+
+
+
+// Dynamic callender - show particular deal data depending on user input 
+
+
+	$('#calendar-default').on('click', function () { 
 
 
 		// show all departure dates if departure and destination value is empty
 
 		if (  $('#departing #autocomplete-dropdown-all').val() == ""  &&  $('#travel #autocomplete-dropdown-all').val() == "" )   { 
+		
 
+		
 
-			console.log('empty');
+			for (i=0; i < localData.length; i++ ) { 
+				avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
+			}
 
-			for ( var i = 0 ; i < localData.length; i ++ ) { 
 			
 
-				$('#calender-list-dropdown').append('<li class="calender-dates">' + localData[i].departureDate.substring(0,10)  + '</li>' );
-
-
+			for(var i in avaliableHolidayDates){
+			    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
+			        uniqueHolidayDates.push(avaliableHolidayDates[i]);
+			    }
 			}
+
+
+			console.log(uniqueHolidayDates);
+
+
 
 		}
 
@@ -633,10 +684,26 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
 			if  (  $('#departing #autocomplete-dropdown-all').val() == localData[i].departure + " " + localData[i].departureAirportCode  &&  $('#travel #autocomplete-dropdown-all').val() == "" )   { 
+					
 
-				$('#calender-list-dropdown').html(" ");
+			
 
-				$('#calender-list-dropdown').append('<li class="calender-dates">' + localData[i].departureDate.substring(0,10)  + '</li>' );
+				for (i=0; i < localData.length; i++ ) { 
+					avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
+				}
+
+				
+
+
+				for(var i in avaliableHolidayDates){
+				    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
+				        uniqueHolidayDates.push(avaliableHolidayDates[i]);
+				    }
+				}
+
+
+				console.log(uniqueHolidayDates);
+
 
 
 			}
@@ -648,9 +715,26 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 			if  (  $('#departing #autocomplete-dropdown-all').val() == "" &&  $('#travel #autocomplete-dropdown-all').val() == localData[i].destination )   { 
 
-				$('#calender-list-dropdown').html(" ");
+				
 
-				$('#calender-list-dropdown').append('<li class="calender-dates">' + localData[i].departureDate.substring(0,10)  + '</li>' );
+			
+
+				for (i=0; i < localData.length; i++ ) { 
+					avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
+				}
+
+		
+
+
+				for(var i in avaliableHolidayDates){
+				    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
+				        uniqueHolidayDates.push(avaliableHolidayDates[i]);
+				    }
+				}
+
+
+				console.log(uniqueHolidayDates);
+
 
 
 			}
@@ -661,8 +745,24 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 			if  ( $('#departing #autocomplete-dropdown-all').val() == localData[i].departure + " " + localData[i].departureAirportCode &&  $('#travel #autocomplete-dropdown-all').val() == localData[i].destination )   { 
 
-				$('#calender-list-dropdown').html(" ");
-				$('#calender-list-dropdown').append('<li class="calender-dates">' + localData[i].departureDate.substring(0,10)  + '</li>' );
+			
+
+
+				for (i=0; i < localData.length; i++ ) { 
+					avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
+				}
+
+		
+
+				for(var i in avaliableHolidayDates){
+				    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
+				        uniqueHolidayDates.push(avaliableHolidayDates[i]);
+				    }
+				}
+
+
+				console.log(uniqueHolidayDates);
+
 
 
 			}
@@ -673,12 +773,6 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 		}
 
 
-
-
-
-
-
-
 	});
 
 
@@ -687,80 +781,190 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
 
+$('#calendar-default').on('click', function () { 
+	
+	$('#calendar').addClass('show-calender');
 
 
-
-
-
-
-
-
-
-
-
-	// Remove user departure search input if invalid function
-	function invalidDeparture() { 
+	$('#calendar').datepicker({
 		
-
-		for (i=0; i < localData.length; i++ ) { 
-		 
-		 	if( $$('#departing #autocomplete-dropdown-all').val() !== localData[i].departure + " " + localData[i].depAir ) { 
-		 		$$('#departing #autocomplete-dropdown-all').val("");	
-		 	}
-
-		}
-
-	}
+	    showOtherMonths: true,
+	    dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+	    dateFormat : 'dd/mm/yyyy',
+   
 
 
-	// Remove user destination search input if invalid function
-	function invalidDestination () { 
 
-		for (i=0; i < localData.length; i++ ) { 
-		 
-		 	if( $('#travel #autocomplete-dropdown-all').val() !== localData[i].destination ) { 
-		 		$('#travel #autocomplete-dropdown-all').val("");	
-		 	}
-
-		}
-
-	}
+	    beforeShowDay: function(d) {
+	        // normalize the date for searching in array
+	        var dmy = "";
+	        dmy += ("00" + d.getDate()).slice(-2) + "/";
+	        dmy += ("00" + (d.getMonth() + 1)).slice(-2) + "/";
+	        dmy += d.getFullYear();
+	        if ($.inArray(dmy, uniqueHolidayDates) >= 0) {
+	            return [true, ""];
+	        }
+	        else {
+	            return [false, ""];
+	        }
 
 
 
 
-	// on input blur check if departure and destination input is valid 
-	$('#departing input#autocomplete-dropdown-all').on('blur', invalidDeparture);
-	$('#travel input#autocomplete-dropdown-all').on('blur', invalidDestination);
+	    },
+
+	  	onSelect: function (date) {
+	       
+
+	       $('#calendar-default').val(date.substring(0,10));
+
+	       $('#calendar').removeClass('show-calender');
 
 
 
+	    }
 
-
-
-
-
-	$('.compare-button').on('click', function () { 
-		
-		var departingVal = $('#departing input#autocomplete-dropdown-all').val();
-		var destinationVal = $('#travel input#autocomplete-dropdown-all').val();
-		var dateVal = $('#calendar-default').val();
-
-		// If no values are inputted 
-		if ( departingVal  == "" &&  destinationVal == "" && dateVal == "" ) { 
-			$(".compare-button").removeAttr('href');
-		} 
-
-		// If one of the search requirments are meet add href to deal landing page
-		if ( departingVal !== "" || destinationVal !== "" || dateVal !== "" ) { 
-			$(".compare-button").attr("href", "#deal-landing");
-		}
 
 
 	});
 
 
 
+	// Check if close button exist if not add it to dynamic calender 
+	if ($('#close-calender').length == 0) {
+    	$('#calendar').append('<div id="close-calender"> Close </div>');
+	}
+		
+
+});
+
+
+
+
+// Add click event to dunamically appended calender close button
+$('body').on('click', '#close-calender', function() { 
+	$('#calendar').removeClass('show-calender');
+});
+
+
+
+
+
+
+// Code to show hide input clearing 
+
+$('#departing input#autocomplete-dropdown-all').each(function() {
+   var elem = $(this);
+
+   // Save current value of element
+   elem.data('oldVal', elem.val());
+
+   // Look for changes in the value
+   elem.bind("propertychange change click keyup input paste", function(event){
+      // If value has changed...
+      if (elem.data('oldVal') != elem.val()) {
+       // Updated stored value
+       elem.data('oldVal', elem.val());
+
+       // Do action
+      
+       $('#departing .remove-text').show();
+
+     }
+   });
+ });
+
+
+
+$('#travel input#autocomplete-dropdown-all').each(function() {
+   var elem = $(this);
+
+   // Save current value of element
+   elem.data('oldVal', elem.val());
+
+   // Look for changes in the value
+   elem.bind("propertychange change click keyup input paste", function(event){
+      // If value has changed...
+      if (elem.data('oldVal') != elem.val()) {
+       // Updated stored value
+       elem.data('oldVal', elem.val());
+
+       // Do action
+      
+       $('#travel .remove-text').show();
+
+     }
+   });
+ });
+
+
+
+$('input#calendar-default').each(function() {
+   var elem = $(this);
+
+   // Save current value of element
+   elem.data('oldVal', elem.val());
+
+   // Look for changes in the value
+   elem.bind("propertychange change click keyup input paste", function(event){
+      // If value has changed...
+      if (elem.data('oldVal') != elem.val()) {
+       // Updated stored value
+       elem.data('oldVal', elem.val());
+
+       // Do action
+      
+       $('.leaving-container .remove-text').show();
+
+     }
+   });
+ });
+
+
+
+
+
+
+ $('.remove-text').bind('click', function() {
+    $(this).hide();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Search nanobreak button 
+
+$('.compare-button').on('click', function () { 
+	
+	var departingVal = $('#departing input#autocomplete-dropdown-all').val();
+	var destinationVal = $('#travel input#autocomplete-dropdown-all').val();
+	var dateVal = $('#calendar-default').val();
+
+	// If no values are inputted 
+	if ( departingVal  == "" &&  destinationVal == "" && dateVal == "" ) { 
+		$(".compare-button").removeAttr('href');
+	} 
+
+	// If one of the search requirments are meet add href to deal landing page
+	if ( departingVal !== "" || destinationVal !== "" || dateVal !== "" ) { 
+		$(".compare-button").attr("href", "#deal-landing");
+	}
+
+
+});
+
+
+
+console.log(localData);
 
 
 
@@ -791,8 +995,7 @@ searchPageContainer.find('.save-storage-data').on('click', function (e) {
 
 	departure = $(searchPageContainer).find("#departing #autocomplete-dropdown-all").val();
 	destination = $(searchPageContainer).find("#travel #autocomplete-dropdown-all").val();
-	date = $(searchPageContainer).find("#calender-drop-down span").html();
-	deals = $(searchPageContainer).find("#best-deals").val();
+	date = $(searchPageContainer).find("#calendar-default").val();
 	adults = $(searchPageContainer).find("#adults").val();
 	children = $(searchPageContainer).find("#children").val();
 
@@ -820,11 +1023,24 @@ myApp.onPageReinit('search', function (page) {
 	// Remove all saved inputed search values 
 	$('#departing #autocomplete-dropdown-all').val("");
 	$('#travel #autocomplete-dropdown-all').val("");
-	$('#calender-drop-down span').html("");
+	$('#calendar-default').val("");
 	$('#adults-dropdown').val("");
 	$('#children-dropdown').val("");
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -888,7 +1104,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 		        '</div>' + 
 
 		        '<div class="deal-logo">' + 
-		            '<img src="https://static2.dealchecker.co.uk/10.7-6' + localData[i].clientImage + '" alt="' + '" />' + 
+		            '<img src="https://static2.dealchecker.co.uk/11.2-4' + localData[i].clientImage + '" alt="' + '" />' + 
 		        '</div>' + 
 
 		        '<div class="inner-deal-summary-container">' + 
@@ -1067,16 +1283,6 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 
 
-
-
-
-
-
-
-
-
-
-
 // Script that runs on every other time the deallanding page is init\loaded  
 myApp.onPageReinit('deal-landing', function (page) {
    
@@ -1160,7 +1366,7 @@ myApp.onPageReinit('deal-landing', function (page) {
 		        '</div>' + 
 
 		        '<div class="deal-logo">' + 
-		            '<img src="https://static2.dealchecker.co.uk/10.7-6' + localData[i].clientImage + '" alt="' + '" />' + 
+		            '<img src="https://static2.dealchecker.co.uk/11.2-4' + localData[i].clientImage + '" alt="' + '" />' + 
 		        '</div>' + 
 
 		        '<div class="inner-deal-summary-container">' + 
@@ -1374,7 +1580,7 @@ function priceLowToHigh () {
 		          '</div>' + 
 
 		          '<div class="deal-logo">' + 
-		            '<img src="https://static2.dealchecker.co.uk/10.7-6' + localData[i].clientImage + '" alt="' + '" />' + 
+		            '<img src="https://static2.dealchecker.co.uk/11.2-4' + localData[i].clientImage + '" alt="' + '" />' + 
 		          '</div>' + 
 
 		          '<div class="inner-deal-summary-container">' + 
@@ -1510,7 +1716,7 @@ function priceHighToLow() {
 		          '</div>' + 
 
 		          '<div class="deal-logo">' + 
-		            '<img src="https://static2.dealchecker.co.uk/10.7-6' + localData[i].clientImage + '" alt="' + '" />' + 
+		            '<img src="https://static2.dealchecker.co.uk/11.2-4' + localData[i].clientImage + '" alt="' + '" />' + 
 		          '</div>' + 
 
 		          '<div class="inner-deal-summary-container">' + 
@@ -1654,7 +1860,7 @@ function ratingSort () {
 		          '</div>' + 
 
 		          '<div class="deal-logo">' + 
-		            '<img src="https://static2.dealchecker.co.uk/10.7-6' +  ratingData[i].clientImage + '" alt="' + '" />' + 
+		            '<img src="https://static2.dealchecker.co.uk/11.2-4' +  ratingData[i].clientImage + '" alt="' + '" />' + 
 		          '</div>' + 
 
 		          '<div class="inner-deal-summary-container">' + 
@@ -1740,52 +1946,23 @@ function ratingSort () {
 
 
 
-// filter deals functionality
-$('.toolbar.toolbar-bottom').on('click', function () {
-  myApp.modal({
-    title:  'Sort & Filter',
-    text: '',
-    verticalButtons: true,
-    buttons: [
-      {
-        text: 'PRICE - LOW TO HIGH',
-        onClick: function() {
-          priceLowToHigh();
-          title:  'Sort & Filter',
-          myApp.alert('Deals filtered by best price!', '');
 
-        }
-      },
 
-       {
-        text: 'PRICE - HIGH TO LOW',
-        onClick: function() {
-          priceHighToLow();
-          myApp.alert('Deals price filtered by highest to lowest!', '');
 
-        }
-      },
 
-      {
-        text: 'HIGHEST RATING',
-        onClick: function() {
-          ratingSort();
-          myApp.alert('Deals filtered by highest rating!', '');
 
-        }
-      },
 
-       {
-        text: 'CLOSE',
-        onClick: function() {
-          
 
-        }
-      },
-      
-    ]
-  })
-});    
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1814,30 +1991,6 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 	// Call best priced function on load so user sees deal filtered by best priced deals on page load 
 	priceLowToHigh();
-
-
-
-
-
-   
-
-
-// End of Best deals page -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-});
-
-
-
-
-
-
-// Script that runs on every other time the best-deals page is init\loaded 
-myApp.onPageReinit('best-deals', function (page) {
-   
-
-	activeNavRemove();
-	$('.content-block p').eq(2).addClass('active-nav');
-
-
 
 
 
@@ -1878,16 +2031,34 @@ myApp.onPageReinit('best-deals', function (page) {
 	      },
 
 	       {
-	        text: 'CLOSE',
-	        onClick: function() {
-	          
+	        text: 'CANCEL',
+	     
+	        close: true,
 
-	        }
 	      },
 	      
 	    ]
 	  })
 	});    
+
+
+   
+
+
+// End of Best deals page -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+});
+
+
+
+
+
+
+// Script that runs on every other time the best-deals page is init\loaded 
+myApp.onPageReinit('best-deals', function (page) {
+   
+
+	activeNavRemove();
+	$('.content-block p').eq(2).addClass('active-nav');
 
 
 
@@ -1897,6 +2068,29 @@ myApp.onPageReinit('best-deals', function (page) {
 
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1933,6 +2127,30 @@ myApp.onPageReinit('about', function (page) {
 
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
