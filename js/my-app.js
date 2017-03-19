@@ -679,8 +679,11 @@ $('#calendar-default').on('click', function () {
 		if (  $('#departing #autocomplete-dropdown-all').val() == ""  &&  $('#travel #autocomplete-dropdown-all').val() == "" )   { 
 		
 
-		
-			avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
+			
+			for ( var i = 0 ; i < localData.length; i ++ ) { 
+				avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
+			}
+
 
 
 			for(var i in avaliableHolidayDates){
@@ -929,8 +932,8 @@ $('input#calendar-default').each(function() {
 
 
 
-
- $('.remove-text').bind('click', function() {
+// onclick og .remove text hide button 
+$('.remove-text').bind('click', function() {
     $(this).hide();
 });
 
@@ -942,11 +945,7 @@ $('input#calendar-default').each(function() {
 
 
 
-
-
-
-
-// Search nanobreak button 
+// Search nanobreak button - if fields are not empty add link to button 
 
 $('.compare-button').on('click', function () { 
 	

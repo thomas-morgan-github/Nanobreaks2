@@ -446,7 +446,29 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	
 
 
-	.nano-search-icon-container { margin-top: 0px; display: inline-block; right: 43px;  position: relative;}
+	.nano-search-icon-container { margin-top: 0px; display: inline-block; right: 43px;  position: relative;   animation: pulse 1s ease infinite; }
+	
+
+	.header { color: @light-yellow; font-size: 34px; .mixroboto(500); position: relative; left: -30px; top: -23px; display: inline-block; }
+
+	@keyframes pulse {
+	  0% {
+	    transform: scale(1);
+	  }
+
+	  50% {
+	    transform: scale(1.1);
+	  }
+
+	  100% {
+	    transform: scale(1);
+	  }
+	}
+
+
+
+
+
 	
 	a { text-decoration: none; height: 100%; width:100%; display: block; }
 
@@ -455,7 +477,6 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	#search-container { background-image: url(../img/search-container-bg.jpg);  margin-bottom: 2px;  margin-top: -2px;}
 	#best-deals-container { background-image: url(../img/best-deals-container-bg.jpg); background-position: right; }
 
-	.header { color: @light-yellow; font-size: 34px; .mixroboto(500); position: relative; left: -30px; top: -23px; display: inline-block; }
 	.discription { color: white; font-size: 18px; .mixroboto(400);  position: relative;  margin-top: 10px; display: block; }
 	.arrow-svg-white {  display: inline-block; position: relative; top: 0px;
 		.white-arrow-discription { fill:#FFFFFF; }
@@ -1188,7 +1209,7 @@ margin-top: 10px;
 // Settings ---------------------------------------------------------------------------------------------------
 
 
-.page-content.settings-page  { background-color: @dark-purple;
+.page-content.settings-page  { background-image: url('../img/berlin-BG.jpg'); background-size: cover; 
 	#settings-container { 
 		
 		
@@ -1203,8 +1224,8 @@ margin-top: 10px;
 		.section-title { text-align: center; text-transform: uppercase; .mixroboto(600); font-size: 18px; margin-bottom: 10px; margin-top: 30px; color: white;}
 		
 
-		.link-container { background-color: @royal-blue; display: block; width: 100%; position: relative;
-			.settings-links { color: white;  padding-top: 20px; padding-bottom: 20px;  .mixroboto(500); font-size: 18px; position: relative; display: inline-block;	width: 100%;
+		.link-container { display: block; width: 100%; position: relative;     background-color: rgba(255,255,255,0.2); left: 1%; width: 98%;  
+			.settings-links { color: white;  padding-top: 20px; padding-bottom: 20px;  .mixroboto(500); font-size: 18px; position: relative; display: inline-block;	width: 100%; 
 				span { margin-left: 15px; }
 			}
 			.arrow-white-settings { position: absolute; top: 50%; right: 20px; margin-top: -7px; 
@@ -1235,7 +1256,7 @@ margin-top: 10px;
 .page-content.privacy-page { background-color: @dark-purple;}
 
 #privacy-info-container { margin-left: 1%; margin-right: 1%; color: white; 
-	#privacy-update-date { color: @dark-grey; margin-top: 30px; display: block; .mixroboto(600); margin-bottom: 20px; text-align: center; }
+	#privacy-update-date { color: @dark-grey; margin-top: 18px; display: block; .mixroboto(600); margin-bottom: 20px; text-align: center; }
 	.privacy-subtitle { color: @dark-grey; display: block; .mixroboto(400); margin-bottom: 10px; margin-top: 20px;  }
 	p { margin-bottom: 10px; margin-top: 0px; .mixroboto(300); }
 }
@@ -1257,7 +1278,7 @@ margin-top: 10px;
 
 
 
-.page-content.about { background-color: @dark-purple;
+.page-content.about { background-color: @dark-purple;  background-image: url('../img/london-day-bg.jpg'); background-size: cover; 
 	
 	.st0{ fill:#755641;}
     .st1{ fill:#AA8147;}
@@ -1279,7 +1300,7 @@ margin-top: 10px;
     .st17{ fill:#FFFFFF;}
     .st18{ fill:#CF142B;}
 
-	#designed-built { display: block;   font: 21px "budget"; color: white;  
+	#designed-built { display: block;   font: 21px "budget"; color: white;  background: rgba(255,255,255,0.2); padding: 50px; border-radius: 3px;
 		#build-location { display: block; font: "budget" 18px; }
 		#london-svg { margin-top: 20px;  }
 	}
