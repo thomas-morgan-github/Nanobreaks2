@@ -25,6 +25,30 @@ var mainView = myApp.addView('.view-main', {
 
 
 
+// social sharing 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Check if apps run once before if so take action 
@@ -644,24 +668,20 @@ var uniqueHolidayDates = [];
 
 
 
-// Dynamic callender - show particular deal data depending on user input 
+// Dynamic calender - show particular deal data depending on user input 
 
 
-	$('#calendar-default').on('click', function () { 
+$('#calendar-default').on('click', function () { 
 
 
-		// show all departure dates if departure and destination value is empty
+// show all departure dates if departure and destination value is empty
 
 		if (  $('#departing #autocomplete-dropdown-all').val() == ""  &&  $('#travel #autocomplete-dropdown-all').val() == "" )   { 
 		
 
 		
+			avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
 
-			for (i=0; i < localData.length; i++ ) { 
-				avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
-			}
-
-			
 
 			for(var i in avaliableHolidayDates){
 			    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
@@ -670,6 +690,7 @@ var uniqueHolidayDates = [];
 			}
 
 
+			console.log('below is all departure dates no field has been changed');
 			console.log(uniqueHolidayDates);
 
 
@@ -677,109 +698,104 @@ var uniqueHolidayDates = [];
 		}
 
 
-		for ( var i = 0 ; i < localData.length; i ++ ) { 
-
-			
-			// show departure dates for departure value only
 
 
-			if  (  $('#departing #autocomplete-dropdown-all').val() == localData[i].departure + " " + localData[i].departureAirportCode  &&  $('#travel #autocomplete-dropdown-all').val() == "" )   { 
-					
 
-			
+	for ( var i = 0 ; i < localData.length; i ++ ) { 
 
-				for (i=0; i < localData.length; i++ ) { 
-					avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
-				}
+		
+// show departure dates for departure value only
 
+
+		if  (  $('#departing #autocomplete-dropdown-all').val() == localData[i].departure + " " + localData[i].departureAirportCode  &&  $('#travel #autocomplete-dropdown-all').val() == "" )   { 
 				
 
-
-				for(var i in avaliableHolidayDates){
-				    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
-				        uniqueHolidayDates.push(avaliableHolidayDates[i]);
-				    }
-				}
+			avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
+		
 
 
-				console.log(uniqueHolidayDates);
-
-
-
+			for(var i in avaliableHolidayDates){
+			    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
+			        uniqueHolidayDates.push(avaliableHolidayDates[i]);
+			    }
 			}
 
 
-
-			// show departure dates for destination only
-
-
-			if  (  $('#departing #autocomplete-dropdown-all').val() == "" &&  $('#travel #autocomplete-dropdown-all').val() == localData[i].destination )   { 
-
-				
-
-			
-
-				for (i=0; i < localData.length; i++ ) { 
-					avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
-				}
-
-		
-
-
-				for(var i in avaliableHolidayDates){
-				    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
-				        uniqueHolidayDates.push(avaliableHolidayDates[i]);
-				    }
-				}
-
-
-				console.log(uniqueHolidayDates);
+			console.log('below is only the departure dates for the chosen departure');
+			console.log(uniqueHolidayDates);
 
 
 
-			}
-
-
-
-			// show departure dates for departure and destination 
-
-			if  ( $('#departing #autocomplete-dropdown-all').val() == localData[i].departure + " " + localData[i].departureAirportCode &&  $('#travel #autocomplete-dropdown-all').val() == localData[i].destination )   { 
-
-			
-
-
-				for (i=0; i < localData.length; i++ ) { 
-					avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
-				}
-
-		
-
-				for(var i in avaliableHolidayDates){
-				    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
-				        uniqueHolidayDates.push(avaliableHolidayDates[i]);
-				    }
-				}
-
-
-				console.log(uniqueHolidayDates);
-
-
-
-			}
-
-
-		
-		
 		}
 
 
-	});
+
+// show departure dates for destination only
+
+
+		if  (  $('#departing #autocomplete-dropdown-all').val() == "" &&  $('#travel #autocomplete-dropdown-all').val() == localData[i].destination )   { 
+
+			
+
+				avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
+
+
+
+				for(var i in avaliableHolidayDates){
+				    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
+				        uniqueHolidayDates.push(avaliableHolidayDates[i]);
+				    }
+				}
+
+
+				console.log('below is only the departure dates for chosen destination');
+				console.log(uniqueHolidayDates);
+
+
+
+		}
+
+
+
+		// show departure dates for departure and destination 
+
+		if  ( $('#departing #autocomplete-dropdown-all').val() == localData[i].departure + " " + localData[i].departureAirportCode &&  $('#travel #autocomplete-dropdown-all').val() == localData[i].destination )   { 
+
+		
+
+			avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
+
+
+	
+
+			for(var i in avaliableHolidayDates){
+			    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
+			        uniqueHolidayDates.push(avaliableHolidayDates[i]);
+			    }
+			}
+
+
+			console.log('below is departure dates for chosen departure and destination');
+			console.log(uniqueHolidayDates);
+
+
+
+		}
+
+
+		
+		
+	}
+
+
+});
 
 
 
 
 
 
+// Popup calender functionality 
 
 $('#calendar-default').on('click', function () { 
 	
@@ -792,8 +808,6 @@ $('#calendar-default').on('click', function () {
 	    dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
 	    dateFormat : 'dd/mm/yyyy',
    
-
-
 
 	    beforeShowDay: function(d) {
 	        // normalize the date for searching in array
@@ -808,23 +822,14 @@ $('#calendar-default').on('click', function () {
 	            return [false, ""];
 	        }
 
-
-
-
 	    },
 
 	  	onSelect: function (date) {
 	       
-
-	       $('#calendar-default').val(date.substring(0,10));
-
+	       $('#calendar-default').val(date.substring(0,10)).trigger('change');
 	       $('#calendar').removeClass('show-calender');
 
-
-
 	    }
-
-
 
 	});
 

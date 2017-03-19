@@ -453,7 +453,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	#search-container, #best-deals-container { cursor: pointer; position: relative; display: block; width: 100%; background-size: cover; height: 50%;  background-position: center center; }
 	
 	#search-container { background-image: url(../img/search-container-bg.jpg);  margin-bottom: 2px;  margin-top: -2px;}
-	#best-deals-container { background-image: url(../img/best-deals-container-bg.jpg); }
+	#best-deals-container { background-image: url(../img/best-deals-container-bg.jpg); background-position: right; }
 
 	.header { color: @light-yellow; font-size: 34px; .mixroboto(500); position: relative; left: -30px; top: -23px; display: inline-block; }
 	.discription { color: white; font-size: 18px; .mixroboto(400);  position: relative;  margin-top: 10px; display: block; }
@@ -494,7 +494,13 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 }
 
 
+@media (max-width : 320px) { 
+	.home-page { 
+		.header { left: auto;}
+		.nano-search-icon-container { display: none;}
 
+	}
+}
 
 
 
@@ -1076,6 +1082,10 @@ margin-top: 10px;
 
 
 // best deals ---------------------------------------------------------------------------------------------
+
+
+// Bets deals sort pop up 
+.modal-buttons.modal-buttons-vertical .modal-button { text-align: center;}
 
 
 // Filter option 

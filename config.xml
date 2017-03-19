@@ -53,6 +53,13 @@
 
 
     
+    
+
+
+    <plugin name="cordova-plugin-x-socialsharing" source="npm" />
+
+
+
 
      
 
