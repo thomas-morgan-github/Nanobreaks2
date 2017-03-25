@@ -170,10 +170,8 @@ function starRating() {
 function userLoginCallback(data) { 
 
 	if ( data == '123578') { 
-		console.log('valid email');
 		$('#email-login').addClass('valid');
 		$('#email-fail').removeClass('invalidEmail');
-
 	} 
 
 	else { 
@@ -573,114 +571,74 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
 	// Start of calender scripting --------------------------------------------------
-
 	var avaliableHolidayDates = [];
 	var uniqueHolidayDates = [];
 
 
-
-
-	// Dynamic calender - show particular deal data depending on user input 
-
-
+	// Dynamic calender - show deal data depending on user input - runs everytime user clicks on calender input field
 	$('#calendar-default').on('click', function () { 
 
-
-	// show all departure dates if departure and destination value is empty
-
-		if (  $('#departing #autocomplete-dropdown-all').val() == ""  &&  $('#travel #autocomplete-dropdown-all').val() == "" )   { 
+		// show all departure dates avaliable in delachecker API in calender if departure and destination input values are empty
+		if ( $('#departing #autocomplete-dropdown-all').val() == ""  &&  $('#travel #autocomplete-dropdown-all').val() == "" )   { 
 		
-
-			
+			// loop through API data and and store all avaliable departure dates in array 
 			for ( var i = 0 ; i < localData.length; i ++ ) { 
 				avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
 			}
 
 
-
+			// Loop through all avaliable departure dates and push only unique dates to new array 
 			for(var i in avaliableHolidayDates){
 			    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
 			        uniqueHolidayDates.push(avaliableHolidayDates[i]);
 			    }
 			}
-
-
-			console.log('below is all departure dates no field has been changed');
-			console.log(uniqueHolidayDates);
-
-
-
 		}
 
 
 
-
-
-		for ( var i = 0 ; i < localData.length; i ++ ) { 
-
+		for ( var i = 0; i < localData.length; i ++ ) { 
 			
-	// show departure dates for departure value only
-
-
-			if  (  $('#departing #autocomplete-dropdown-all').val() == localData[i].departureAirportName + " " + localData[i].departureAirportCode  &&  $('#travel #autocomplete-dropdown-all').val() == "" )   { 
-					
-
+		// Filter calender dates to show dates for the departure value the user has selected only 
+			if  ( $('#departing #autocomplete-dropdown-all').val() == localData[i].departureAirportName + " " + localData[i].departureAirportCode  &&  $('#travel #autocomplete-dropdown-all').val() == "" )   { 
+				
+				// store avaliable  dates for the selected departure
 				avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
-			
-
-
+		
+				// Store unique avaliable dates in array
 				for(var i in avaliableHolidayDates){
 				    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
 				        uniqueHolidayDates.push(avaliableHolidayDates[i]);
 				    }
 				}
-
-
-				console.log('below is only the departure dates for the chosen departure');
-				console.log(uniqueHolidayDates);
-
-
-
 			}
 
 
 
-	// show departure dates for destination only
-
-
+		// Filter calender dates to show  dates for the destination value the user has selected only
 			if  (  $('#departing #autocomplete-dropdown-all').val() == "" &&  $('#travel #autocomplete-dropdown-all').val() == localData[i].destination )   { 
 
-				
+				// store avaliable dates for the selected destination
+				avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
 
-					avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
-
-
-
-					for(var i in avaliableHolidayDates){
-					    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
-					        uniqueHolidayDates.push(avaliableHolidayDates[i]);
-					    }
-					}
-
-
-					console.log('below is only the departure dates for chosen destination');
-					console.log(uniqueHolidayDates);
-
-
-
+				// Store unique avaliable dates in array
+				for(var i in avaliableHolidayDates){
+				    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
+				        uniqueHolidayDates.push(avaliableHolidayDates[i]);
+				    }
+				}
 			}
 
 
 
-	// show departure dates for departure and destination 
+		// Filter calender dates to show  dates for the users selected departure and destination 
 
 			if  ( $('#departing #autocomplete-dropdown-all').val() == localData[i].departureAirportName + " " + localData[i].departureAirportCode &&  $('#travel #autocomplete-dropdown-all').val() == localData[i].destination )   { 
 
-				console.log(localData[i]);
-
+				// store avaliable dates for the selected destination
 				avaliableHolidayDates.push(localData[i].departureDate.substring(0,10) );
 
-
+				// Store unique avaliable dates in array
 				for(var i in avaliableHolidayDates){
 				    if(uniqueHolidayDates.indexOf(avaliableHolidayDates[i]) === -1){
 				        uniqueHolidayDates.push(avaliableHolidayDates[i]);
@@ -700,13 +658,17 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 $('#calendar-default').on('click', function () { 
 	
+	// add class to show calender on click of calender input field 	
 	$('#calendar').addClass('show-calender');
 
-
+	// Calender parameters defined here
 	$('#calendar').datepicker({
 		
+		// show all months of the year
 	    showOtherMonths: true,
+	   	// set format for dates in the week 
 	    dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+	    // set date format for selected date shown in input field 
 	    dateFormat : 'dd/mm/yyyy',
    
 
@@ -735,7 +697,6 @@ $('#calendar-default').on('click', function () {
 	});
 
 
-
 	// Check if close button exist if not add it to dynamic calender 
 	if ($('#close-calender').length == 0) {
     	$('#calendar').append('<div id="close-calender"> Close </div>');
@@ -756,8 +717,7 @@ $('body').on('click', '#close-calender', function() {
 
 
 
-
-// Code to show hide input clearing 
+// Code to show hide input clearing icon depending on if input has value or not 
 
 $('#departing input#autocomplete-dropdown-all').each(function() {
    var elem = $(this);
@@ -901,7 +861,6 @@ $('.compare-button').on('click', function () {
 
 
 
-console.log(localData);
 
 
 
