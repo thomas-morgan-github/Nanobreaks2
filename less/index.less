@@ -36,12 +36,6 @@
 
 
 
-
-
-
-
-
-
 // Navigation Styling 
 
 .navbar { background:  @dark-blue; z-index: 60001; box-shadow: 2px 3px rgba(0,0,0,.1);
@@ -585,7 +579,6 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 .search-bg-page { padding-bottom:30px; background-image: url(../img/new-search-bg.jpg);  width: 100%; height: 100%; position: absolute; top: 0px; left: 0px; background-size: cover; background-position: 50% 50%; background-repeat: none;  
 	
-	#children-icon-search { margin-left: 0px; left: 0px; }
 
 	.centered-content { text-align: left; padding: 0px; width: 80%; }
 
@@ -597,10 +590,6 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 	.swiper-container-horizontal>.swiper-pagination-bullets { bottom: 0px; margin-top: 20px;}
 
-
-	#adults-dropdown, #children-dropdown {  height: 48px; width: 100%; background: rgba(255,255,255,0.2); display: block; color: white;  border-radius: 2px;
-		span { position: relative; top: 14px; left: 42px;  }
-	}
 
 
 	// Start of search form styling ------------------------------------------------------------------------------------------------------
@@ -614,11 +603,8 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 		::-moz-placeholder {  /* Firefox 19+ */  .mixroboto(400);  text-indent: 40px; color: white; }
 		:-ms-input-placeholder {    .mixroboto(400);  text-indent: 40px; color: white; }
 		
-		.adults-container, .children-container { width: 48%; display: inline-block; float:left;  position: relative;  margin-top: 0px;		}
 		
-		.adults-container { margin-right: 2%; margin-top: 14px; }
-		.children-container { margin-left: 2%; margin-top: 14px; }
-
+	
 		
 
 		label { color: white; .mixroboto(400); font-size: 16px; top: -5px; position: relative; display:block;}
@@ -629,7 +615,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 		
 		.autosuggest-labels { color: white; .mixroboto(400); font-size: 16px; display: block; position: relative;   margin-bottom: 5px; }
 
-		.list-block { margin-bottom: 14px; margin-top: 0px; height: 48px;
+		.list-block { margin-bottom: 25px; margin-top: 0px; height: 48px;
 			input { display: block;   width: 100%;   height: 48px;    border-radius: 2px;    border: 0; }
 			.item-content { padding-left: 0px; display: block; width: 100%;  border-radius: 2px;  border: 0px; text-indent:15px;	}
 			.item-input { min-height: 48px; margin-top: 0px; margin-bottom: 0px; }
@@ -642,8 +628,6 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 
 	
-	
-
 	
 	 // Icons for input fields  ------------------------------------------------------------------------------------------------------
 
@@ -658,45 +642,12 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 			#calender-icon-search { fill: white; width: 25px; height: 23px; position: absolute; top: -37px; left: 7px; }
 		}
 		
-		.adults-icon { position: relative;			
-			#adults-icon-search { fill: white; width: 27px; height: 17px; position: absolute; top: -32px; left: 7px; }
-		}
-
-		.childrens-icon { position: relative;
-			#children-icon-search { fill: white;   width: 27px; height:24px; top: -37px; position: absolute; left: 9px;}
-		}
-
-
-		.down-arrow-icon {  position: absolute; right: 10px; top: 50%; 
-			#white-dropdown-search { width: 17px; height: 10px; fill: white;  }
-		} 
-
-
-
 
 		.leaving-container input[type="text"] { text-indent: 49px; }
 
-
 	}
 
 
-
-
-
-	// Input drop down styling ----------------------------------------------------------------------------------------------------------------
-
-	.adults-container.active ,   .children-container.active  { display: block;
-		ul { z-index: 9; display: block;  list-style: none;   margin: 0;   padding: 0;  margin-top: -1px; background-color: white; width: 100%; position: absolute; max-height: 150px;     overflow: scroll; }
-	}
-
-	.adults-container,  .children-container { 
-	 	ul { display: none; 
-			 li {  padding: 8px; 
-				span { display: inline-block; }
-				span + span { margin-left: 10px;  }
-			 }
-	 	} 
-	}
 
 
 	/* Search Nano-breaks button */
@@ -860,24 +811,6 @@ margin-top: 10px;
 
 
 
-
-
-/* portrait tablets, portrait iPad, e-readers (Nook/Kindle) */
-
-@media (min-width:600px)  {  
-	
-
-	.search-bg-page { 
-	
-		.adults-container { width: 100%;  display: block;}
-
-		i.icon.icon-next {  background-position: 0 -882px; }
-		i.icon.icon-prev {  background-position: 0 -917px; }
-
-	}
-} 
-
-
 @media (max-width: 600px) { 
 
 	.search-bg-page { 	
@@ -892,10 +825,12 @@ margin-top: 10px;
 
 	.search-bg-page { 
 		#my-form { margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;}
-		#compare-nanobreaks-button { margin-top: 30px; }
+		#compare-nanobreaks-button { margin-top: 50px; }
 		.popup-wrappr .popup-swiper { background-image: url(../img/newyork-slider-bg-mob.jpg) }
 		.swiper-container-horizontal>.swiper-pagination-bullets { margin-top: 12px; }
 	}
+
+	#calendar.show-calender { margin-bottom: 100px;}
 
 }
 
@@ -911,9 +846,11 @@ margin-top: 10px;
 
 
 
+@media (max-width: 350px) { 
 
+	#calendar.show-calender { left: -20px; margin-bottom: 100px;  }
 
-
+}
 
 
 
@@ -928,15 +865,6 @@ margin-top: 10px;
 
 .destination-icon { fill: #f5344b; position: relative; top: 2px;
 	#destination-icon-red { width: 14px; height: 21px; margin-top: -2px;   }
-}
-
-.adults-icon { position: relative;			
-	#adults-icon-search { fill: white; width: 27px; height: 17px; position: absolute;  left: -10px; top: 2px; }
-}
-
-
-#children-icon-search { position: relative; width: 27px; height:24px;  top: 4px; margin-left: 23px;
-	.children-icon { fill: white; position: absolute; left: -9px;  }
 }
 
 
@@ -981,7 +909,7 @@ margin-top: 10px;
 }
 
 // Deals found count 
-#deals-found-container {  .mixroboto(400); font-size: 18px; margin-bottom: 10px;  text-transform: uppercase; color: white; margin-left: 1%; margin-right: 1%; text-align: center;
+#deals-found-container {  .mixroboto(400); font-size: 18px; margin-bottom: 10px;   color: white; margin-left: 1%; margin-right: 1%; text-align: center;
 	#deal-count { color: @yellow; }
 	#deals-found { color: white;}
 	#search-destination { color: @yellow; 
@@ -1021,8 +949,6 @@ margin-top: 10px;
 					.rating-5 { background-position: 0; }
 				}
 
-				.adults { display: inline-block; position: relative; font-weight: 300; margin-left: 20px; 		}
-				.children { display: inline-block; position: relative; font-weight: 300; margin-left: 9px; }
 			}
 
 		}
@@ -1076,7 +1002,10 @@ margin-top: 10px;
 /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
 @media (min-width:600px)  {  
 	
-	#deals-container .deal-wrappr { width: 49.5%; display: inline-block;  }
+	#deals-container .deal-wrappr { width: 49.5%; display: inline-block;  
+			
+	}
+
 
 }
 
@@ -1098,15 +1027,18 @@ margin-top: 10px;
 
 
 
-
-
-
-
 // best deals ---------------------------------------------------------------------------------------------
 
 
 // Bets deals sort pop up 
 .modal-buttons.modal-buttons-vertical .modal-button { text-align: center;}
+
+
+.modal-buttons { 
+	.modal-button:nth-child(4){ color: red; }
+}
+
+
 
 
 // Filter option 
@@ -1143,14 +1075,14 @@ margin-top: 10px;
 		.deal-wrappr.rating {  
 			.result-price-container { background-color:  @orange; padding-left: 45px; 	}
 		}
-		.deal-wrappr.best {  
+		.deal-wrappr.best {  margin-top: 10px; 
 			.result-price-container { background-color:  @orange; padding-left: 45px; }
 		}
 		.deal-wrappr.high-to-low {  
 			.result-price-container { background-color:  @orange; padding-left: 45px; }
 		}
-		.deal-wrappr:nth-child(even) { margin-left: 0%;  }
-		.deal-wrappr:nth-child(odd) { margin-left: 1%;  }
+		.deal-wrappr:nth-child(even) { margin-left: 1%;  }
+		.deal-wrappr:nth-child(odd) { margin-left: 0%;  }
 		.deal-wrappr.highest-rating:nth-child(odd) { margin-left: 0%; margin-right: 1%; }
 		.deal-wrappr:last-of-type { margin-bottom: 50px;}
 	}
@@ -1159,6 +1091,30 @@ margin-top: 10px;
 
 
 	.top-margin { margin-top: 10px; }
+
+
+
+// Social sharing popup styling --------------------
+
+	.social-popup { position: absolute;  bottom: 3px; right: -8px; z-index: 7;
+		
+		.social-button {  width: 60px; height: 60px;    display: block;     color: white;   margin-top: 15px;
+			
+			.share-icon-container { margin-left: 14px; position: relative; top: 10px; 
+				.share-icon { width: 20px; height: 35px;  }
+				.share-white-icon { fill: @light-yellow; }
+			}
+
+			.share-title { text-transform: uppercase; .mixroboto(700); margin-left: 2px; color: @light-yellow; }
+
+		}
+		
+	}
+   
+
+
+
+
 
 
 }
@@ -1177,8 +1133,12 @@ margin-top: 10px;
 	.page-content.best-deals-page {
 		#deals-container {
 			.deal-wrappr:nth-child(odd) { margin-left: 0%;  }
+			.deal-wrappr:nth-child(even) { margin-left: 0; }
 		}
+		#deals-container .deal-wrappr .deal-info-container .inner-deal-summary-container .accomodation { margin-bottom: 10px; }
 	}
+
+	
 
 }
 
@@ -1191,7 +1151,13 @@ margin-top: 10px;
 
 
 
+@media (max-width: 400px) { 
 
+	.page-content.best-deals-page  { 
+		.social-popup { bottom: 3px;  }
+	
+	}
+}
 
 
 
@@ -1210,7 +1176,8 @@ margin-top: 10px;
 
 
 .page-content.settings-page  { background-image: url('../img/berlin-BG.jpg'); background-size: cover; 
-	#settings-container { 
+	
+	#settings-container { margin-bottom: 10px; 
 		
 		
 
@@ -1278,7 +1245,7 @@ margin-top: 10px;
 
 
 
-.page-content.about { background-color: @dark-purple;  background-image: url('../img/london-day-bg.jpg'); background-size: cover; 
+.page-content.about {  background-image: url('../img/london-day-bg.jpg'); background-size: cover; 
 	
 	.st0{ fill:#755641;}
     .st1{ fill:#AA8147;}
@@ -1300,15 +1267,15 @@ margin-top: 10px;
     .st17{ fill:#FFFFFF;}
     .st18{ fill:#CF142B;}
 
-	#designed-built { display: block;   font: 21px "budget"; color: white;  background: rgba(255,255,255,0.2); padding: 50px; border-radius: 3px;
+	#designed-built { display: block;   font: 21px "budget"; color: white;  
 		#build-location { display: block; font: "budget" 18px; }
 		#london-svg { margin-top: 20px;  }
 	}
-	#copyright { position: absolute; bottom: 10px; color: @purple-grey; font-size: 18px; .mixroboto(500); text-align: center; width: 100%; }
+	#copyright { position: absolute; bottom: 10px; color: white; font-size: 18px; .mixroboto(500); text-align: center; width: 100%; }
 
 	#about-app-london { width: 300px; height: 300px; } 
 
-	
+	.inner-container {   background: rgba(255,255,255,0.2)  }
 
 }
 
