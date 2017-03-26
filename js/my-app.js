@@ -133,6 +133,8 @@ function activeNavRemove() {
 
 // global functions ------------------------------------------------------------------------------------
 
+
+// Function to loop through all deals on page and add class to change star image sprite depending on the deals rating 
 function starRating() { 
 
  	// add star rating class depending on deals rating 
@@ -186,13 +188,13 @@ function userLoginCallback(data) {
 $$(document).on('pageInit', '.page[data-page="login"]', function(e) {
 
 
-
-	// Account validation ---------------------------------------------------------
+	// check users login email address input value against emails stored in dealchecker database, Account validation ---------------------------------------------------------
 
 	$('input#email-login').on('blur',  function() { 
 
 		var emailInput = $('input#email-login').val();
 
+		// Create script that uses jsonp request to check if email address user entered exists it database  
 		var my_script = document.createElement('script');
 		my_script.setAttribute('src','https://www.dealchecker.co.uk/user/user-exists/' + emailInput + '-jsonp.html?callback=userLoginCallback');
 		document.head.appendChild(my_script);
@@ -207,16 +209,12 @@ $$(document).on('pageInit', '.page[data-page="login"]', function(e) {
 });
 
 
-
+// Check if input has class then add href to login button
 $('#login-button-container').on('click', function() { 
-	
 	if ( $('#email-login').hasClass('valid') ) { 
 		$("a#login-button").attr("href", "#home");
 	}
-
 });
-
-
 
 
 
@@ -231,8 +229,6 @@ $('#login-button-container').on('click', function() {
 $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
 	activeNavRemove();
-
-
 	$('.content-block p').eq(0).addClass('active-nav');
 			
     // Sort deal data by Price - order by cheapest price
@@ -314,8 +310,6 @@ searchPageContainer.find('.save-storage-data').on('click', function (e) {
 	date = $(searchPageContainer).find("#calendar-default").val();
 
 });
-
-
 
 
 
@@ -470,9 +464,6 @@ $$(document).on('pageInit', '.page[data-page="search"]', function(e) {
 
 
 			}	
-
-
-
 
 
 		// Show only avaliable destinations for selected departure airport ----------------------------------------------------------
@@ -697,7 +688,7 @@ $('#calendar-default').on('click', function () {
 	});
 
 
-	// Check if close button exist if not add it to dynamic calender 
+	// Check if close button exist if not add close button to calender 
 	if ($('#close-calender').length == 0) {
     	$('#calendar').append('<div id="close-calender"> Close </div>');
 	}
@@ -708,7 +699,7 @@ $('#calendar-default').on('click', function () {
 
 
 
-// Add click event to dunamically appended calender close button
+// Add click event to dynamically appended calender close button
 $('body').on('click', '#close-calender', function() { 
 	$('#calendar').removeClass('show-calender');
 });
@@ -717,7 +708,7 @@ $('body').on('click', '#close-calender', function() {
 
 
 
-// Code to show hide input clearing icon depending on if input has value or not 
+// Code to show hide input clearing icon on inputs, if input has value or not 
 
 $('#departing input#autocomplete-dropdown-all').each(function() {
    var elem = $(this);
@@ -736,12 +727,12 @@ $('#departing input#autocomplete-dropdown-all').each(function() {
       
        $('#departing .remove-text').show();
 
-     }
+      }
 
 
-    if ( $('#calendar-default').val().length !== 0 ) { 
-		$('#calendar-default').val("");
-	}
+	   if ( $('#calendar-default').val().length !== 0 ) { 
+		  $('#calendar-default').val("");
+	   }
 
 
    });
@@ -776,9 +767,8 @@ $('#travel input#autocomplete-dropdown-all').each(function() {
    });
 
 
-
-
  });
+
 
 
 
@@ -795,8 +785,7 @@ $('input#calendar-default').each(function() {
        // Updated stored value
        elem.data('oldVal', elem.val());
 
-       // Do action
-      
+       // Do action 
        $('.leaving-container .remove-text').show();
 
      }
@@ -807,7 +796,7 @@ $('input#calendar-default').each(function() {
 
 
 
-// onclick of input delete hide button 
+// onclick of input close button, then hide close button  
 $('.remove-text').bind('click', function() {
     $(this).hide();
 });
@@ -815,30 +804,19 @@ $('.remove-text').bind('click', function() {
 
 
 
-
+// Hide calender from view if either departing or departure input is clicked by user
 $('#autocomplete-dropdown-all').on('click', function() { 
-
 	if ( $('#calendar').hasClass('show-calender') ) { 
 		$('#calendar').removeClass('show-calender');
 	}
-
-});
-
-
-
-$('#travel #autocomplete-dropdown-all').on('click', function() { 
-
-	if ( $('#calendar').hasClass('show-calender') ) { 
-		$('#calendar').removeClass('show-calender');
-	}
-
 });
 
 
 
 
 
-// Search nanobreak button - if fields are not empty add link to button 
+
+//  if one input field is not empty add href to button Search button, allowing user to make a search with there chosen requirments 
 
 $('.compare-button').on('click', function () { 
 	
@@ -846,12 +824,12 @@ $('.compare-button').on('click', function () {
 	var destinationVal = $('#travel input#autocomplete-dropdown-all').val();
 	var dateVal = $('#calendar-default').val();
 
-	// If no values are inputted 
+	// If no values are inputted remove href from search button
 	if ( departingVal  == "" &&  destinationVal == "" && dateVal == "" ) { 
 		$(".compare-button").removeAttr('href');
 	} 
 
-	// If one of the search requirments are meet add href to deal landing page
+	// If one of the search requirments are meet add href to search button, allowing user to make a search
 	if ( departingVal !== "" || destinationVal !== "" || dateVal !== "" ) { 
 		$(".compare-button").attr("href", "#deal-landing");
 	}
@@ -862,12 +840,7 @@ $('.compare-button').on('click', function () {
 
 
 
-
-
-
-
-
-
+// on click of input check all input fields, if a input is empty hide clear text icon button
 $('input').on('click', function() { 
 	if ( $(this).val("") ) { 
 		$(this).next().hide();
@@ -888,11 +861,11 @@ $('input').on('click', function() {
 
 
 
-// Script that runs on every other time the searchpage is page is init\loaded 
+// Script that runs on every other time the searchpage is page is init\loaded - this is needed as framework7 caches pages 
 myApp.onPageReinit('search', function (page) {
    
 	activeNavRemove();
-
+	// add class to nav to highlight that the user is on search page 
 	$('.content-block p').eq(1).addClass('active-nav');
 
 
@@ -901,25 +874,20 @@ myApp.onPageReinit('search', function (page) {
 	$('#travel #autocomplete-dropdown-all').val("");
 	$('#calendar-default').val("");
 
-	$('.remove-text ').hide();
+	// remove cross icon from inputs 
+	$('.remove-text').hide();
 
 
-
-
+	// assign users search page values to variables  
 	var searchPageContainer = $('.search-bg-page');
 
+	// on search button click get store all values in input fields 
 	searchPageContainer.find('.save-storage-data').on('click', function (e) {
-		
 		e.preventDefault();
-
 		departure = $(searchPageContainer).find("#departing #autocomplete-dropdown-all").val();
 		destination = $(searchPageContainer).find("#travel #autocomplete-dropdown-all").val();
-		date = $(searchPageContainer).find("#calendar-default").val();
-
-	   
+		date = $(searchPageContainer).find("#calendar-default").val(); 
 	});
-
-
 
 });
 
@@ -942,12 +910,12 @@ myApp.onPageReinit('search', function (page) {
 
 $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
-
 	activeNavRemove();
 	
 	var supplierLogo; 
 
 
+	// appends all html to deal, with specific deal details depending on users search choices 
 	function appendInputedDataToDeal() { 
 		
 		$('.deal-landing-page #deals-container').append(
@@ -1184,7 +1152,7 @@ myApp.onPageReinit('deal-landing', function (page) {
 	activeNavRemove();
 
 
-	// Hide previous searched deals 
+	// Hide previous searched deals on page load , so only new search deals show 
 	$(".deal-landing-page #deals-container .deal-wrappr").each(function () {
 	    $(this).remove();
 	});
@@ -1405,7 +1373,10 @@ myApp.onPageReinit('deal-landing', function (page) {
 	 	$("#search-destination").html("in" + " " + destination);
 	}
 
+	// find amount of deal result found 
 	var DealCounter = $('.deal-landing-page #deals-container .deal-wrappr').length;
+	
+	// add deal amount to html, showing user amount of deals found
 	$("#deal-count").html(DealCounter);
 
 
@@ -1428,15 +1399,12 @@ myApp.onPageReinit('deal-landing', function (page) {
 
 
 
-
 // Functions for best deals page -------------------------------------------------------------------------------------------------------
 
 
 // function for sorting deals into lowest price and appending to html dynamically
 
 function priceLowToHigh () { 
-
-
 
 	// Sort by Price - return best priced deals 
     localData.sort(function(a, b) {
@@ -1447,7 +1415,7 @@ function priceLowToHigh () {
 	});
 
 
-
+    // Remove all deals from previous search
 	$(".best-deals-page #deals-container .deal-wrappr").each(function () {
 	    $(this).remove();
 	});
@@ -1456,11 +1424,7 @@ function priceLowToHigh () {
 	// loop through each object in returned data array 
     for( var i=0;  i < localData.length;  i++) {
   	
-
-
        	$('.best-deals-page #deals-container').append(
-
-
 
 		    '<div class="deal-wrappr">' + 
 		      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '),  url(img/no-image450x250.jpg); ">'  +  
@@ -1619,7 +1583,7 @@ function priceLowToHigh () {
   	// add class to remove margin from top deal 
     $('.best-deals-page #deals-container .deal-wrappr').eq(0).addClass('best');
    
-    // add low price svg icon
+    // add low price svg icon to lowest priced deal
     $('.deal-wrappr.best .result-price-container').prepend( '<svg version="1.1" id="banner-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"width="38.6px" height="55.4px" viewBox="0 0 38.6 55.4" style="enable-background:new 0 0 38.6 55.4;" xml:space="preserve"><path class="banner-icon" d="M19.5,12c-0.1,0-0.3,0-0.4,0c-2.1,0.2-4.1,2-3.9,4.7c0,0.2,0,0.4,0.1,0.7c-0.2,0-0.4,0-0.5,0c-0.6,0-1,0.6-1,1.1s0.6,1,1.1,1h0.6c0,0.4,0.1,0.8,0.1,1.1c0,0.9-0.2,1.6-0.9,2.6c-0.2,0.3-0.2,0.8-0.1,1.1s0.6,0.6,1,0.6h7.2c0.6,0,1.1-0.5,1.1-1.1s-0.5-1.1-1.1-1.1h-5.5c0.3-0.7,0.4-1.4,0.4-2.1c0-0.4,0-0.7-0.1-1.1h2.6c0.6,0,1.1-0.5,1.1-1.1s-0.5-1.1-1.1-1.1h-2.8c0-0.3,0-0.5-0.1-0.8l0,0c-0.1-1.6,0.9-2.3,2-2.4c0.6-0.1,1.1,0.1,1.5,0.4s0.7,0.7,0.8,1.5c0.1,0.6,0.6,1,1.2,1c0.6-0.1,1-0.6,1-1.2c-0.1-1.3-0.8-2.4-1.7-3C21.4,12.3,20.4,12,19.5,12z"/><path class="banner-icon" d="M15.9,39.6c0.6,0,1.2-0.1,1.8-0.3l-6.1,15.2c-0.2,0.5-0.8,0.5-1.1,0.1l-2.9-5.1c-0.1-0.2-0.3-0.2-0.5-0.2L1.7,51c-0.5,0.2-0.9-0.3-0.7-0.8l5.8-14.4c0.8,0.4,1.6,0.6,2.5,0.6c0.4,0,0.7-0.1,1.1-0.1h0.1l0.1,0.1C11.6,38.4,13.7,39.6,15.9,39.6z M32.2,35.9c-0.8,0.4-1.6,0.6-2.6,0.6c-0.4,0-0.7-0.1-1.1-0.1h-0.1l-0.1,0.1c-1.1,1.9-3.1,3.1-5.3,3.1c-0.6,0-1.2-0.1-1.8-0.3l6.1,15.3c0.2,0.5,0.8,0.5,1.1,0.1l2.9-5.1c0.1-0.2,0.3-0.2,0.5-0.2l5.4,1.7c0.5,0.2,0.9-0.3,0.7-0.8L32.2,35.9z"/><path class="banner-icon" d="M37.1,17.1c1.1,1,1.1,2.7,0,3.6l-0.7,0.6c-0.8,0.7-1.1,1.8-0.6,2.8l0.4,0.9c0.6,1.4-0.2,2.9-1.6,3.3l-0.9,0.2c-1,0.3-1.7,1.2-1.8,2.2l-0.1,0.9c-0.1,1.5-1.4,2.5-2.9,2.3L28,33.7c-1-0.2-2.1,0.3-2.6,1.2l-0.5,0.8c-0.7,1.3-2.4,1.6-3.6,0.8l-0.8-0.6c-0.8-0.6-2-0.6-2.8,0l-0.8,0.5c-1.2,0.8-2.9,0.5-3.5-0.8l-0.5-0.8c-0.5-0.9-1.5-1.4-2.5-1.2l-0.9,0.2C8,34,6.7,33,6.7,31.5l-0.1-0.9c-0.1-1.1-0.8-1.9-1.8-2.2l-0.9-0.2c-1.4-0.4-2.1-1.9-1.6-3.3L2.7,24c0.4-0.9,0.2-2.1-0.6-2.8l-0.7-0.6c-1.1-1-1.1-2.7,0-3.6l0.7-0.6c0.8-0.7,1.1-1.8,0.6-2.8l-0.4-0.9c-0.6-1.4,0.2-2.9,1.6-3.3l0.9-0.2C5.8,8.9,6.5,8,6.6,7l0.1-0.9c0.1-1.5,1.4-2.5,2.9-2.3L10.5,4c1,0.2,2.1-0.3,2.6-1.2L13.6,2c0.7-1.3,2.4-1.6,3.6-0.8L18,1.8c0.8,0.6,2,0.6,2.8,0l0.8-0.5c1.2-0.8,2.9-0.5,3.5,0.8l0.5,0.8c0.5,0.9,1.5,1.4,2.5,1.2L29,3.9c1.5-0.2,2.8,0.8,2.8,2.3l0.1,0.9C32,8.2,32.7,9,33.7,9.3l0.9,0.2c1.4,0.4,2.1,1.9,1.6,3.3l-0.4,0.9c-0.4,0.9-0.2,2.1,0.6,2.8L37.1,17.1z M31.1,18.9C31.1,12.3,25.8,7,19.2,7S7.3,12.3,7.3,18.9s5.3,11.9,11.9,11.9S31.1,25.5,31.1,18.9z"/></svg>' );
 
 
@@ -1630,22 +1594,19 @@ function priceLowToHigh () {
 
 
 
-
-
-// function for filtering deals from highest to lowest 
+// function for filtering deals from highest price to lowest 
 
 function priceHighToLow() { 
-
 
 	// Sort by Price - return highest priced deals 
     localData.sort(function(a, b) {
 	    var a1= a.price, b1= b.price;
 	    if(a1== b1) return 0;
 	    return a1< b1? 1: -1;
-	   
 	});
 
 
+    // Remove all deals from previous search
 	$(".best-deals-page #deals-container .deal-wrappr").each(function () {
 	    $(this).remove();
 	});
@@ -1654,10 +1615,7 @@ function priceHighToLow() {
 	// loop through each object in returned data array 
     for( var i=0;  i < localData.length;  i++) {
 
-
        	$('.best-deals-page #deals-container').append(
-
-
 
 		    '<div class="deal-wrappr">' + 
 		      '<div class="deal-info-container" style="background-image: url(' + localData[i].contentImage + '),  url(img/no-image450x250.jpg); ">'  +  
@@ -1783,8 +1741,6 @@ function priceHighToLow() {
 		    $(this).parent().hide(); 
 		});
 
-
-
     }	
 
     // add star rating class depending on deals rating 
@@ -1810,10 +1766,9 @@ function priceHighToLow() {
 
 
 
-// sort deals by rating functionality -------------------------------------------------------------------------------
+// sort deals by highest rating functionality -------------------------------------------------------------------------------
 
 function ratingSort () { 
-
 
 	// Store deal data in rating variable 
    	var ratingData = localData;
@@ -1827,8 +1782,6 @@ function ratingSort () {
 	});
 
 
-
-
 	// Hide previous searched deals 
 	$(".best-deals-page #deals-container .deal-wrappr").each(function () {
 	    $(this).remove();
@@ -1839,10 +1792,7 @@ function ratingSort () {
     for( var i=0;  i <  ratingData.length;  i++) {
   	
 
-
        	$('.best-deals-page #deals-container').append(
-
-
 
 		    '<div class="deal-wrappr">' + 
 		      '<div class="deal-info-container" style="background-image: url(' +  ratingData[i].contentImage + '),  url(img/no-image450x250.jpg); ">'  +  
@@ -1999,17 +1949,13 @@ function ratingSort () {
 
 
 
-
-
-
-
 // Best deals page --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
 $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
-	
+	// on click of skip button on best deals popup guide hide it from showing again on load of best deal page 
 	$('.skip-nano-guide').on('click', function(){ 
 		$(this).parent().parent().hide();
 	});
@@ -2061,11 +2007,8 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 
 	       {
 	        text: 'CANCEL',
-	     
 	        close: true,
-
-	      },
-	      
+	      }, 
 	    ]
 	  })
 	});    
@@ -2092,15 +2035,6 @@ myApp.onPageReinit('best-deals', function (page) {
 
 
 });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -2140,22 +2074,16 @@ myApp.onPageReinit('about', function (page) {
 
 
 
-
-
-
-
 // Start of settings page -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 $$(document).on('pageInit', '.page[data-page="settings"]', function(e) {
 
-	activeNavRemove();
-
-	
+	activeNavRemove();	
 	$('.content-block p').eq(3).addClass('active-nav');
 
 
 
-	// script to run video in settings on click 
+	// script to run video in settings on click  of about dealchecker link
 	var myPhotoBrowserPopupDark = myApp.photoBrowser({
 	    photos : [
 	        {
@@ -2170,7 +2098,6 @@ $$(document).on('pageInit', '.page[data-page="settings"]', function(e) {
 	$$('.pb-standalone-video').on('click', function () {
 	    myPhotoBrowserPopupDark.open();
 	});
-
 
 
 
