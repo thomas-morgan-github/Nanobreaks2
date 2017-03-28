@@ -1,5 +1,6 @@
 @import (reference) "mixins.less";
 
+// Custom Fonts
 @font-face {
   font-family: "HandWritingFont";
   src: url('../fonts/Drawing with markers.ttf') format('truetype');
@@ -18,26 +19,9 @@
 
 
 
-// Loading Splash screen on app start  
-#splash { z-index: 999; background-color: @light-blue; width: 100%; height: 100%;  display: block; text-align: center; 
-	#splash-logo { padding-top: 100px;  
-		#splash-nanobreak-title {   font: 45px "enso"; color: white;   }
-	}
-	#dealchecker-title { position: absolute; bottom: 20px; text-align: center; left: 50%; margin-left: -75px;  }
-	.dealchecker-title-svg-white { fill: white; }
-	.icon-bg {fill:url(#Shape_1_copy_2_);}
-    .plane {fill:#FFCD20; stroke:#FFFFFF; stroke-width:2;}
-}
-
-
-
-
-
-
 
 
 // Navigation Styling 
-
 .navbar { background:  @dark-blue; z-index: 60001; box-shadow: 2px 3px rgba(0,0,0,.1);
 	&:after { display: none; }
 	.center { margin: 0; line-height: 0; left: 50%!important; 
@@ -55,11 +39,8 @@
 
 
 
-/* Panel styling */
-
+/* Navigation Panel styling */
 .panel { background: @orange; width: 150px; 
-
-
 	.content-block { margin-top: 0px; margin-left: 0px; margin-bottom: 0px;  margin-right: 0px;  padding: 0px; 
 		a { display: block; width: 100%; height: 100%; }
 		p { margin: 0px; width: 100%;  display: block; text-align: center;  border-bottom: solid 2px rgb(240, 102, 0); padding-bottom: 20px; padding-top: 20px;}
@@ -79,21 +60,13 @@
 
 	.nav-close { position: absolute; bottom: 20px; right: 20px; }
 	#nav-close-icon { fill: white; width: 40px; height: 40px; }
-
-
 }
 
-
-
-
-
-
-
+// push left Nav below top nav bar 
 .panel-overlay { top: 56px; }
 
 
-// Styling for menu icon & menu icon animation 
-
+// Styling for menu hamburger` icon 
 #nav-icon3 {  width: 23px;  height: 14px; position: relative; margin: 50px auto; cursor: pointer; z-index: 99999; 
 	span { margin-left: 0px;  display: block; position: absolute; height: 2px; width: 23px; background: white; border-radius: 9px; opacity: 1; left: 0; z-index: 99999; }
 }
@@ -101,8 +74,6 @@
 #nav-icon3 span:nth-child(1) { top: 0px; }
 #nav-icon3 span:nth-child(2), #nav-icon3 span:nth-child(3) { top: 6px; height: 2px; }
 #nav-icon3 span:nth-child(4) { top: 12px; height: 2px; }
-
-
 
 
 
@@ -123,8 +94,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 
 
-
-// styling to center content
+// styling to center content - generic used throughout app pages to center content horizontally and vertically 
 .outer-container { position : absolute;  display: table;  width: 100%; /* This could be ANY width */  height: 100%; /* This could be ANY height */ }
 .inner-container {   display: table-cell;    vertical-align: middle;   text-align: center; }
 .centered-content {  display: inline-block;  padding : 20px; }
@@ -144,7 +114,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 
 
-/* swiper styles */;
+/* swiper slider styles */;
 .swiper-container { height: 100%; }
 .swiper-slide { background: transparent;
 	span { text-align:center; display:block; }
@@ -159,21 +129,19 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 
 
-// Index page styling 
+// Index page styling --------------------------------------------------------------------------------------------------------------------------------------
 .navbar-fixed .page-content.index { padding-top: 0px;  
-
 
 	.best-deals-icon-wrappr { 
 		.best-deals-icon { fill: white;  }
 	}	
 
+	// Icon for what is a nanobreak slide 
 	#luggage-icon { fill: white; width: 300px; height: 110px; margin-bottom: 20px; }
-
 
 	#nanobreak-logo-nav-title { color: white; font: 45px "enso"; }
 
 	.st0 {   fill: url(#Shape_1_copy_2_); }
-
 	.st3 { fill: white; }
 
 	// search walkthrough 
@@ -189,40 +157,10 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	.travel-trip-walkthrough { background-image: url(../img/travel-tip-walkthrough.jpg); background-size: cover;  }
 
 
-
-
-	// Start of app description text 
+	// Styling for app walkthrough description text 
 	#welcome-text { text-align: center; display: block;   z-index: 1; position: relative; color: white; margin-top: 40px; 
 		#welcome { display: block; .mixroboto(400); font-size: 20px; margin: 0; padding: 0; line-height: normal; }
 		#comparison-app-text { display: block; .mixroboto(700); font-size: 20px; margin-top: 10px;  line-height: normal; padding: 0; }
-	}
-
-	#app-description { display: block; position: relative; z-index: 1; color: white;  text-align: center; font-size: 18px; .mixroboto(300); max-width: 300px; margin: 0 auto;  margin-top: 77px; 
-		.d-one , .d-two , .d-three , .d-four, .d-five , .d-six  {   padding: 0; position: relative; display: block;	}
-		.d-one, .d-two { margin-bottom: 7px;  }
-		.d-four, .d-six { margin-top: 40px; }
-		.d-one, .d-four, .d-six { position: relative;
-			&::before { content: ''; position: absolute; background-size: 100% auto; background-position: 0 -1022px; background-image: url(../img/SpriteSheet.svg); width: 10px; height: 10px; background-repeat: no-repeat; margin-left: -18px; top: 8px; }
-		}
-	}
-
-
-	/* Search Nano-breaks button */
-	.search-button-container  { display: block; z-index: 1; position: relative; margin-bottom: 100px; 
-		.search { z-index: 60003; position: relative;  	top: 50px; border: none;  display: block;  padding: 19px 39px 23px 39px; border-radius: 4px;	-webkit-border-radius: 4px;	-moz-border-radius: 4px;	width: 196px;	height: 20px;	margin: 0 auto;	background: -webkit-linear-gradient(#ffc703, #ffcd1e); /* For Safari 5.1 to 6.0 */    background: -o-linear-gradient(#ffc703, #ffcd1e); /* For Opera 11.1 to 12.0 */  background: -moz-linear-gradient(#ffc703, #ffcd1e); /* For Firefox 3.6 to 15 */    background: linear-gradient(#ffc703, #ffcd1e); /* Standard syntax */		color: black;  	.mixroboto(700);	font-size: 18px;	-webkit-box-shadow: 0 4px 4px -2px #000000;   -moz-box-shadow: 0 4px 4px -2px #000000;    box-shadow: 0 4px 4px -2px #000000;
-			.search-icon { position: relative; z-index: 1;
-				&:before { width: 20px; height: 20px; background-image: url(../img/SpriteSheet.svg); background-position: 0 -1420px; background-size: 100% auto; background-repeat: no-repeat; background-color: transparent; position: absolute;  content: ''; display: block; margin-top: 1px;  z-index: 60001; }
-			}
-			.text { margin-left: 30px; z-index: 60001; position: relative;} 
-		}
-	}
-
-
-	#what-is-a-nanobreak-container { display: block; position: relative;  z-index: 2; color: white; text-align: right; padding: 10px 20px 30px 0px; width: 100%; text-align: center;
-		a { text-decoration: none; color: white; position: relative;
-			#nanobreak-text { position: relative;  font: 24px "HandWritingFont"; margin-right: 20px;	}
-			.arrow-white { display: block; width: 280px; height: 18px; position:  relative; left: 50%; margin-left: -140px;}
-		}
 	}
 
 
@@ -233,20 +171,13 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 /* Start of Media Queries for devices (mobile first- min-width styles only apply if screen size is equal to or greater) -------------------------------------------------------------------------- */
 
-
-
-/* tablet, landscape iPad, lo-res laptops ands desktops */
 @media (min-width:801px)  {  
 	#logo-and-image-container #bg-image { background-position: 0px -46px; }
 }
 
 
 
-
-
-
-
-/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle) */
 @media (min-width:600px)  {  
 	#app-description .d-one::before, #app-description .d-four::before, #app-description .d-six::before {     background-position: 0 -1018px;  }
 	.search-button-container .search { width: 240px;
@@ -261,13 +192,10 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	}
 }
 
-/* smartphones, Android phones, landscape iPhone */
+/* smartphones, Android phones */
 @media (min-width:480px)  {  
 	#app-description { max-width: none; }
-
-
 }
-
 
 
 
@@ -279,8 +207,6 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	}
 
 	.info-container .info-title { font-size: 32px; }
-	
-
 }
 
 
@@ -293,6 +219,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 .navbar-fixed .page-content.login-page { background-image: url(../img/login-bg.jpg); background-size: cover; padding-top: 0px;
 
+	// set browser support placeholder color to white 
 	::-webkit-input-placeholder { color: white; }
 	:-moz-placeholder { color: white; }
 	::-moz-placeholder { color: white; }
@@ -310,17 +237,16 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 		.logo-text { display: block; font: 45px "enso"; color: white;  }
 	}
 
+	// sub title - search, compare and book weekend holidays
 	#title-description { color: white;  font-size: 21px; .mixroboto(500); text-align: center; margin-top: 50px; }
 
+	// email input login styling 
 	#login-container {  display: block; margin-top: 60px; color: white; text-align: center;
 		#email-fail { display: none; position: relative; top: -20px;  background-color: @error-pink;  padding: 8px; border: 1px solid red; color: black; }
 		#email-fail.invalidEmail { display: inline-block; }
 		#email-container { display: block; position: relative;
-			#email-icon-login { width: 24px; height: 16px;  position: absolute; top: 6px; margin-left: 5px; } 
+			#email-icon-login { width: 24px; height: 16px;  position: absolute; top: 3px; margin-left: 7px; } 
 			.email-icon-white { fill: white; }
-			#email-label {  
-				// &:before { margin-top: 4px; position: absolute; content: ''; width: 24px; height: 16px; background-position: 0 -2813px; background-image: url(../img/SpriteSheet.svg); background-size: 100% auto; }	
-			}
 			#email-login {  min-width: 200px; background: transparent; border: 0px; border-bottom: 1px solid white; padding-left: 52px; padding-bottom:  10px;  font-size: 18px; .mixroboto(400); color: white; border-radius: 0px; }
 		}
 		
@@ -343,19 +269,13 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 
 
-
-
-
-@media (max-width: 480px) {
-	
+@media (max-width: 480px) {	
 	.page-content.login-page {
 		#login-container { margin-top: 100px;}
 		#login-button-container { margin-top: 50px; }
 		#title-description { display: none; }
 	}
-
-	.navbar-fixed .page-content.login-page { background-image: url(../img/login-bg-mob.jpg);	}
-
+	.navbar-fixed .page-content.login-page { background-image: url(../img/login-bg-mob.jpg); }
 }
 
 
@@ -386,6 +306,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 .notifications { 
 	.todays-best-deals-price-container { display: inline-block; font-weight: 700; color: @orange;}
 	.star-rating {  background-repeat: no-repeat; height: 10px; width: 59px; background-size: 118px 165px; background-image: url(../img/star-sprite.svg); content: ''; position: absolute; background-position: 0px; margin-left: 10px;   margin-top: 5px; }					
+	// depending on rating from api add class to show relevant amount of stars on notification
 	.rating-1 { background-position: -46px; }
 	.rating-2 { background-position: -35px; }
 	.rating-3 { background-position: -24px; }
@@ -393,9 +314,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	.rating-5 { background-position: 0; }
 	
 	.view-todays-deal {  display: block; text-align: right;
-		.view-deal-button {    color: @links-blue; position: relative; display: block; margin-right: 3px; font-weight: 700; margin-top: 6px; display: inline-block;
-		    &:after { 	position: absolute;  content: ''; width: 12px; height: 43px; background-size: 100% auto; background-image: url(../img/new-sprite.svg); background-repeat: no-repeat; background-position: -5px -464px; top: 50%; margin-top: -11px;  background-color: transparent; right: -18px;  }
-		}
+		.view-deal-button {    color: @links-blue; position: relative; display: block; margin-right: 3px; font-weight: 700; margin-top: 6px; display: inline-block;	}
 	}
 	
 	.todays-deal-destinations { display: inline-block; font-weight: 700; color: #757575; }
@@ -404,19 +323,11 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 		.blue-arrow { fill: #0f4da8; }
 	}
 
-
-
 }
 
-.list-block .item-subtitle { white-space: normal; text-overflow: normal;  }
+.list-block .item-subtitle { white-space: normal; text-overflow: normal; }
 
-.navbar .center.home {
-    margin-left: -77px;
-}
-
-
-
-
+.navbar .center.home {  margin-left: -77px; }
 
 
 
@@ -433,18 +344,12 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 // Home page styling -------------------------------------------------------------------------------------------------------------------------------------
 
-
-
 .home-page { text-align: center;
 
-	
-
-
-	.nano-search-icon-container { margin-top: 0px; display: inline-block; right: 43px;  position: relative;   animation: pulse 1s ease infinite; }
-	
-
+	.nano-search-icon-container { margin-top: 0px; display: inline-block; right: 43px;  position: relative;   animation: pulse 1s ease infinite; }	
 	.header { color: @light-yellow; font-size: 34px; .mixroboto(500); position: relative; left: -30px; top: -23px; display: inline-block; }
 
+	// Keyframe animation for pulsing effect on search and best deals icon 
 	@keyframes pulse {
 	  0% {
 	    transform: scale(1);
@@ -459,15 +364,11 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	  }
 	}
 
-
-
-
-
-	
+	// Links for search and best deals section, size to fit container 
 	a { text-decoration: none; height: 100%; width:100%; display: block; }
 
+	// search and best deal containers
 	#search-container, #best-deals-container { cursor: pointer; position: relative; display: block; width: 100%; background-size: cover; height: 50%;  background-position: center center; }
-	
 	#search-container { background-image: url(../img/search-container-bg.jpg);  margin-bottom: 2px;  margin-top: -2px;}
 	#best-deals-container { background-image: url(../img/best-deals-container-bg.jpg); background-position: right; }
 
@@ -523,11 +424,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 
 
-
-
-
-
-// Nano-search popup
+//  popup guide for search and best deals 
 
 .popup-wrappr { background: rgba(0, 0, 0, 0.5); position: fixed; top: 0px; left: 0px; width: 100%; height: 100%;   z-index: 9;
 	.popup-swiper { height: 400px; position: absolute; top: 50%; margin-top: -200px; width: 80%; left: 50%; margin-left: -40%; z-index: 10; text-align: center; background-size: cover; background-image: url(../img/newyork-slider-bg.jpg);  background-position: center center; background-color: transparent;
@@ -551,15 +448,11 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 }
 
 
-
 .yellow-icon-best-deals-circle { fill:none;stroke:#FFCD20; stroke-width:1.5769; stroke-miterlimit:10; }
 .yellow-icon-best-deals { fill:#FFCD20; }
 
 
-
-
 #date { display: block;  z-index: 999;}
-
 .hasDatepicker { display: block; z-index: 9999;}
 
 
@@ -567,21 +460,15 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 // Search page ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+// remove top padding from search page
 .navbar-fixed .page-content.search-bg-page { padding-top: 0px;  }
 
 
-
-
-
-[contentEditable=true]:empty:not(:focus):before{
-    content:attr(data-text)
-}
+[contentEditable=true]:empty:not(:focus):before{ content:attr(data-text) }
 
 .search-bg-page { padding-bottom:30px; background-image: url(../img/new-search-bg.jpg);  width: 100%; height: 100%; position: absolute; top: 0px; left: 0px; background-size: cover; background-position: 50% 50%; background-repeat: none;  
 	
-
 	.centered-content { text-align: left; padding: 0px; width: 80%; }
-
 
 	.swiper-container.search { text-align: center;
 		.swiper-slide { background-color: transparent; }
@@ -603,16 +490,13 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 		::-moz-placeholder {  /* Firefox 19+ */  .mixroboto(400);  text-indent: 40px; color: white; }
 		:-ms-input-placeholder {    .mixroboto(400);  text-indent: 40px; color: white; }
 		
-		
-	
-		
-
 		label { color: white; .mixroboto(400); font-size: 16px; top: -5px; position: relative; display:block;}
 
 
 
 	// Departing from and traveling to autofill input styling ---------------------------------------------------------------------------------------
 		
+		// input labels styling
 		.autosuggest-labels { color: white; .mixroboto(400); font-size: 16px; display: block; position: relative;   margin-bottom: 5px; }
 
 		.list-block { margin-bottom: 25px; margin-top: 0px; height: 48px;
@@ -636,7 +520,6 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 			#remove-text-icon { fill: white; }
 		}
 
-
 		
 		.leaving-icon  { position: relative;
 			#calender-icon-search { fill: white; width: 25px; height: 23px; position: absolute; top: -37px; left: 7px; }
@@ -654,73 +537,33 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	#compare-nanobreaks-button { display: block; text-align: center; margin-top: 100px; 
 		.compare-button {  display: inline-block; padding: 19px 100px 19px 100px; background-color: @red;  color: white;  font-size: 18px; .mixroboto(400);  text-transform: uppercase; box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);  }
 	}
-
-
-	
-
 }
 
 
-/* === Autocomplete === */
+/* === Autocomplete dropdown === */
 
 
-.autocomplete-dropdown {
+.autocomplete-dropdown {  box-sizing: border-box;  position: absolute;  z-index: 500;  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);  width: 100%;  left: 0; }
 
-  box-sizing: border-box;
-  position: absolute;
-  z-index: 500;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
-  width: 100%;
-  left: 0;
+.autocomplete-dropdown .autocomplete-dropdown-inner { position: relative; overflow: auto; -webkit-overflow-scrolling: touch; height: 100%; z-index: 1; }
 
+.autocomplete-dropdown .autocomplete-preloader { display: block; position: absolute; right: 16px; bottom: 100%; margin-bottom: 8px; width: 20px; height: 20px; }
 
-}
-.autocomplete-dropdown .autocomplete-dropdown-inner {
-  position: relative;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  height: 100%;
-  z-index: 1;
-}
+.autocomplete-dropdown .autocomplete-preloader .preloader-inner-gap, .autocomplete-dropdown .autocomplete-preloader .preloader-inner-half-circle {  border-width: 3px; }
 
-
-.autocomplete-dropdown .autocomplete-preloader {
-  display: block;
-  position: absolute;
-  right: 16px;
-  bottom: 100%;
-  margin-bottom: 8px;
-  width: 20px;
-  height: 20px;
-}
-
-
-.autocomplete-dropdown .autocomplete-preloader .preloader-inner-gap,
-.autocomplete-dropdown .autocomplete-preloader .preloader-inner-half-circle {
-  border-width: 3px;
-}
-.autocomplete-dropdown .autocomplete-preloader-visible {
-  display: block;
-}
+.autocomplete-dropdown .autocomplete-preloader-visible {  display: block; }
 
 .autocomplete-dropdown .list-block {  margin: 0; }
 
-.autocomplete-dropdown .list-block ul:before {
-  display: none;
-}
-.autocomplete-dropdown .list-block ul:after {
-  display: none;
-}
-.autocomplete-dropdown .list-block b {
-  font-weight: normal;
-  color: #212121;
-}
+.autocomplete-dropdown .list-block ul:before { display: none; }
+
+.autocomplete-dropdown .list-block ul:after { display: none; }
+
+.autocomplete-dropdown .list-block b { font-weight: normal;  color: #212121; }
 
 .autocomplete-dropdown .list-block {  
 	div {  left: -10px; 
-		div { margin-left: 0px; padding-left: 20px; background: transparent; 
-			// &:before {  width: 22px; height: 20px; background-image: url(../img/SpriteSheet.svg);  background-position: 0 -1842px; background-size: 100% auto; background-repeat: no-repeat; background-color: transparent; position: absolute;  content: ''; display: block; margin-top: 0px; left: 10px; }
-		}
+		div { margin-left: 0px; padding-left: 20px; background: transparent;	}
 	}
 }
 
@@ -734,6 +577,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 }
 
 
+// dropdown list styling 
 .list-block { margin: 0px; 
 	ul { background:rgba(255,255,255, 0.2); 
 		&:before , &:after { display: none; }
@@ -747,50 +591,26 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 // Calender datepicker styling  ---------------------------------------------------------------------------
 
-.ui-datepicker {
-background: #fff; /* Old browsers */
-padding:10px;
-border:1px solid #ccc;
-}
+.ui-datepicker { background: #fff; /* Old browsers */ padding:10px;border:1px solid #ccc; }
  
-.ui-datepicker table {
-width:278px;
-}
+.ui-datepicker table { width:278px; }
  
-.ui-datepicker table td {
-text-align:center;
-}
+.ui-datepicker table td { text-align:center; }
  
-.ui-datepicker a {
-cursor:pointer;
-text-decoration:none;
-}
+.ui-datepicker a { cursor:pointer; text-decoration:none; }
  
-.ui-datepicker-prev {
-}
+.ui-datepicker-next { float:right; }
  
-.ui-datepicker-next {
-float:right;
-}
- 
-.ui-datepicker-title {
-text-align: center;
-font-weight:bold;
-margin-top: 10px; 
-}
-
-
+.ui-datepicker-title { text-align: center; font-weight:bold; margin-top: 10px;  }
 
 #calendar { display: none; background-color: white; border: 1px solid #ccc; }
 #calendar.show-calender { display: block; position: absolute; }
 #calendar-default { background: rgba(255,255,255,0.2); }
 
 .search-bg-page #my-form { 
-
 	.leaving-container { position: relative; 
 		.remove-text { bottom: 7px; top: auto; }
 	}
-
 }
 
 .ui-state-disabled { opacity: 0.4; }
@@ -799,14 +619,8 @@ margin-top: 10px;
 
 
 
-
-
-
-
 @media (max-width: 800px) {
-	
 	.autocomplete-dropdown .list-block { margin-left: -40px; }
-
 }
 
 
@@ -843,9 +657,6 @@ margin-top: 10px;
 
 
 
-
-
-
 @media (max-width: 350px) { 
 
 	#calendar.show-calender { left: -20px; margin-bottom: 100px;  }
@@ -855,50 +666,27 @@ margin-top: 10px;
 
 
 
+// global deal icon styling for search result deals and best deals 
 
-
-
-
-
-// global icon styling 
-
-
+// red pin icon on before destination title 
 .destination-icon { fill: #f5344b; position: relative; top: 2px;
 	#destination-icon-red { width: 14px; height: 21px; margin-top: -2px;   }
 }
 
-
+// blue plane icon on deals 
 #plane-icon-blue { width: 23px; height: 35px;  position: absolute; left: -1px; top: 2px;
 	.plane-icon { fill: #a0ecff; position: absolute; left: -10px;  }
 }
 
 
-#view-deals-arrow { width: 7px; height: 10px; position: absolute;  top: 50%; margin-top: -4.5px;  right: 12px;     }
+#view-deals-arrow { width: 7px; height: 10px; position: absolute;  top: 50%; margin-top: -4.5px;  right: 12px;  }
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// deal landing -------------------------------------------------------------------------------------------------------------------------------------------
+// deal landing page styling -------------------------------------------------------------------------------------------------------------------------------------------
 
 
 .page-content.deal-landing-page {  background-color: @dark-purple; }
@@ -918,7 +706,7 @@ margin-top: 10px;
 }
 
 
-
+// styling for each deal 
 #deals-container { width: 98%; height: 100%; display: block; margin-left: 1%; margin-right: 1%;
 	.deal-wrappr:nth-child(even) { margin-left: 1%; }
 	.deal-wrappr { display: block; width: 100%; position: relative; margin-bottom: 10px; box-shadow: 2px 3px rgba(0,0,0,.1);
@@ -954,7 +742,7 @@ margin-top: 10px;
 		}
 
 
-// Bottom of deal styling 	----------------------------
+		// Bottom section (flight details) of deal styling 	
 		.result-bottom { display: block; background: @light-blue; border-top: 1px solid #3f8dc5; z-index: 7; position: relative; padding-top: 7px; padding-right: 13px; padding-bottom: 0px; padding-left: 13px;
 			&::before { content: " ";  display: table; }
 			&::after { content: " ";  display: table; clear: both; }
@@ -996,17 +784,10 @@ margin-top: 10px;
 
 
 
-
-
-
-/* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+/* portrait tablets, portrait iPad, e-readers (Nook/Kindle) */
 @media (min-width:600px)  {  
 	
-	#deals-container .deal-wrappr { width: 49.5%; display: inline-block;  
-			
-	}
-
-
+	#deals-container .deal-wrappr { width: 49.5%; display: inline-block; 	}
 }
 
 @media (max-width: 600px) { 
@@ -1027,7 +808,7 @@ margin-top: 10px;
 
 
 
-// best deals ---------------------------------------------------------------------------------------------
+// best deals page styling ---------------------------------------------------------------------------------------------
 
 
 // Bets deals sort pop up 
@@ -1040,8 +821,7 @@ margin-top: 10px;
 
 
 
-
-// Filter option 
+// Filter option bottom bar 
 .toolbar { background-color:rgba(21,140,225,.95);   height: 40px; 
 	&::before { display: none; }
 }
@@ -1052,15 +832,13 @@ margin-top: 10px;
 }
 
 
-.page-content.best-deals-page { background-color: @dark-purple; 
-    
+.page-content.best-deals-page { background-color: @dark-purple;   
 
 	#banner-icon { fill:white; height: 35px; width: 30px; left: 6px; position: absolute;  }
 	#high-to-low-icon { fill:white; height: 35px; width: 30px; left: 6px; position: absolute; margin-top: 2px; }
 	#deal-rating-star-icon {  fill:white; height: 26px; width: 30px; left: 8px; position: absolute; margin-top: 5px;   }
 
 	.popup-wrappr .popup-swiper { background-image: url(../img/amsterdam-slider-bg.jpg); }
-
 
 
 	// Best Deals styling 
@@ -1087,36 +865,25 @@ margin-top: 10px;
 		.deal-wrappr:last-of-type { margin-bottom: 50px;}
 	}
 	
+	// styling fot slider dots on popup guide 
 	.swiper-container-horizontal>.swiper-pagination-bullets { bottom: 0px; margin-top: 20px; }
-
 
 	.top-margin { margin-top: 10px; }
 
 
 
-// Social sharing popup styling --------------------
-
+	// Social sharing popup styling 	
 	.social-popup { position: absolute;  bottom: 3px; right: -8px; z-index: 7;
-		
 		.social-button {  width: 60px; height: 60px;    display: block;     color: white;   margin-top: 15px;
-			
 			.share-icon-container { margin-left: 14px; position: relative; top: 10px; 
 				.share-icon { width: 20px; height: 35px;  }
 				.share-white-icon { fill: @light-yellow; }
 			}
-
 			.share-title { text-transform: uppercase; .mixroboto(700); margin-left: 2px; color: @light-yellow; }
-
 		}
 		
 	}
    
-
-
-
-
-
-
 }
 
 
@@ -1170,27 +937,18 @@ margin-top: 10px;
 
 
 
-
-
-// Settings ---------------------------------------------------------------------------------------------------
+// Settings page styling ---------------------------------------------------------------------------------------------------
 
 
 .page-content.settings-page  { background-image: url('../img/berlin-BG.jpg'); background-size: cover; 
-	
 	#settings-container { margin-bottom: 10px; 
-		
-		
-
 		#button-center { text-align: center; margin-bottom: 30px;
 
 			#login-button-container {   display: inline-block;  text-align: center;   margin-top: 10px;
 				#login-button { box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);  display: inline-block; padding: 19px 104px 19px 104px; background-color: #f5344b;  color: white; font-size: 18px; .mixroboto(400);  text-transform: uppercase; }
 			}
 		} 
-
 		.section-title { text-align: center; text-transform: uppercase; .mixroboto(600); font-size: 18px; margin-bottom: 10px; margin-top: 30px; color: white;}
-		
-
 		.link-container { display: block; width: 100%; position: relative;     background-color: rgba(255,255,255,0.2); left: 1%; width: 98%;  
 			.settings-links { color: white;  padding-top: 20px; padding-bottom: 20px;  .mixroboto(500); font-size: 18px; position: relative; display: inline-block;	width: 100%; 
 				span { margin-left: 15px; }
@@ -1218,7 +976,10 @@ margin-top: 10px;
 
 
 
-// Privacy ---------------------------------------------------------------------------
+
+
+
+// Privacy page styling ---------------------------------------------------------------------------
 
 .page-content.privacy-page { background-color: @dark-purple;}
 
@@ -1239,14 +1000,13 @@ margin-top: 10px;
 
 
 
-// About --------------------------------------------------------------------------------------
+// About page styling --------------------------------------------------------------------------------------
 
 .navbar-fixed .page-content.about { padding-top: 0px; }
 
-
-
 .page-content.about {  background-image: url('../img/london-day-bg.jpg'); background-size: cover; 
 	
+	// london svg illustration svg fill
 	.st0{ fill:#755641;}
     .st1{ fill:#AA8147;}
     .st2{ fill:#253949;}
@@ -1274,7 +1034,6 @@ margin-top: 10px;
 	#copyright { position: absolute; bottom: 10px; color: white; font-size: 18px; .mixroboto(500); text-align: center; width: 100%; }
 
 	#about-app-london { width: 300px; height: 300px; } 
-
 	.inner-container {   background: rgba(255,255,255,0.2)  }
 
 }
