@@ -7,9 +7,6 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-  
-    
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src * data:" />
 
 
@@ -28,14 +25,11 @@
 
     
     
-    
-
+    <!-- Need this file for building the app with phonegap build, without it app will error on build  -->
     <script type="text/javascript" src="cordova.js"></script>
 
 
-
-
-    <!-- Need this version of jquery for calender to work -->
+    <!-- Need this version of jquery for calender to function  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="jquery-ui-1.12.1.custom/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 
@@ -47,7 +41,7 @@
 <body>
 
 
-
+    <!-- Left panel navigation  -->
     <div class="panel-overlay"></div>
     <!-- Left panel -->
     <div class="panel panel-left panel-cover">
@@ -159,7 +153,7 @@
 
 
 
-
+<!-- start of page views -->
 
     <!-- Views -->
     <div class="views">
@@ -168,7 +162,7 @@
         <div class="pages navbar-fixed">         
 
 
-
+<!-- Index page --> 
           <div class="page" data-page="index">
             <div class="page-content index ">
               
@@ -272,8 +266,6 @@
                             <div class="centered-content">
 
                               <div class="what-is-a-nanobreak-icon">
-
-
                                                                 
                                 <svg version="1.1" id="luggage-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                    width="512px" height="424px" viewBox="0 0 512 424" style="enable-background:new 0 0 512 424;" xml:space="preserve">
@@ -304,8 +296,7 @@
                                     c-2.9-2.9-4.4-6.3-4.4-8.5c0-1.3,0.4-2.4,1.1-3c0.6-0.6,1.7-1,3-1.1C136.3,1244.3,139.7,1245.9,142.6,1248.7z"/>
                                 </g>
                                 </svg>
-
-                                
+                  
                               </div>
                               
                               <div class="info-container">
@@ -324,9 +315,6 @@
                 <div class="skip"><a href="#login">Skip</a></div>
                 <div class="swiper-pagination"></div>
               </div>
-
-
-
             </div>
           </div>
 
@@ -342,7 +330,6 @@
                   <div class="centered-content"> 
 
                     <div class="nanobreaks-logo-container">
-                           
                      <div class="pin-logo">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                          width="74px" height="90px" viewBox="0 0 193.7 233.7" style="enable-background:new 0 0 193.7 233.7;" xml:space="preserve"
@@ -422,21 +409,12 @@
 
 
 
-
-
 <!-- Home page -->
           <div class="page cached" data-page="home">
 
             <div class="navbar">
               <div class="navbar-inner">
-                
-                <!-- <div class="left">
-                  <a href="#" class="link icon-only back">
-                      <i class="icon icon-back"></i>
-                  </a>
-                </div> -->
-
-              
+                           
                 <div class="center home sliding ">
                   <a href="#home">
               
@@ -613,16 +591,12 @@
 
               </div>
 
-        
-                
-              
-
-
             </div>
           </div>
         
 
-          <!-- search page -->
+
+<!-- search page -->
           <div class="page cached" data-page="search">
             
             <div class="navbar">
@@ -746,13 +720,7 @@
                 </div> 
               </div>     
                   
-
-
-            
-
-
-      
-            
+   
               <div class="outer-container">
                 <div class="inner-container">
                    <div class="centered-content">
@@ -808,7 +776,7 @@
 
 
 
-                      <!-- Calender --> 
+                      <!-- Calender input --> 
                         <div class="leaving-container">
                           
                           <label>Leaving:</label>
@@ -852,15 +820,9 @@
 
                         </div>
 
-
-
+                        <!-- Container where calender is dynamically added from JS --> 
                         <div id="calendar"></div>
-                 
 
-                       
-                
-                        
-                        <div style="clear: both"></div>
                       </form>
                     
 
@@ -872,15 +834,14 @@
                     </div>
                   </div>
                 </div>
-                  
-
-
             </div>
           </div>
           
 
           
-          <!-- deal results page -->
+
+
+<!-- deal results page -->
           <div class="page cached" data-page="deal-landing">
             
             <div class="navbar">
@@ -979,9 +940,6 @@
               <!-- Main page container for all deal results generated -->
               <div id="deals-container">
 
-
-                
-
               </div>
 
 
@@ -989,7 +947,13 @@
           </div>
           
 
-          <!-- best deals page -->
+
+
+
+
+
+
+<!-- best deals page -->
           <div class="page cached toolbar-fixed" data-page="best-deals">
             
             <div class="navbar">
@@ -1072,7 +1036,8 @@
             </div>
 
 
-
+            
+            <!-- Filter deals bottom toolbar --> 
 
             <div class="toolbar toolbar-bottom">
               <div class="toolbar-inner">
@@ -1097,11 +1062,6 @@
                 </div>  
               </div>
             </div>
-
-
-
-
-
 
 
             <div class="page-content best-deals-page">
@@ -1182,7 +1142,7 @@
 
 
 
-          <!-- settings page -->
+<!-- settings page -->
           <div class="page cached" data-page="settings">
 
             <div class="navbar">
@@ -1378,23 +1338,20 @@
                     </span>
                 </div>
 
-
-
-
               </div>
               
             </div>
           </div>
   
 
-           <!-- settings page -->
+
+
+<!-- About page -->
           <div class="page cached" data-page="about">
 
             <div class="navbar">
               <div class="navbar-inner">
                 
-                
-
                 <div class="left">
                   <a href="#" class="link icon-only back">
                       <i class="icon icon-back"></i>
@@ -1481,6 +1438,8 @@
                     <div id="designed-built">Designed and built in London, 
                       <span id="build-location"> United Kingdom </span>
                       
+
+                  <!-- London city svg inline code  --> 
                       <div id="london-svg">
                         <?xml version="1.0" encoding="utf-8"?>
                 
@@ -1897,17 +1856,15 @@
                    </div>
                 </div>
               </div>
-
-            
               <div id="copyright">  &copy; Copyright 2017 dealchecker.co.uk. All rights reserved</div>
-
-
-
             </div>  
           </div>
        
 
-          <!-- privacy page -->
+
+
+
+<!-- privacy page -->
           <div class="page cached" data-page="privacy">
 
             <div class="navbar">
@@ -2072,27 +2029,20 @@
   
     
 
-<!-- 
-
-    
-  
-
-    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script> -->
-
 
     <!-- Path to Framework7 Library JS-->
     <script type="text/javascript" src="js/framework7.min.js"></script>
 
-    <!-- Path to your app js-->
+    <!-- Path to my custom app js file -->
     <script type="text/javascript" src="js/my-app.js"></script>
 
     <!-- JSONP call to dealchecker API -->
     <script type="application/javascript" src="https://dealchecker.co.uk:8181/holidays/nano-deals-jsonp.html?numberOfWeeks=45"> </script>
 
 
-
-   
     <script type="text/javascript" src="js/index.js"></script>
+    
+    <!-- Script to initialize app -->
     <script type="text/javascript">
         app.initialize();
     </script>
