@@ -159,6 +159,10 @@ function starRating() {
 
 
 
+// global variable 
+
+// variable to store href path to supplier logo depending on client name of deal, variable used to store supplier logo href path. Varible is used on the best deals page and search page so declared globally for use on both pages. Variable used in image src on append deals function, priceLowToHigh , priceHighToLow,  ratingSort functions    
+var supplierLogo; 
 
 
 
@@ -933,7 +937,7 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 		        '</div>' + 
 
 		        '<div class="deal-logo">' + 
-		            '<img src="'  + supplierLogo + '" alt="' + '" />' + 
+		             '<img src="' +	supplierLogo + '" alt="' + '" />' + 
 		        '</div>' + 
 
 		        '<div class="inner-deal-summary-container">' + 
@@ -981,8 +985,8 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 
 
 
-			
-		if ( localData[i].clientName = "ebookersHolidayFeed"  ) { 
+	 //  add supplier logo depending on supplier client name,  all possible supplier working with dealchecker
+		if ( localData[i].clientName == "ebookersHolidayFeed"  ) { 
 
 			supplierLogo = "img/ebookers.gif";
 
@@ -1224,8 +1228,8 @@ myApp.onPageReinit('deal-landing', function (page) {
 	
 
 
-			
-		if ( localData[i].clientName = "ebookersHolidayFeed"  ) { 
+	 //  add supplier logo depending on supplier client name,  all possible supplier working with dealchecker
+		if ( localData[i].clientName == "ebookersHolidayFeed"  ) { 
 
 			supplierLogo = "img/ebookers.gif";
 
@@ -1399,12 +1403,15 @@ myApp.onPageReinit('deal-landing', function (page) {
 
 
 
+
 // Functions for best deals page -------------------------------------------------------------------------------------------------------
 
 
 // function for sorting deals into lowest price and appending to html dynamically
 
 function priceLowToHigh () { 
+
+	console.log(localData);
 
 	// Sort by Price - return best priced deals 
     localData.sort(function(a, b) {
@@ -1419,6 +1426,7 @@ function priceLowToHigh () {
 	$(".best-deals-page #deals-container .deal-wrappr").each(function () {
 	    $(this).remove();
 	});
+
 
 
 	// loop through each object in returned data array 
@@ -1438,7 +1446,7 @@ function priceLowToHigh () {
 		          '</div>' + 
 
 		          '<div class="deal-logo">' + 
-		            '<img src="" alt="' + '" />' + 
+		            '<img src="' +	supplierLogo + '" alt="' + '" />' + 
 		          '</div>' + 
 
 		          '<div class="inner-deal-summary-container">' + 
@@ -1507,8 +1515,8 @@ function priceLowToHigh () {
 		);
 
 		
-		
-		if ( localData[i].clientName = "ebookersHolidayFeed"  ) { 
+	 //  add supplier logo depending on supplier client name,  all possible supplier working with dealchecker
+		if ( localData[i].clientName == "ebookersHolidayFeed"  ) { 
 
 			supplierLogo = "img/ebookers.gif";
 
@@ -1629,7 +1637,7 @@ function priceHighToLow() {
 		          '</div>' + 
 
 		          '<div class="deal-logo">' + 
-		            '<img src="https://static2.dealchecker.co.uk/11.2-4' + localData[i].clientImage + '" alt="' + '" />' + 
+		              '<img src="' +	supplierLogo + '" alt="' + '" />' + 
 		          '</div>' + 
 
 		          '<div class="inner-deal-summary-container">' + 
@@ -1677,8 +1685,8 @@ function priceHighToLow() {
 
 
 	
-         	
-		if ( localData[i].clientName = "ebookersHolidayFeed"  ) { 
+         //  add supplier logo depending on supplier client name,  all possible supplier working with dealchecker
+		if ( localData[i].clientName == "ebookersHolidayFeed"  ) { 
 
 			supplierLogo = "img/ebookers.gif";
 
@@ -1768,7 +1776,7 @@ function priceHighToLow() {
 
 // sort deals by highest rating functionality -------------------------------------------------------------------------------
 
-function ratingSort () { 
+function ratingSort() { 
 
 	// Store deal data in rating variable 
    	var ratingData = localData;
@@ -1806,7 +1814,7 @@ function ratingSort () {
 		          '</div>' + 
 
 		          '<div class="deal-logo">' + 
-		            '<img src="https://static2.dealchecker.co.uk/11.2-4' +  ratingData[i].clientImage + '" alt="' + '" />' + 
+		              '<img src="' +	supplierLogo + '" alt="' + '" />' + 
 		          '</div>' + 
 
 		          '<div class="inner-deal-summary-container">' + 
@@ -1853,8 +1861,8 @@ function ratingSort () {
 
 
 
-			
-		if ( localData[i].clientName = "ebookersHolidayFeed"  ) { 
+	 //  add supplier logo depending on supplier client name,  all possible supplier working with dealchecker
+		if ( localData[i].clientName == "ebookersHolidayFeed"  ) { 
 
 			supplierLogo = "img/ebookers.gif";
 
