@@ -39,10 +39,9 @@ if(applaunchCount){
 
 
    //This is a second time launch, and count = applaunchCount
+   // remove popup guides and app walkthrough being shown again 
    $('.search-bg-page .popup-wrappr').remove();
-
    $('.best-deals-page .popup-wrappr').remove();
-
    $('.swiper-container.walkthrough').remove();
 
   
@@ -64,13 +63,6 @@ function onOffline() {
    alert("Device not connected to internet, reconnect to the internet to use application");
 }
 
-// document.addEventListener("online", onOnline, false);
- 
-// function onOnline() {
-//     // Handle the online event 
-//        alert("Device connected to internet, full use of application enabled");
-
-// }
 
 
 
@@ -114,6 +106,7 @@ setTimeout(function() {
 }, 1000); 
 
 
+// on click of menu icon open/close left navigation panel 
 $('.menu-icon-nav').on('click', function() { 
 	$(this).toggleClass('close-panel open-panel');
 });
@@ -188,11 +181,11 @@ function userLoginCallback(data) {
 
 
 
-
+// document on page init is a framework7 specific function that runs the code inside the function only once on page initialize, all of the pages in this web app have this function aswell as page reinit which runs every time user loads page after initilization. Both page init and reinit functions are needed to run js code consistenly when having built with the Framework7 framework
 $$(document).on('pageInit', '.page[data-page="login"]', function(e) {
 
 
-	// check users login email address input value against emails stored in dealchecker database, Account validation ---------------------------------------------------------
+	// check users login email address input value against emails stored in dealchecker database, Account validation 
 
 	$('input#email-login').on('blur',  function() { 
 
@@ -272,9 +265,9 @@ $$(document).on('pageInit', '.page[data-page="home"]', function(e) {
 
 
 
-// Script that runs on every other time the home page is loaded -----------------------------------------------------------
+// page reinit is the framework7 Script that runs on every other time the home page is loaded after page initialization 
 myApp.onPageReinit('home', function (page) {
-   
+ 
 	activeNavRemove();
 	$('.content-block p').eq(0).addClass('active-nav');
 
@@ -949,6 +942,28 @@ $$(document).on('pageInit', '.page[data-page="deal-landing"]', function(e) {
 	            	'</span>' +
  	          	'</div>' +
 
+
+	          '<div class="social-popup ">' +
+
+                  '<a href="#" class="social-button" onclick="window.plugins.socialsharing.share( \' '   + localData[i].deepLink  + ' \'  )">' +
+
+                    '<span class="share-icon-container">' +
+                      
+                      '<svg version="1.1" class="share-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="49.7px" height="58.8px" viewBox="0 0 49.7 58.8" style="enable-background:new 0 0 49.7 58.8;" xml:space="preserve">' +
+
+                      '<path class="share-white-icon" d="M40,39.2c-2.1,0-4.1,0.7-5.8,2L19,32.8c0.3-0.9,0.5-2,0.5-3.1s-0.2-2.1-0.5-3.1l16-8.9c1.5,0.9,3.3,1.4,5,1.4  c5.2,0,9.5-4.3,9.5-9.5S45.2,0.2,40,0.2s-9.5,4.3-9.5,9.5c0,1.5,0.3,2.9,1,4.2l-15.3,8.6c-1.7-1.5-3.8-2.3-6.2-2.3  c-5.2,0-9.5,4.3-9.5,9.5s4.3,9.5,9.5,9.5c2.3,0,4.5-0.8,6.2-2.3l15,8.3c-0.4,1.1-0.7,2.3-0.7,3.5c0,5.2,4.3,9.5,9.5,9.5 s9.5-4.3,9.5-9.5S45.2,39.2,40,39.2z"/>' +
+                      
+                      '</svg>' +
+
+                    '</span>' +
+
+                    '<span class="share-title"> SHARE </span>' +
+                    
+                  '</a>' +
+   
+                '</div>' +
+
+
 	        '</div>' + 
 
 		    '<div class="result-bottom">' + 
@@ -1192,6 +1207,29 @@ myApp.onPageReinit('deal-landing', function (page) {
 		              '<span class="star-rating">' + localData[i].rating  +  '</span>' + 
 	            	'</span>' +
  	          	'</div>' +
+
+
+
+	          '<div class="social-popup ">' +
+
+                  '<a href="#" class="social-button" onclick="window.plugins.socialsharing.share( \' '   + localData[i].deepLink  + ' \'  )">' +
+
+                    '<span class="share-icon-container">' +
+                      
+                      '<svg version="1.1" class="share-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="49.7px" height="58.8px" viewBox="0 0 49.7 58.8" style="enable-background:new 0 0 49.7 58.8;" xml:space="preserve">' +
+
+                      '<path class="share-white-icon" d="M40,39.2c-2.1,0-4.1,0.7-5.8,2L19,32.8c0.3-0.9,0.5-2,0.5-3.1s-0.2-2.1-0.5-3.1l16-8.9c1.5,0.9,3.3,1.4,5,1.4  c5.2,0,9.5-4.3,9.5-9.5S45.2,0.2,40,0.2s-9.5,4.3-9.5,9.5c0,1.5,0.3,2.9,1,4.2l-15.3,8.6c-1.7-1.5-3.8-2.3-6.2-2.3  c-5.2,0-9.5,4.3-9.5,9.5s4.3,9.5,9.5,9.5c2.3,0,4.5-0.8,6.2-2.3l15,8.3c-0.4,1.1-0.7,2.3-0.7,3.5c0,5.2,4.3,9.5,9.5,9.5 s9.5-4.3,9.5-9.5S45.2,39.2,40,39.2z"/>' +
+                      
+                      '</svg>' +
+
+                    '</span>' +
+
+                    '<span class="share-title"> SHARE </span>' +
+                    
+                  '</a>' +
+   
+                '</div>' +
+
 
 	        '</div>' + 
 
@@ -1649,6 +1687,29 @@ function priceHighToLow() {
 		            '</span>' +
 		          '</div>' +
 
+
+
+		          '<div class="social-popup ">' +
+
+	                  '<a href="#" class="social-button" onclick="window.plugins.socialsharing.share( \' '   + localData[i].deepLink  + ' \'  )">' +
+
+	                    '<span class="share-icon-container">' +
+	                      
+	                      '<svg version="1.1" class="share-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="49.7px" height="58.8px" viewBox="0 0 49.7 58.8" style="enable-background:new 0 0 49.7 58.8;" xml:space="preserve">' +
+
+	                      '<path class="share-white-icon" d="M40,39.2c-2.1,0-4.1,0.7-5.8,2L19,32.8c0.3-0.9,0.5-2,0.5-3.1s-0.2-2.1-0.5-3.1l16-8.9c1.5,0.9,3.3,1.4,5,1.4  c5.2,0,9.5-4.3,9.5-9.5S45.2,0.2,40,0.2s-9.5,4.3-9.5,9.5c0,1.5,0.3,2.9,1,4.2l-15.3,8.6c-1.7-1.5-3.8-2.3-6.2-2.3  c-5.2,0-9.5,4.3-9.5,9.5s4.3,9.5,9.5,9.5c2.3,0,4.5-0.8,6.2-2.3l15,8.3c-0.4,1.1-0.7,2.3-0.7,3.5c0,5.2,4.3,9.5,9.5,9.5 s9.5-4.3,9.5-9.5S45.2,39.2,40,39.2z"/>' +
+	                      
+	                      '</svg>' +
+
+	                    '</span>' +
+
+	                    '<span class="share-title"> SHARE </span>' +
+	                    
+	                  '</a>' +
+	   
+	                '</div>' +
+
+
 		      '</div>' + 
 
 		      '<div class="result-bottom">' + 
@@ -1825,6 +1886,28 @@ function ratingSort() {
 		              '<span class="star-rating">' +  ratingData[i].rating  +  '</span>' + 
 		            '</span>' +
 		          '</div>' +
+
+
+		          '<div class="social-popup ">' +
+
+	                  '<a href="#" class="social-button" onclick="window.plugins.socialsharing.share( \' '   + localData[i].deepLink  + ' \'  )">' +
+
+	                    '<span class="share-icon-container">' +
+	                      
+	                      '<svg version="1.1" class="share-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="49.7px" height="58.8px" viewBox="0 0 49.7 58.8" style="enable-background:new 0 0 49.7 58.8;" xml:space="preserve">' +
+
+	                      '<path class="share-white-icon" d="M40,39.2c-2.1,0-4.1,0.7-5.8,2L19,32.8c0.3-0.9,0.5-2,0.5-3.1s-0.2-2.1-0.5-3.1l16-8.9c1.5,0.9,3.3,1.4,5,1.4  c5.2,0,9.5-4.3,9.5-9.5S45.2,0.2,40,0.2s-9.5,4.3-9.5,9.5c0,1.5,0.3,2.9,1,4.2l-15.3,8.6c-1.7-1.5-3.8-2.3-6.2-2.3  c-5.2,0-9.5,4.3-9.5,9.5s4.3,9.5,9.5,9.5c2.3,0,4.5-0.8,6.2-2.3l15,8.3c-0.4,1.1-0.7,2.3-0.7,3.5c0,5.2,4.3,9.5,9.5,9.5 s9.5-4.3,9.5-9.5S45.2,39.2,40,39.2z"/>' +
+	                      
+	                      '</svg>' +
+
+	                    '</span>' +
+
+	                    '<span class="share-title"> SHARE </span>' +
+	                    
+	                  '</a>' +
+	   
+	                '</div>' +
+
 
 		      '</div>' + 
 
@@ -2036,10 +2119,8 @@ $$(document).on('pageInit', '.page[data-page="best-deals"]', function(e) {
 // Script that runs on every other time the best-deals page is init\loaded 
 myApp.onPageReinit('best-deals', function (page) {
    
-
 	activeNavRemove();
 	$('.content-block p').eq(2).addClass('active-nav');
-
 
 
 });
@@ -2057,7 +2138,6 @@ $$(document).on('pageInit', '.page[data-page="about"]', function(e) {
 
 	activeNavRemove();
 	
-
 });
 
 
@@ -2066,10 +2146,7 @@ $$(document).on('pageInit', '.page[data-page="about"]', function(e) {
 // Script that runs every time after the about page is init\loaded 
 myApp.onPageReinit('about', function (page) {
    
-
 	activeNavRemove();
-
-
 
 });
 
@@ -2088,8 +2165,6 @@ $$(document).on('pageInit', '.page[data-page="settings"]', function(e) {
 
 	activeNavRemove();	
 	$('.content-block p').eq(3).addClass('active-nav');
-
-
 
 	// script to run video in settings on click  of about dealchecker link
 	var myPhotoBrowserPopupDark = myApp.photoBrowser({
@@ -2120,6 +2195,5 @@ myApp.onPageReinit('settings', function (page) {
 	activeNavRemove();
 
 	$('.content-block p').eq(3).addClass('active-nav');
-
 
 });

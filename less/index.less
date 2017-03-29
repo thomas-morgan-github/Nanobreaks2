@@ -739,6 +739,20 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 
 			}
 
+		
+			// Social sharing popup styling 	
+			.social-popup { position: absolute;  bottom: 3px; right: -8px; z-index: 7;
+				.social-button {  width: 60px; height: 60px;    display: block;     color: white;   margin-top: 15px;
+					.share-icon-container { margin-left: 14px; position: relative; top: 10px; 
+						.share-icon { width: 20px; height: 35px;  }
+						.share-white-icon { fill: @light-yellow; }
+					}
+					.share-title { text-transform: uppercase; .mixroboto(700); margin-left: 2px; color: @light-yellow; }
+				}
+				
+			}
+
+
 		}
 
 
@@ -869,21 +883,7 @@ i.icon.icon-prev{ 	background-image: url(../img/arrow-left-svg.svg) ; width: 10p
 	.swiper-container-horizontal>.swiper-pagination-bullets { bottom: 0px; margin-top: 20px; }
 
 	.top-margin { margin-top: 10px; }
-
-
-
-	// Social sharing popup styling 	
-	.social-popup { position: absolute;  bottom: 3px; right: -8px; z-index: 7;
-		.social-button {  width: 60px; height: 60px;    display: block;     color: white;   margin-top: 15px;
-			.share-icon-container { margin-left: 14px; position: relative; top: 10px; 
-				.share-icon { width: 20px; height: 35px;  }
-				.share-white-icon { fill: @light-yellow; }
-			}
-			.share-title { text-transform: uppercase; .mixroboto(700); margin-left: 2px; color: @light-yellow; }
-		}
-		
-	}
-   
+ 
 }
 
 
